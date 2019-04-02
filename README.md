@@ -14,14 +14,14 @@ A meeting-room booking system built with ReactJS, Express.js, Node.js and Cloud 
 These instructions will get you a copy of the project up and running on your local machine for development purposes.
 ### Installing Git
 You can install Git for Mac, Windows and Linux by following the instructions here for your operating system.
-[Install Git] (https://www.atlassian.com/git/tutorials/install-git)
+[Install Git](https://www.atlassian.com/git/tutorials/install-git)
 
 ### Installing Node and npm
 npm is simply a package manager for Javascript libraries. We will use npm to install Express.js, React.js and several other useful packages.
 
 To install Node and npm for Mac or Windows:
-[Install for Mac] (https://nodejs.org/dist/v10.15.3/node-v10.15.3.pkg)
-[Install for Windows] (https://nodejs.org/dist/v10.15.3/node-v10.15.3-x86.msi)
+[Install for Mac](https://nodejs.org/dist/v10.15.3/node-v10.15.3.pkg)
+[Install for Windows](https://nodejs.org/dist/v10.15.3/node-v10.15.3-x86.msi)
 
 ### Project Setup
 
@@ -94,11 +94,12 @@ DB_PASS=admin
 .env helps establish a connection to the CloudSQL Database, when you run the Node server.
 
 -- ALL STEPS AFTER THIS POINT IS SOLELY FOR THE DEVELOPMENT TEAM, NOT FOR SHERLOCK --
+
 Now you need to choose a database managing tool like DBeaver or MySQL Workbench. This will
 help you add/delete/view and manage the database.
 
-[Download DBeaver] (https://dbeaver.io/download/)
-[Download MySQL Workbench] (https://dev.mysql.com/downloads/workbench/)
+[Download DBeaver](https://dbeaver.io/download/)
+[Download MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
 
 For setup instructions let's just talk about it.
 
