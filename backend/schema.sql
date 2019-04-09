@@ -14,12 +14,13 @@ CREATE TABLE `room` (
   `room_ID` int(3) NOT NULL AUTO_INCREMENT,
   `room_name` varchar(5) NOT NULL,
   `capacity` int(2) NOT NULL,
-  `projector` tinyint(1) NOT NULL,
-  `tv` tinyint(1) NOT NULL,
-  `whiteboard` tinyint(1) NOT NULL,
+  `projector` tinyint(1) NOT NULL DEFAULT '0',
+  `tv` tinyint(1) NOT NULL DEFAULT '0',
+  `whiteboard` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`room_ID`),
   UNIQUE KEY `room_UN` (`room_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table that shows all the information about rooms';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='Table that shows all the information about rooms';
+
 
 CREATE TABLE `booking` (
   `booking_ID` int(11) NOT NULL AUTO_INCREMENT,
