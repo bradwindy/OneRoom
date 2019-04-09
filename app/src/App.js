@@ -1,29 +1,24 @@
-// Primary file for our UI
-
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import Root from "./components/Root"
+import Home from "./components/Home"
+import Login from "./components/Login"
+import Book from "./components/Book"
+
+import { BrowserRouter, Router, Route } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <p> LETS BUILD THIS ROOM BOOKING APPLICATION TEAM! </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+        <BrowserRouter>
+            <Root>
+                <Route exact path={"/"} component={Home}/>
+                <Route path={"/login/"} component={Login}/>
+                <Route path={"/book/"} component={Book}/>
+            </Root>
+        </BrowserRouter>
+
     );
   }
 }
