@@ -7,6 +7,8 @@
 // get a lot bigger. So We will store/organise all our routes into a "routes" directory.
 // Similarly, we will have a "controllers" directory which will store all our MySQL query logic.
 
+// Hi Slice here
+
 require('dotenv').config()
 
 const express = require('express');
