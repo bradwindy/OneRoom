@@ -33,8 +33,11 @@ class Login extends Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <div className="col-sm-offset-2 col-sm-10">
+                        <div className="col-sm-offset-2 col-sm-5">
                             <button type="submit" className="btn btn-primary">Sign in</button>
+                        </div>
+                        <div className="col-sm-offset-2 col-sm-5">
+                        <a className="btn btn-default" href="/register" role="button">Register</a>
                         </div>
                     </div>
                 </form>
