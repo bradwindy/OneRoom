@@ -8,13 +8,13 @@
 // Similarly, we will have a "controllers" directory which will store all our MySQL query logic.
 
 
-require('dotenv').config()
+require('dotenv').config();
 
 const express = require('express');
 const server = express();
 const bodyParser = require('body-parser');
 const connection = require('./database');
-// Capital J as what is returned from this mopdule is a class and classes need to be uppercase
+// Capital J as what is returned from this module is a class and classes need to be uppercase
 // Joi helps us validate user input on the server side.
 const Joi = require('joi');
 
@@ -23,7 +23,7 @@ server.use(express.json());
 
 // server.route('/books/:userId')
 
-// Skeleton For user registeration
+// Skeleton For user registration
 server.route('/api/register')
   .post((req, res) => {
     const schema = {
@@ -31,7 +31,7 @@ server.route('/api/register')
     };
     const result = Joi.validate(req.body, schema);
     if (result.error) {
-      // Helps us retrive the error message. We can collect multiple errors from the details array
+      // Helps us retrieve the error message. We can collect multiple errors from the details array
       // and concatenate the errors to display them all to the user.
       res.status(400).send(result.error.details[0].message);
       return;
@@ -45,7 +45,7 @@ server.route('/api/booking/:id')
     /** Delete Logic Flow 
      *  1. Look for the item, if not existing, return 404 and exit route.
      *  2. If existing, delete the item
-     *  3. Return the deleted item confimration to user
+     *  3. Return the deleted item confirmation to user
      */
 
      // If booking is not found, return 404 and exit route. The "return" prevents
@@ -54,7 +54,7 @@ server.route('/api/booking/:id')
     });
 
 // This is a route. Route's perform a specific task by calling our API.
-// the /user route helps us retrive all the users from our Cloud SQL and displays it onto a webpage as JSON.
+// the /user route helps us retrieve all the users from our Cloud SQL and displays it onto a web page as JSON.
 server.route('/user')
   .get(function (req, res, next) {
     connection.query(
