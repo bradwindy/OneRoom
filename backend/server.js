@@ -8,6 +8,7 @@
 // Similarly, we will have a "controllers" directory which will store all our MySQL query logic.
 
 // Hi Slice here
+// This is a test update
 
 require('dotenv').config()
 
