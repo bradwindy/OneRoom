@@ -38,6 +38,8 @@ server.route('/api/register')
     }
   });
 
+// Skeleton For user login
+
 
 // Skeleton To delete a booking 
 server.route('/api/booking/:id')
@@ -48,10 +50,10 @@ server.route('/api/booking/:id')
      *  3. Return the deleted item confirmation to user
      */
 
-     // If booking is not found, return 404 and exit route. The "return" prevents
-     // the rest of the route code from being run
+    // If booking is not found, return 404 and exit route. The "return" prevents
+    // the rest of the route code from being run
     if (!booking) return res.status(404).send('The booking with the given ID was not found');
-    });
+  });
 
 // This is a route. Route's perform a specific task by calling our API.
 // the /user route helps us retrieve all the users from our Cloud SQL and displays it onto a web page as JSON.
@@ -66,18 +68,18 @@ server.route('/user')
     );
   });
 
-  // Route to return a user based of the ID that is passed on from the front end
-  // This route will also provide the way we should implement SQL securely, effectively
-  // and efficiently.
-  server.route('/user/:id')
+// Route to return a user based of the ID that is passed on from the front end
+// This route will also provide the way we should implement SQL securely, effectively
+// and efficiently.
+server.route('/user/:id')
   .get(function (req, res, next) {
     const userID = req.params.id
     const query = "SELECT * FROM `user` where user_ID = ?"
     console.log("Fetching user with id: " + req.params.id)
     connection.query(query, [userID], (error, results, fields) => {
-        if (error) throw error;
-        res.json(results);
-      }
+      if (error) throw error;
+      res.json(results);
+    }
     );
   });
 

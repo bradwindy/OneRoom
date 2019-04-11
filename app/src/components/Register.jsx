@@ -44,7 +44,7 @@ class Register extends Component {
 
         /** Using Axios to POST this to our /register API and passing the user object as a payload */
         //axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
-        axios.post('/register', { user })
+        axios.post('api/register', { user })
         .then(res => {
                 console.log(res);
                 console.log(res.data);

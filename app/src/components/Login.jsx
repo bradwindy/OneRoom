@@ -1,11 +1,48 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
 
 class Login extends Component {
+    state = {
+        email: '',
+        password: '',
+    };
+
+    /** Takes the value of anything that is typed by the user for the form fields 
+    * and sets the state for the form field above.
+    * Source - https://reactjs.org/docs/forms.html
+    */
+
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    /** HandleSubmit is triggered when the sign up form is submitted */
+    handleSubmit = event => {
+        // Stopping the browser from reloading the page
+        event.preventDefault();
+        // Making a new object called userLogin which takes all the inputted form details
+        const userLogin = {
+            email: this.state.email,
+            password: this.state.password,
+        };
+
+        /** Using Axios to POST this to our /API/Login and passing the userLogin object as a payload */
+        axios.post(`https://jsonplaceholder.typicode.com/users`, { userLogin })
+        //axios.post('/api/login', { userLogin })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            });
+    };
+
+
     render() {
         return (
             <div className="container pt-4">
 
-                <form className="form-vertical m-4">
+                <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <div className="col-sm-10">
                             <h1 className="pt-4"><b>Log In</b></h1>
@@ -14,20 +51,20 @@ class Login extends Component {
                     <div className="form-group">
                         <label htmlFor="inputEmail3" className="col-sm-2 control-label">Email</label>
                         <div className="col-sm-10">
-                            <input type="email" className="form-control" id="inputEmail3" placeholder="Email"/>
+                            <input type="email" className="form-control" id="inputEmail3" placeholder="Email" name="email" onChange={this.handleChange} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="inputPassword3" className="col-sm-2 control-label">Password</label>
                         <div className="col-sm-10">
-                            <input type="password" className="form-control" id="inputPassword3" placeholder="Password"/>
+                            <input type="password" className="form-control" id="inputPassword3" placeholder="Password" name="password" onChange={this.handleChange} />
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-sm-offset-2 col-sm-10">
                             <div className="checkbox">
                                 <label>
-                                    <input type="checkbox"/> Remember me
+                                    <input type="checkbox" /> Remember me
                                 </label>
                             </div>
                         </div>
@@ -37,7 +74,7 @@ class Login extends Component {
                             <button type="submit" className="btn btn-primary">Sign in</button>
                         </div>
                         <div className="col-sm-offset-2 col-sm-5">
-                        <a className="btn btn-default" href="/register" role="button">Register</a>
+                            <a className="btn btn-default" href="/register" role="button">Register</a>
                         </div>
                     </div>
                 </form>
