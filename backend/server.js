@@ -21,6 +21,11 @@ const Joi = require('joi');
 // Allows our Express app/server to use JSON data
 server.use(express.json());
 
+// Authentication Packages
+const session = require('express-session');
+const passport = require('passport');
+
+
 // server.route('/books/:userId')
 
 // Skeleton For user registration
