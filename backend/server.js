@@ -13,34 +13,66 @@ require('dotenv').config();
 const express = require('express');
 const server = express();
 const bodyParser = require('body-parser');
-const connection = require('./database');
+const db = require('./database');
+// Authentication Packages
+const session = require('express-session');
+const passport = require('passport');
+
 // Capital J as what is returned from this module is a class and classes need to be uppercase
 // Joi helps us validate user input on the server side.
 const Joi = require('joi');
 
 // Allows our Express app/server to use JSON data
 server.use(express.json());
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: false }));
 
-// Authentication Packages
-const session = require('express-session');
-const passport = require('passport');
-
+// Allows our server to use cross origin requests. This allows us to test our backend and frontend simultaneously on loclahost.
+server.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 // server.route('/books/:userId')
 
 // Skeleton For user registration
 server.route('/api/register')
-  .post((req, res) => {
-    const schema = {
-      name: Joi.string().min(2).required()
-    };
-    const result = Joi.validate(req.body, schema);
-    if (result.error) {
-      // Helps us retrieve the error message. We can collect multiple errors from the details array
-      // and concatenate the errors to display them all to the user.
-      res.status(400).send(result.error.details[0].message);
-      return;
-    }
+  .post((req, res, next) => {
+    const username = req.body.user.username;
+    const studentid = req.body.user.studentid;
+    const firstname = req.body.user.firstname;
+    const lastname = req.body.user.lastname;
+    const email = req.body.user.email;
+    const password = req.body.user.password;
+
+    // Checking if our JSON data passed from Axios (frontend) is recieved by our api in the backend.
+    console.log(req.body.user.username);
+    console.log(req.body.user.studentid);
+    console.log(req.body.user.firstname);
+    console.log(req.body.user.lastname);
+    console.log(req.body.user.email);
+    console.log(req.body.user.password);
+
+    // Sending a response back to the frontend to see if the data was passed correctly.
+    res.send(req.body);
+
+    const query = "INSERT INTO `user` (username, student_ID, firstname, lastname, student_email, password) VALUES (?, ?, ?, ?, ?, ?)";
+    
+    db.query(query, [username, studentid, firstname, lastname, email, password], (error, results, fields) => {
+      if (error) throw error;
+    });
+
+    // const schema = {
+    //   name: Joi.string().min(2).required()
+    // };
+    // const result = Joi.validate(req.body, schema);
+    // if (result.error) {
+    //   // Helps us retrieve the error message. We can collect multiple errors from the details array
+    //   // and concatenate the errors to display them all to the user.
+    //   res.status(400).send(result.error.details[0].message);
+    //   return;
+    // }
   });
 
 // Skeleton For user login
@@ -64,7 +96,7 @@ server.route('/api/booking/:id')
 // the /user route helps us retrieve all the users from our Cloud SQL and displays it onto a web page as JSON.
 server.route('/user')
   .get(function (req, res, next) {
-    connection.query(
+    db.query(
       "SELECT * FROM `user`",
       function (error, results, fields) {
         if (error) throw error;
@@ -81,7 +113,7 @@ server.route('/user/:id')
     const userID = req.params.id
     const query = "SELECT * FROM `user` where user_ID = ?"
     console.log("Fetching user with id: " + req.params.id)
-    connection.query(query, [userID], (error, results, fields) => {
+    db.query(query, [userID], (error, results, fields) => {
       if (error) throw error;
       res.json(results);
     }
