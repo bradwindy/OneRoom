@@ -44,7 +44,7 @@ class Login extends Component {
             <div className="container p-4">
 
                 <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
-                    <div className="form-group">
+                    <div className="form-group row">
                         <div className="col-sm-10">
                             <h1 className="pt-4"><b>Log In</b></h1>
                         </div>
@@ -53,6 +53,9 @@ class Login extends Component {
                         <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email</label>
                         <div className="col-sm-10">
                             <input type="email" className="form-control" id="inputEmail3" placeholder="example123@student.otago.ac.nz" name="email" onChange={this.handleChange} />
+                            <small id="" className="form-text text-muted pl-1">
+                                You must use an Otago University email address.
+                            </small>
                         </div>
                     </div>
 

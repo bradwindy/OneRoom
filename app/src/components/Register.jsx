@@ -38,7 +38,7 @@ class Register extends Component {
             studentid: this.state.studentid,
             firstname: this.state.firstname,
             lastname: this.state.lastname,
-            email: this.state.email,
+            email: this.state.email + "@student.otago.ac.nz",
             password: this.state.password,
         };
 
@@ -72,6 +72,9 @@ class Register extends Component {
                         <label htmlFor="inputId3" className="col-sm-2 control-label">Student ID:</label>
                         <div className="col-sm-10">
                             <input type="number" className="form-control" id="inputId3" placeholder="Student ID" name="studentid" onChange={this.handleChange} />
+                            <small id="" className="form-text text-muted pl-1">
+                                E.g. 12345678
+                            </small>
                         </div>
                     </div>
                     <div className="form-group row">
@@ -88,14 +91,20 @@ class Register extends Component {
                     </div>
                     <div className="form-group row">
                         <label htmlFor="inputEmail3" className="col-sm-2 control-label">Email:</label>
-                        <div className="col-sm-10">
-                            <input type="email" className="form-control" id="inputEmail3" placeholder="example123@student.otago.ac.nz" name="email" onChange={this.handleChange} />
+                        <div className="col-sm-10 input-group">
+                            <input type="text" className="form-control" id="inputEmail3" placeholder="user123" name="email" onChange={this.handleChange} />
+                            <div className="input-group-append">
+                                <span className="input-group-text" id="basic-addon2">@student.otago.ac.nz</span>
+                            </div>
                         </div>
                     </div>
                     <div className="form-group row">
                         <label htmlFor="inputPassword3" className="col-sm-2 control-label">Password:</label>
                         <div className="col-sm-10">
                             <input type="password" className="form-control" id="inputPassword3" placeholder="Password" name="password" onChange={this.handleChange} />
+                            <small id="passwordHelpBlock" className="form-text text-muted">
+                                Your password must be 8-25 characters long and contain letters and numbers.
+                            </small>
                         </div>
                     </div>
                     <div className="form-group row">
