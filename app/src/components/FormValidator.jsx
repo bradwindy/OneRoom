@@ -17,14 +17,14 @@ class FormValidator {
                 // optional args from the rule definition
                 const field_value = state[rule.field].toString();
                 const args = rule.args || [];
-                const validation_method = typeof rule.method === 'string' ?
-                    validator[rule.method] :
-                    rule.method;
+                const validation_method = typeof rule.method === 'string' ? validator[rule.method] : rule.method;
 
+                // if rule not valid
                 if(validation_method(field_value, ...args, state) !== rule.validWhen) {
                     validation[rule.field] = {
                         isInvalid: true,
-                        message: rule.message
+                        message: rule.message,
+                        classText: "form-control is-invalid"
                     };
                     validation.isValid = false;
                 }
@@ -36,9 +36,8 @@ class FormValidator {
     // create a validation object for a valid form
     valid() {
         const validation = {};
-
         this.validations.map(rule => (
-            validation[rule.field] = { isInvalid: false, message: '' }
+            validation[rule.field] = { isInvalid: false, message: '', classText: "form-control" }
         ));
         return { isValid: true, ...validation };
     }

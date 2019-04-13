@@ -9,8 +9,6 @@ class Login extends Component {
         password: '',
     };
 
-    passwordMatch = (confirmation, state) => (state.password === confirmation);
-
     /** Takes the value of anything that is typed by the user for the form fields
     * and sets the state for the form field above.
     * Source - https://reactjs.org/docs/forms.html
@@ -26,16 +24,21 @@ class Login extends Component {
     handleSubmit = event => {
         // Stopping the browser from reloading the page
         event.preventDefault();
+
         // Making a new object called userLogin which takes all the inputted form details
         const userLogin = {
             email: this.state.email,
             password: this.state.password,
         };
 
+        // Calling a validator to validate state on submit
         const validation = this.validator.validate(this.state);
+        // setting validation within state
         this.setState({ validation });
+        // Letting the validator know in the future if we have submitted this form before
         this.submitted = true;
 
+        // Only POST using axios if the form is all valid
         if (validation.isValid) {
             /** Using Axios to POST this to our /API/Login and passing the userLogin object as a payload */
             axios.post('/api/login', { userLogin })
@@ -43,15 +46,22 @@ class Login extends Component {
                     console.log(res);
                     console.log(res.data);
                 });
-        }else{
-            this.formClassName = "form-control is-invalid";
         }
     };
 
+    // Constructor for login object
     constructor(props) {
         super(props);
 
+        // Validator created from FormValidator class
         this.validator = new FormValidator([
+            /* These are all rules. These rules have a:
+             * Field: The name of the field in the form that the rule applies to
+             * Method: Listed here https://www.npmjs.com/package/validator ,
+             *         these are the checks that happen to the field
+             * ValidWhen: What the result of the method above needs to be for the rule to be valid\
+             * Message: Message to be displayed to the user upon invalid field
+             */
             {
                 field: 'email',
                 method: 'isEmpty',
@@ -66,10 +76,10 @@ class Login extends Component {
             }
         ]);
 
+        // if form has been submitted before
         this.submitted = false;
 
-        this.formClassName = "form-control";
-
+        // sets state upon construction
         this.state = {
             email: '',
             password: '',
@@ -79,9 +89,10 @@ class Login extends Component {
 
 
     render() {
+        // Setting validation conditionally
         let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation;
         return (
-            // log in page
+            // log in page, below, validation.x.y are values from within validation object
             <div className="container p-4">
 
                 <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
@@ -94,7 +105,7 @@ class Login extends Component {
                         <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email</label>
                         <div className="col-sm-10">
                             <input type="email"
-                                   className={this.formClassName}
+                                   className={validation.email.classText}
                                    id="inputEmail3"
                                    placeholder="example123@student.otago.ac.nz"
                                    name="email"
@@ -113,7 +124,7 @@ class Login extends Component {
                         <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</label>
                         <div className="col-sm-10">
                             <input type="password"
-                                   className={this.formClassName}
+                                   className={validation.password.classText}
                                    id="inputPassword3"
                                    placeholder="Password"
                                    name="password"
