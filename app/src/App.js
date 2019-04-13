@@ -12,6 +12,8 @@ import { BrowserRouter, Router, Route } from 'react-router-dom';
 class App extends Component {
   render() {
     return (
+        // this is the browser router, and it displays a different react component depending on where the user
+        // is within the web page.
         <BrowserRouter>
             <Root>
                 <Route exact path={"/"} component={Home}/>

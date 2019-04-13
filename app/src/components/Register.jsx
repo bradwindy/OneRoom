@@ -56,50 +56,52 @@ class Register extends Component {
         return (
             <div className="container pt-4">
                 <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
-                    <div className="form-group">
+                    <div className="form-group row">
                         <div className="col-sm-10">
-                            <h1 className="pt-4"><b>Sign Up</b></h1>
+                            <h1 className="pt-2"><b>Sign Up</b></h1>
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputUsername3" className="col-sm-2 control-label">Username</label>
+                    <div className="form-group row">
+                        <label htmlFor="inputUsername3" className="col-sm-2 control-label">Username:</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="inputUsername3" placeholder="Username" name="username" onChange={this.handleChange} />
+                            <input type="text" className="form-control" id="inputUsername3" placeholder="username123" name="username" onChange={this.handleChange} />
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputId3" className="col-sm-2 control-label">Student ID</label>
+                    <div className="form-group row">
+                        <label htmlFor="inputId3" className="col-sm-2 control-label">Student ID:</label>
                         <div className="col-sm-10">
                             <input type="number" className="form-control" id="inputId3" placeholder="Student ID" name="studentid" onChange={this.handleChange} />
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputFirstname3" className="col-sm-2 control-label">First Name</label>
+                    <div className="form-group row">
+                        <label htmlFor="inputFirstname3" className="col-sm-2 control-label">First Name:</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="inputFirstname3" placeholder="Firstname" name="firstname" onChange={this.handleChange} />
+                            <input type="text" className="form-control" id="inputFirstname3" placeholder="First Name" name="firstname" onChange={this.handleChange} />
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputLastname3" className="col-sm-2 control-label">Last Name</label>
+                    <div className="form-group row">
+                        <label htmlFor="inputLastname3" className="col-sm-2 control-label">Last Name:</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="inputLastname3" placeholder="Lastname" name="lastname" onChange={this.handleChange} />
+                            <input type="text" className="form-control" id="inputLastname3" placeholder="Last Name" name="lastname" onChange={this.handleChange} />
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputEmail3" className="col-sm-2 control-label">Email</label>
+                    <div className="form-group row">
+                        <label htmlFor="inputEmail3" className="col-sm-2 control-label">Email:</label>
                         <div className="col-sm-10">
-                            <input type="email" className="form-control" id="inputEmail3" placeholder="Email" name="email" onChange={this.handleChange} />
+                            <input type="email" className="form-control" id="inputEmail3" placeholder="example123@student.otago.ac.nz" name="email" onChange={this.handleChange} />
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputPassword3" className="col-sm-2 control-label">Password</label>
+                    <div className="form-group row">
+                        <label htmlFor="inputPassword3" className="col-sm-2 control-label">Password:</label>
                         <div className="col-sm-10">
                             <input type="password" className="form-control" id="inputPassword3" placeholder="Password" name="password" onChange={this.handleChange} />
                         </div>
                     </div>
-                    <div className="form-group">
-                        <div className="col-sm-offset-2 col-sm-5">
-                            <button type="submit" className="btn btn-primary">Register</button>
+                    <div className="form-group row">
+                        <div className="col-sm-2">
+                        </div>
+                        <div className="col-sm-offset-2 col-sm-10">
+                            <button type="submit" className="btn btn-primary mt-2">Register</button>
                         </div>
                     </div>
                 </form>
