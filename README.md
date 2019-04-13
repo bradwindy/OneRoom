@@ -123,7 +123,8 @@ FOR MAC USERS ONLY:
 You should be able to see the folders `app` and `backend`. Ignore the `README.md'
 
 ### The app directory
-This directory refers to the front end of the system. This is where Elora and Bradley will work on the UI/UX things.
+This directory refers to the front end of the system. This is where Elora and Bradley will work on the UI/UX things. 
+**_Refer to app folder README for more details._**
 
 ### The backend directory
 This directory refers to the back end of the system. This is where Alice, Vivek and Akash will work on 
