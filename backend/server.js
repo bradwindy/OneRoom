@@ -44,7 +44,7 @@ server.use(function (req, res, next) {
 
 // server.route('/books/:userId')
 
-// Skeleton For user registration
+// User registration
 server.route('/api/register')
   .post((req, res, next) => {
     const username = req.body.user.username;
@@ -62,7 +62,7 @@ server.route('/api/register')
     console.log(req.body.user.email);
     console.log(req.body.user.password);
 
-
+    // Setting up a Joi Schema, which sets parameters for the user data and validates it
     const schema = Joi.object().keys({
       username: Joi.string().alphanum().min(7).max(9).required(),
       studentid: Joi.number().integer().min(100000).max(9999999).required(),
@@ -73,7 +73,10 @@ server.route('/api/register')
       }).required(),
       password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required()
     });
-
+    /** Validating the incoming data against the above schema. 
+     *  If the data is not in the required format, throw an error and display it in the backend 
+     *  and send a 400 error to the frontend.
+    */
     const result = Joi.validate(req.body.user, schema);
     // console.log(result)
     if (result.error) {
@@ -100,6 +103,16 @@ server.route('/api/register')
 
 // Skeleton For user login
 
+
+// Route to retrive room details from database and send it to frontend
+server.route('/api/rooms')
+.get((req, res, next) => {
+  const query = "SELECT * FROM `room`";
+  db.query(query, (error, results, fields) => {
+    if (error) throw error;
+    res.json(results);
+  });
+});
 
 // Skeleton To delete a booking 
 server.route('/api/booking/:id')
