@@ -1,4 +1,4 @@
-/** The Registeration or Sign up Page for the User
+/** The Registration or Sign up Page for the User
  *  Provides the user with a sign up form. Then, takes the user input
  *  and converts it into JSON using Axios and sends the POST AJAX
  *  request to the /register API Route.
@@ -90,6 +90,20 @@ class Register extends Component {
                 message: 'Student ID is required.'
             },
             {
+                field: 'studentid',
+                method: 'isInt',
+                args: [{allow_leading_zeroes: false}],
+                validWhen: true,
+                message: 'Student ID must contain no letters or leading zeros'
+            },
+            {
+                field: 'studentid',
+                method: 'isLength',
+                args: [{min:8, max: 8}],
+                validWhen: true,
+                message: 'Student ID must be 8 numbers in length'
+            },
+            {
                 field: 'firstname',
                 method: 'isEmpty',
                 validWhen: false,
@@ -106,6 +120,13 @@ class Register extends Component {
                 method: 'isEmpty',
                 validWhen: false,
                 message: 'Email is required.'
+            },
+            {
+                field: 'email',
+                method: 'matches',
+                args: [new RegExp("([A-z]{5}[0-9]{3})")],
+                validWhen: true,
+                message: 'Must be a valid student email username.'
             },
             {
                 field: 'password',
@@ -148,7 +169,7 @@ class Register extends Component {
                             <input type="text"
                                 className={validation.username.classText}
                                 id="inputUsername3"
-                                placeholder="username123"
+                                placeholder="Username"
                                 name="username"
                                 onChange={this.handleChange}
                             />
