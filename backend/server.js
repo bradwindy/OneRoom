@@ -12,6 +12,7 @@ require('dotenv').config();
 
 const express = require('express');
 const server = express();
+const router = express.Router();
 const bodyParser = require('body-parser');
 const db = require('./database');
 // Encryption (Salting and Hashing for our passwords)
@@ -20,7 +21,8 @@ const saltRounds = 10;
 // Authentication Packages
 const session = require('express-session');
 const passport = require('passport');
-
+const LocalStrategy = require('passport-local').Strategy;
+const MySQLStore = require('express-mysql-session')(session);
 
 // Capital J as what is returned from this module is a class and classes need to be uppercase
 // Joi helps us validate user input on the server side.
@@ -34,7 +36,7 @@ server.use(bodyParser.urlencoded({
   extended: false
 }));
 
-// Allows our server to use cross origin requests. This allows us to test our backend and frontend simultaneously on loclahost.
+// Allows our server to use cross origin requests. This allows us to test our backend and frontend simultaneously on localhost.
 // https://github.com/axios/axios/issues/853
 server.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -42,7 +44,35 @@ server.use(function (req, res, next) {
   next();
 });
 
-// server.route('/books/:userId')
+/** WIP CODE IGNORE */
+/** This opens a session for the user and sends the session id back to the user as a cookie 
+ *  @param secret helps set a SALT/HASH for our cookie. Usually a random a string.
+ *  @param resave this determines whether or not a session should be updated if a user makes a change to the session (reloading a page).
+ *  @param saveUninitialized sets a session and cookie for our user, each time a user visits the page.
+ */
+// server.use(session({
+//   secret: 'avbeacjisuhwebfix', //usually generated using a random string generator
+//   resave: false,
+//   saveUninitialized: false, // we use this to check if a user has been authorised
+//   //cookie: { secure: true }
+// }));
+
+// Initializing passport and making sure passport can integrate with our session
+// server.use(passport.initialize());
+// server.use(passport.session());
+
+// passport.use(new LocalStrategy(
+//   function (email, password, done) {
+//     console.log(email);
+//     console.log(password);
+//     return done(null, 'test');
+//   }
+// ));
+
+// // GET home page
+// router.get('/', (req, res) => {
+//   res.render('home');
+// });
 
 // User registration
 server.route('/api/register')
@@ -76,7 +106,7 @@ server.route('/api/register')
     /** Validating the incoming data against the above schema. 
      *  If the data is not in the required format, throw an error and display it in the backend 
      *  and send a 400 error to the frontend.
-    */
+     */
     const result = Joi.validate(req.body.user, schema);
     // console.log(result)
     if (result.error) {
@@ -94,25 +124,48 @@ server.route('/api/register')
         const query = "INSERT INTO `user` (username, student_ID, firstname, lastname, student_email, password) VALUES (?, ?, ?, ?, ?, ?)";
         db.query(query, [username, studentid, firstname, lastname, email, hash], (error, results, fields) => {
           if (error) throw error;
-          // Sending a response back to the frontend to see if the data was passed correctly.
-          if (!error) return res.send(`The user ${username} has been registered and stored in the database.`);
-        });
+          /** WIP CODE - IGNORE */
+          // db.query("SELECT LAST_INSERT_ID() as user_ID", (error, results, fields) => {
+          //   if (error) throw error;
+          //   const user_ID = results[0];
+
+          //   req.login(user_ID, function (err) {
+          //     console.log(user_ID);
+          return res.send(`The user ${username} has been registered and stored in the database.`);
+          //if (!error) return res.send(`The user ${username} has been registered and stored in the database.`);
+        })
       });
+      // Sending a response back to the frontend to see if the data was passed correctly.
+      //});
+      //});
     }
   });
 
-// Skeleton For user login
+// passport.serializeUser(function (user_ID, done) {
+//   done(null, user_ID);
+// });
+
+// passport.deserializeUser(function (user_ID, done) {
+//   done(null, user_ID);
+// });
+
+// // User login
+// server.route('/api/login')
+//   .post(passport.authenticate('local', {
+//     successRedirect: '/',
+//     failureRedirect: '/'
+//   }));
 
 
 // Route to retrive room details from database and send it to frontend
 server.route('/api/rooms')
-.get((req, res, next) => {
-  const query = "SELECT * FROM `room`";
-  db.query(query, (error, results, fields) => {
-    if (error) throw error;
-    res.json(results);
+  .get((req, res, next) => {
+    const query = "SELECT * FROM `room`";
+    db.query(query, (error, results, fields) => {
+      if (error) throw error;
+      res.json(results);
+    });
   });
-});
 
 // Skeleton To delete a booking 
 server.route('/api/booking/:id')
