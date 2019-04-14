@@ -27,7 +27,7 @@ class Login extends Component {
 
         // Making a new object called userLogin which takes all the inputted form details
         const userLogin = {
-            email: this.state.email,
+            email: this.state.email + "@student.otago.ac.nz",
             password: this.state.password,
         };
 
@@ -102,18 +102,22 @@ class Login extends Component {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email</label>
-                        <div className="col-sm-10">
-                            <input type="email"
+                        <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email:</label>
+                        <div className="col-sm-10 input-group">
+                            <input type="text"
                                    className={validation.email.classText}
                                    id="inputEmail3"
-                                   placeholder="example123@student.otago.ac.nz"
+                                   placeholder="user123"
                                    name="email"
-                                   onChange={this.handleChange} />
-
-                            <small id="" className="form-text text-muted pl-1">
-                                You must use an Otago University email address.
-                            </small>
+                                   onChange={this.handleChange}
+                            />
+                            <div className="input-group-append">
+                                <span className="input-group-text" id="basic-addon2">@student.otago.ac.nz</span>
+                            </div>
+                        </div>
+                        <div className="col-sm-2">
+                        </div>
+                        <div className="col-sm-10">
                             <small id="" className="form-text text-danger pl-1">
                                 {validation.email.message}
                             </small>
@@ -121,7 +125,7 @@ class Login extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</label>
+                        <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password:</label>
                         <div className="col-sm-10">
                             <input type="password"
                                    className={validation.password.classText}
