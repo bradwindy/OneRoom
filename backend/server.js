@@ -12,21 +12,13 @@ require('dotenv').config();
 
 const express = require('express');
 const server = express();
-const router = express.Router();
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 const db = require('./database');
-// Encryption (Salting and Hashing for our passwords)
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-// Authentication Packages
-const session = require('express-session');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const MySQLStore = require('express-mysql-session')(session);
 
-// Capital J as what is returned from this module is a class and classes need to be uppercase
-// Joi helps us validate user input on the server side.
-const Joi = require('joi');
+
+/** Middlewares */
+server.use(morgan('dev'));
 
 // Allows our Express app/server to use JSON data
 // https://stackoverflow.com/questions/10005939/how-do-i-consume-the-json-post-data-in-an-express-application
@@ -74,87 +66,8 @@ server.use(function (req, res, next) {
 //   res.render('home');
 // });
 
-// User registration
-server.route('/api/register')
-  .post((req, res, next) => {
-    const username = req.body.user.username;
-    const studentid = req.body.user.studentid;
-    const firstname = req.body.user.firstname;
-    const lastname = req.body.user.lastname;
-    const email = req.body.user.email;
-    const password = req.body.user.password;
-
-    // Checking if our JSON data passed from Axios (frontend) is recieved by our api in the backend.
-    console.log(req.body.user.username);
-    console.log(req.body.user.studentid);
-    console.log(req.body.user.firstname);
-    console.log(req.body.user.lastname);
-    console.log(req.body.user.email);
-    console.log(req.body.user.password);
-
-    // Setting up a Joi Schema, which sets parameters for the user data and validates it
-    const schema = Joi.object().keys({
-      username: Joi.string().alphanum().min(7).max(9).required(),
-      studentid: Joi.number().integer().min(100000).max(9999999).required(),
-      firstname: Joi.string().min(2).required(),
-      lastname: Joi.string().min(2).required(),
-      email: Joi.string().email({
-        minDomainAtoms: 4
-      }).required(),
-      password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required()
-    });
-    /** Validating the incoming data against the above schema. 
-     *  If the data is not in the required format, throw an error and display it in the backend 
-     *  and send a 400 error to the frontend.
-     */
-    const result = Joi.validate(req.body.user, schema);
-    // console.log(result)
-    if (result.error) {
-      // Helps us retrieve the error message. We can collect multiple errors from the details array
-      // and concatenate the errors to display them all to the user.
-      console.log(result.error.details[0].message);
-      res.status(400).send(result.error.details[0].message);
-      return;
-    } else {
-      /** Encrypt the password of the user using SALT and Hash
-       *  Then store the user data into the database and throw any database errors to the server.
-       *  Finally return the original front end data
-       */
-      bcrypt.hash(password, saltRounds, (err, hash) => {
-        const query = "INSERT INTO `user` (username, student_ID, firstname, lastname, student_email, password) VALUES (?, ?, ?, ?, ?, ?)";
-        db.query(query, [username, studentid, firstname, lastname, email, hash], (error, results, fields) => {
-          if (error) throw error;
-          /** WIP CODE - IGNORE */
-          // db.query("SELECT LAST_INSERT_ID() as user_ID", (error, results, fields) => {
-          //   if (error) throw error;
-          //   const user_ID = results[0];
-
-          //   req.login(user_ID, function (err) {
-          //     console.log(user_ID);
-          return res.send(`The user ${username} has been registered and stored in the database.`);
-          //if (!error) return res.send(`The user ${username} has been registered and stored in the database.`);
-        })
-      });
-      // Sending a response back to the frontend to see if the data was passed correctly.
-      //});
-      //});
-    }
-  });
-
-// passport.serializeUser(function (user_ID, done) {
-//   done(null, user_ID);
-// });
-
-// passport.deserializeUser(function (user_ID, done) {
-//   done(null, user_ID);
-// });
-
-// // User login
-// server.route('/api/login')
-//   .post(passport.authenticate('local', {
-//     successRedirect: '/',
-//     failureRedirect: '/'
-//   }));
+/** Routes */
+server.use('/auth', require('./routes/auth'));
 
 
 // Route to retrive room details from database and send it to frontend
@@ -209,6 +122,8 @@ server.route('/user/:id')
   });
 
 server.get('/status', (req, res) => res.send('Working!'));
+
+/** Server Information */
 
 // PORT is an environment (env) variable. Environment variables refers
 // to the variable that the environment in which a process runs. 

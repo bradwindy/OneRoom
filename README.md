@@ -130,16 +130,22 @@ This directory refers to the front end of the system. This is where Elora and Br
 This directory refers to the back end of the system. This is where Alice, Vivek and Akash will work on 
 setting up the middleware, server and database.
 
-Open the `server.js` file. Read through it, I've put in some comments to give a basic overview of what's going on.
+It consists of three main directories `controllers`, `helpers` and `routes`
 
-Also, open the `database.js` file. This file simply checks whether we have succesfully conected to the database everytime we
-launch a local server using Node. It takes values for host, user, database and password from the `.env' file, which we set up
-earlier.
+`server.js` is our main backend/server file. This file will provide access to all the routes in the `routes` directory and can be considered as the brain of the backend. It will also list all the middleware such as bodyParser (which will convert the incoming data into JSON)
+
+`routes` - this directory solely consists of our Express.js routes. This is the entry point of any data from the frontend. The routes usually include several functions taken from the `helpers` and `controllers` directories.
+
+`helpers` - this directory focuses on files which have code and functionality which can be shared by different parts of the project. For example, the routeHelpers.js file consists of Joi (an input validation package), so when data is sent from the front end to the /register route, it is first input validated by Joi (within the routeHelpers.js file) and only then will the validated data be passed to the controller. So a helper can be thought as a checker/checkpoint between our route and controller.
+
+`controllers` - this directory focuses on defining the logic of the routes stored in `routes`. For example, we have a route /register, the AuthController will store all the user details which is passed via the /register route, into the database, only after the data has been validated by a `helper` . So a controller can be thought of as an interface between the database and our routes.
+
+Also, open the `database.js` file. This file simply checks whether we have succesfully conected to the database everytime we launch a local server using Node. It takes values for host, user, database and password from the `.env' file, which we set up earlier.
 
 ### Common files in Directories
 
-`package.json` - this file hold the dependencies we will use when developing our frontend or backend. 
-This is why we have two seperate "package.json" files for `app` and `backend`
+`package.json` - this file hold the dependencies we will use when developing our frontend or backend.
+This is why we have two seperate "package.json" files for `app` and `backend`. It also consists of information about launching the app and server.
 
 `node_modules` - this directory consists of several different Javascript packages/libraries that
 help us develop things faster. Things like Express, React, MySQL when developing come from here.

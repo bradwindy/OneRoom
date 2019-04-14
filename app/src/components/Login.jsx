@@ -41,7 +41,7 @@ class Login extends Component {
         // Only POST using axios if the form is all valid
         if (validation.isValid) {
             /** Using Axios to POST this to our /API/Login and passing the userLogin object as a payload */
-            axios.post('/api/login', { userLogin })
+            axios.post('/auth/signIn', { userLogin })
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
