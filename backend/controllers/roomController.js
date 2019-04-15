@@ -2,15 +2,19 @@ const db = require('../database');
 
 module.exports = {
     roomlist: async (req, res) => {
-        res
-        .status(200)
-        .send("This is our room list from controller");
+        const query = "SELECT * FROM `room`";
+        db.query(query, (error, results, fields) => {
+        if (error) throw error;
+        res.json(results);
+        });
     },
 
     byid: async (req, res) => {
-        res 
-        .status(200)
-        .send("This is a single room based on id")
+        const query = "SELECT * FROM `room` where room_ID = ?"
+        db.query(query, [userID], (error, results, fields) => {
+        if (error) throw error;
+        res.json(results);
+      });
     }
     
  }

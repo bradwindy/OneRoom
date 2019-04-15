@@ -10,7 +10,7 @@ router
     .get(RoomController.roomlist);
 
 router
-    .route("/id")
+    .route("/:id")
     .get(RoomController.byid);
 
 module.exports = router;
