@@ -17,6 +17,7 @@ const morgan = require('morgan');
 const db = require('./database');
 
 
+
 /** Middlewares */
 server.use(morgan('dev'));
 
@@ -68,6 +69,9 @@ server.use(function (req, res, next) {
 
 /** Routes */
 server.use('/auth', require('./routes/auth'));
+
+var routes = require('./routes/room');
+server.use('/room', routes);
 
 
 // Route to retrive room details from database and send it to frontend

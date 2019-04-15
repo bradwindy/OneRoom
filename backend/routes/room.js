@@ -1,12 +1,16 @@
 const express = require('express');
 const server = express();
-const router = require('express-promise-router')();
+const router = express.Router();
 
-const RoomController = require('../controllers/roomController');
+const RoomController = require('../controllers/roomController.js');
 
-//Display room information
+//Get list of rooms from the database
+router
+    .route("/")
+    .get(RoomController.roomlist);
 
-router.route('/room')
-.get(RoomController.roominfo)
+router
+    .route("/id")
+    .get(RoomController.byid);
 
 module.exports = router;
