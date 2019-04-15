@@ -28,7 +28,7 @@ module.exports = {
     schemas: {
         registerSchema: Joi.object().keys({
             username: Joi.string().alphanum().min(7).max(9).required(),
-            studentid: Joi.number().integer().min(100000).max(9999999).required(),
+            studentid: Joi.number().integer().min(100000).max(99999999).required(),
             firstname: Joi.string().min(2).required(),
             lastname: Joi.string().min(2).required(),
             email: Joi.string().email({
