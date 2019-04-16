@@ -6,7 +6,7 @@ const { JWT_SECRET } = require('../configuration');
 signToken = user => {
   return JWT.sign({
     iss: 'Roomease',
-    sub: user._id,
+    sub: user.id,
     iat: new Date().getTime(), //current time 
     exp: Math.floor(Date.now() / 1000) + (60 * 60) // Expires in 1 hour
   }, JWT_SECRET);
