@@ -6,6 +6,7 @@ import Home from "./components/Home"
 import Login from "./components/Login"
 import Book from "./components/Book"
 import Register from "./components/Register"
+import Rooms from "./components/Rooms"
 
 import { BrowserRouter, Router, Route } from 'react-router-dom';
 
@@ -20,6 +21,7 @@ class App extends Component {
                 <Route path={"/login/"} component={Login}/>
                 <Route path={"/book/"} component={Book}/>
                 <Route path={"/register/"} component={Register}/>
+                <Route path={"/rooms/"} component={Rooms}/>
             </Root>
         </BrowserRouter>
 

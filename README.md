@@ -1,4 +1,4 @@
-# Otago Business School Room Booking System
+# Otago Business School Rooms Booking System
 A meeting-room booking system built with ReactJS, Express.js, Node.js and Cloud SQL.
 
 ## Table of Contents
