@@ -70,6 +70,7 @@ server.use(function (req, res, next) {
 /** Routes */
 server.use('/auth', require('./routes/auth'));
 
+//Route for roomController and room.js to enable displaying of room list and details given respective URLs
 var routes = require('./routes/room');
 server.use('/room', routes);
 

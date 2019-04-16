@@ -1,6 +1,8 @@
 const db = require('../database');
 
 module.exports = {
+
+    //Find list of all rooms from database and display it in JSON form
     roomlist: async (req, res) => {
         const query = "SELECT * FROM `room`";
         db.query(query, (error, results, fields) => {
@@ -9,6 +11,7 @@ module.exports = {
         });
     },
 
+    //Find room details using the room name and display details from database in JSON
     byname: async (req, res) => {
         const roomname = req.params.name
         const query = "SELECT * FROM `room` where room_name = ?"

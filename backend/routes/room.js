@@ -9,6 +9,7 @@ router
     .route("/")
     .get(RoomController.roomlist);
 
+//Get room details based on room names
 router
     .route("/:name")
     .get(RoomController.byname);
