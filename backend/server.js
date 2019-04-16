@@ -15,8 +15,9 @@ const server = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const db = require('./database');
+const mongoose = require('mongoose');
 
-
+mongoose.connect('mongodb://localhost/Roomease');
 
 /** Middlewares */
 server.use(morgan('dev'));

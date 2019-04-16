@@ -10,10 +10,9 @@ import FormValidator from "./FormValidator";
 
 class Register extends Component {
     state = {
+        name: '',
+        studentId: '',
         username: '',
-        studentid: '',
-        firstname: '',
-        lastname: '',
         email: '',
         password: '',
     };
@@ -36,10 +35,9 @@ class Register extends Component {
 
         // Making a new object called user which takes all the inputted form details
         const user = {
+            name: this.state.name,
+            studentId: this.state.studentId,
             username: this.state.username,
-            studentid: this.state.studentid,
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
             email: this.state.email + "@student.otago.ac.nz",
             password: this.state.password,
         };
@@ -84,36 +82,30 @@ class Register extends Component {
                 message: 'Username is required.'
             },
             {
-                field: 'studentid',
+                field: 'studentId',
                 method: 'isEmpty',
                 validWhen: false,
                 message: 'Student ID is required.'
             },
             {
-                field: 'studentid',
+                field: 'studentId',
                 method: 'isInt',
                 args: [{allow_leading_zeroes: false}],
                 validWhen: true,
                 message: 'Student ID must contain no letters or leading zeros'
             },
             {
-                field: 'studentid',
+                field: 'studentId',
                 method: 'isLength',
                 args: [{min:7, max: 8}],
                 validWhen: true,
                 message: 'Student ID must be 7 or 8 numbers in length'
             },
             {
-                field: 'firstname',
+                field: 'name',
                 method: 'isEmpty',
                 validWhen: false,
                 message: 'First name is required.'
-            },
-            {
-                field: 'lastname',
-                method: 'isEmpty',
-                validWhen: false,
-                message: 'Last name is required.'
             },
             {
                 field: 'email',
@@ -141,10 +133,9 @@ class Register extends Component {
 
         // sets state upon construction
         this.state = {
+            name: '',
+            studentId: '',
             username: '',
-            studentid: '',
-            firstname: '',
-            lastname: '',
             email: '',
             password: '',
             validation: this.validator.valid(),
@@ -164,7 +155,42 @@ class Register extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="inputUsername3" className="col-sm-2 control-label">Username:</label>
+                        <label htmlFor="inputName3" className="col-sm-2 control-label">Full Name:</label>
+                        <div className="col-sm-10">
+                            <input type="text"
+                                className={validation.name.classText}
+                                id="inputName3"
+                                placeholder="Full Name"
+                                name="name"
+                                onChange={this.handleChange}
+                            />
+                            <small id="" className="form-text text-danger pl-1">
+                                {validation.name.message}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div className="form-group row">
+                        <label htmlFor="inputId3" className="col-sm-2 control-label">Student ID:</label>
+                        <div className="col-sm-10">
+                            <input type="number"
+                                className={validation.studentId.classText}
+                                id="inputId3"
+                                placeholder="Student ID"
+                                name="studentId"
+                                onChange={this.handleChange}
+                            />
+                            <small id="" className="form-text text-muted pl-1">
+                                E.g. 1234567
+                            </small>
+                            <small id="" className="form-text text-danger pl-1">
+                                {validation.studentId.message}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div className="form-group row">
+                        <label htmlFor="inputUsername3" className="col-sm-2 control-label">Evision Username:</label>
                         <div className="col-sm-10">
                             <input type="text"
                                 className={validation.username.classText}
@@ -175,57 +201,6 @@ class Register extends Component {
                             />
                             <small id="" className="form-text text-danger pl-1">
                                 {validation.username.message}
-                            </small>
-                        </div>
-                    </div>
-
-                    <div className="form-group row">
-                        <label htmlFor="inputId3" className="col-sm-2 control-label">Student ID:</label>
-                        <div className="col-sm-10">
-                            <input type="number"
-                                className={validation.studentid.classText}
-                                id="inputId3"
-                                placeholder="Student ID"
-                                name="studentid"
-                                onChange={this.handleChange}
-                            />
-                            <small id="" className="form-text text-muted pl-1">
-                                E.g. 12345678
-                            </small>
-                            <small id="" className="form-text text-danger pl-1">
-                                {validation.studentid.message}
-                            </small>
-                        </div>
-                    </div>
-
-                    <div className="form-group row">
-                        <label htmlFor="inputFirstname3" className="col-sm-2 control-label">First Name:</label>
-                        <div className="col-sm-10">
-                            <input type="text"
-                                className={validation.firstname.classText}
-                                id="inputFirstname3"
-                                placeholder="First Name"
-                                name="firstname"
-                                onChange={this.handleChange}
-                            />
-                            <small id="" className="form-text text-danger pl-1">
-                                {validation.firstname.message}
-                            </small>
-                        </div>
-                    </div>
-
-                    <div className="form-group row">
-                        <label htmlFor="inputLastname3" className="col-sm-2 control-label">Last Name:</label>
-                        <div className="col-sm-10">
-                            <input type="text"
-                                className={validation.lastname.classText}
-                                id="inputLastname3"
-                                placeholder="Last Name"
-                                name="lastname"
-                                onChange={this.handleChange}
-                            />
-                            <small id="" className="form-text text-danger pl-1">
-                                {validation.lastname.message}
                             </small>
                         </div>
                     </div>
