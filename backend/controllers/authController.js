@@ -4,7 +4,7 @@ const User = require("../models/userModel");
 
 module.exports = {
   register: async (req, res, next) => {
-    // Need to get user details
+    // Need to get user details from front end
     const { name, studentId, username, email, password } = req.body.user;
 
     // Check if there is an existing user with the same email
