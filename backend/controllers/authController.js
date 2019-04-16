@@ -1,3 +1,4 @@
+const JWT = require('jsonwebtoken');
 const db = require("../database");
 const User = require("../models/userModel");
 
@@ -24,10 +25,20 @@ module.exports = {
 
     // Store the user into the database and wiat for this to finish before moving on
     await newUser.save();
+   
+    //res.json({ user: 'created' });
+
+    //takes an object (payload) & takes a secret (String) 
+    const token = JWT.sign({
+      iss: 'RoomEase',
+      sub: newUser.id,
+      iat: new Date().getTime(), //current time 
+      exp: new Data().setDate(new Date().getDate() + 1) // current time + 1 day ahead for expiration
+    }, 'roomeaseauthentication');
+    console.log(token);
     // Respond with token
-    res.json({
-        user: 'created'
-    });
+    res.status(200).json({ token });
+
     // bcrypt.hash(password, saltRounds, (err, hash) => {
     //     const query = "INSERT INTO `user` (username, student_ID, firstname, lastname, student_email, password) VALUES (?, ?, ?, ?, ?, ?)";
     //     db.query(query, [username, studentid, firstname, lastname, email, hash], (error, results, fields) => {
