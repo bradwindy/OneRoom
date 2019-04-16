@@ -9,7 +9,7 @@ signToken = user => {
     sub: user._id,
     iat: new Date().getTime(), //current time 
     exp: Math.floor(Date.now() / 1000) + (60 * 60) // Expires in 1 hour
-  }, 'JWT_SECRET');
+  }, JWT_SECRET);
 }
 
 module.exports = {
@@ -60,5 +60,12 @@ module.exports = {
   signIn: async (req, res, next) => {
     // Need to generate a token
     //console.log("authController.signIn() called!");
+    console.log("Login Succes!");
+
+  },
+
+  secret: async (req, res, next) => {
+    console.log('I managed to get here!');
+    res.json({ secret: "resource" });
   }
 };

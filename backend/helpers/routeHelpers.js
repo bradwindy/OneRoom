@@ -34,6 +34,10 @@ module.exports = {
                 minDomainAtoms: 4
             }).required(),
             password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required()
+        }),
+        authSchema : Joi.object().keys({
+            email: Joi.string().email().required(),
+            password: Joi.string().required()
         })
     }
 }

@@ -31,6 +31,7 @@ const userSchema = new Schema({
   }
 });
 
+
 userSchema.pre("save", async function(next) {
   try {
     // Generate a salt
@@ -44,6 +45,14 @@ userSchema.pre("save", async function(next) {
     next(error);
   }
 });
+
+userSchema.methods.isValidPassword = async function(newPassword) {
+  try {
+    return await bcrypt.compare(newPassword, this.password);
+  } catch(error) {
+    throw new Error(error);
+  }
+}
 
 // Create the model
 const User = mongoose.model("user", userSchema);

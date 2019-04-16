@@ -1,6 +1,8 @@
 const express = require('express');
 const server = express();
 const router = require('express-promise-router')();
+const passport = require('passport');
+const passportConf = require('../passport');
 
 const { validateBody, schemas } = require('../helpers/routeHelpers'); // calling both things present in the helper file
 const AuthController = require('../controllers/authController');
@@ -11,10 +13,14 @@ const AuthController = require('../controllers/authController');
  *  3. Then, the AuthController.register will have access to all the data and will store the data into the database.
 */
 router.route('/register')
-.post(validateBody(schemas.registerSchema), AuthController.register);
+    .post(validateBody(schemas.registerSchema), AuthController.register);
 
 // User Sign in
-router.route('/signIn')
-.post(AuthController.signIn);
+router.route('/signin')
+    .post(validateBody(schemas.authSchema), passport.authenticate('local', { session: false }), AuthController.signIn);
+
+//hold the token    
+router.route('/secret')
+    .get(passport.authenticate('jwt', { session: false }), AuthController.secret);
 
 module.exports = router;
