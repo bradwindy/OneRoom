@@ -99,9 +99,9 @@ class Register extends Component {
             {
                 field: 'studentid',
                 method: 'isLength',
-                args: [{min:8, max: 8}],
+                args: [{min:7, max: 8}],
                 validWhen: true,
-                message: 'Student ID must be 8 numbers in length'
+                message: 'Student ID must be 7 or 8 numbers in length'
             },
             {
                 field: 'firstname',
