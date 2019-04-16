@@ -17,7 +17,7 @@ const morgan = require('morgan');
 const db = require('./database');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/Roomease');
+mongoose.connect('mongodb://localhost/Roomease', { useCreateIndex: true, useNewUrlParser: true });
 
 /** Middlewares */
 server.use(morgan('dev'));
