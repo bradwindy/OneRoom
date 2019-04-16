@@ -4,11 +4,14 @@
   "private": true,
   "proxy": "http://localhost:3000",
   "dependencies": {
+    "@trendmicro/react-datepicker": "^1.0.0-alpha.6",
     "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
     "bootstrap": "^4.3.1",
-    "express-session": "^1.16.0",
-    "jquery": "^3.3.1",
+    "braces": "^3.0.1",
+    "express-session": "^1.16.1",
+    "jquery": "^3.4.0",
+    "moment": "^2.24.0",
     "jsonwebtoken": "^8.5.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
@@ -17,7 +20,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
-    "typescript": "^3.4.2",
+    "typescript": "^3.4.3",
     "validator": "^10.11.0"
   },
   "scripts": {

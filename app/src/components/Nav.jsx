@@ -17,7 +17,7 @@ class Nav extends Component {
                         </li>
 
                         <li className="nav-item">
-                            <a className="btn btn-success" href="/book" role="button">Book a Room</a>
+                            <a className="btn btn-success" href="/book/date" role="button">Book a Room</a>
                         </li>
                     </ul>
                 </div>
