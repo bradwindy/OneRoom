@@ -7,8 +7,9 @@ import Login from "./components/Login"
 import Book from "./components/Book"
 import Register from "./components/Register"
 import Rooms from "./components/Rooms"
+import NoMatch from "./components/NoMatch"
 
-import { BrowserRouter, Router, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 class App extends Component {
   render() {
@@ -17,11 +18,14 @@ class App extends Component {
         // is within the web page.
         <BrowserRouter>
             <Root>
-                <Route exact path={"/"} component={Home}/>
-                <Route path={"/login/"} component={Login}/>
-                <Route path={"/book/"} component={Book}/>
-                <Route path={"/register/"} component={Register}/>
-                <Route path={"/rooms/"} component={Rooms}/>
+                <Switch>
+                    <Route exact path={"/"} component={Home}/>
+                    <Route path={"/login/"} component={Login}/>
+                    <Route path={"/book/"} component={Book}/>
+                    <Route path={"/register/"} component={Register}/>
+                    <Route path={"/rooms/"} component={Rooms}/>
+                    <Route component={NoMatch} />
+                </Switch>
             </Root>
         </BrowserRouter>
 
