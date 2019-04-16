@@ -9,12 +9,14 @@ module.exports = {
         });
     },
 
-    byid: async (req, res) => {
-        const query = "SELECT * FROM `room` where room_ID = ?"
-        db.query(query, [userID], (error, results, fields) => {
+    byname: async (req, res) => {
+        const roomname = req.params.name
+        const query = "SELECT * FROM `room` where room_name = ?"
+        console.log("Fetching user with id: " + req.params.name)
+        db.query(query, [roomname], (error, results, fields) => {
         if (error) throw error;
         res.json(results);
-      });
+    });
     }
     
  }
