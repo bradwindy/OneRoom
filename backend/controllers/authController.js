@@ -1,5 +1,5 @@
 const JWT = require('jsonwebtoken');
-const db = require("../database");
+//const db = require("../database");
 const User = require("../models/userModel");
 
 module.exports = {
@@ -30,10 +30,10 @@ module.exports = {
 
     //takes an object (payload) & takes a secret (String) 
     const token = JWT.sign({
-      iss: 'RoomEase',
-      sub: newUser.id,
+      iss: 'Roomease',
+      sub: newUser._id,
       iat: new Date().getTime(), //current time 
-      exp: new Data().setDate(new Date().getDate() + 1) // current time + 1 day ahead for expiration
+      exp: Math.floor(Date.now() / 1000) + (60 * 60) // Expires in 1 hour
     }, 'roomeaseauthentication');
     console.log(token);
     // Respond with token
