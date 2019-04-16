@@ -1,6 +1,16 @@
 const JWT = require('jsonwebtoken');
 //const db = require("../database");
 const User = require("../models/userModel");
+const { JWT_SECRET } = require('../configuration');
+
+signToken = user => {
+  return JWT.sign({
+    iss: 'Roomease',
+    sub: user._id,
+    iat: new Date().getTime(), //current time 
+    exp: Math.floor(Date.now() / 1000) + (60 * 60) // Expires in 1 hour
+  }, 'JWT_SECRET');
+}
 
 module.exports = {
   register: async (req, res, next) => {
@@ -25,17 +35,16 @@ module.exports = {
 
     // Store the user into the database and wiat for this to finish before moving on
     await newUser.save();
-   
+
     //res.json({ user: 'created' });
 
     //takes an object (payload) & takes a secret (String) 
-    const token = JWT.sign({
-      iss: 'Roomease',
-      sub: newUser._id,
-      iat: new Date().getTime(), //current time 
-      exp: Math.floor(Date.now() / 1000) + (60 * 60) // Expires in 1 hour
-    }, 'roomeaseauthentication');
-    console.log(token);
+
+    // console.log(token);
+
+    //generate the token
+    const token = signToken(newUser);
+
     // Respond with token
     res.status(200).json({ token });
 
@@ -50,6 +59,6 @@ module.exports = {
 
   signIn: async (req, res, next) => {
     // Need to generate a token
-    console.log("authController.signIn() called!");
+    //console.log("authController.signIn() called!");
   }
 };
