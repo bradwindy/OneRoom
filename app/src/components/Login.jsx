@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import FormValidator from './FormValidator';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 
 class Login extends Component {
@@ -45,7 +46,11 @@ class Login extends Component {
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
-                    //window.location.href = "/register";
+                    // take json web token (JWT) that was returned from server
+                    // we'll save it in local storage
+                    const token = res.data.token; //capture jwt
+                    localStorage.setItem('jwtToken', token);// set jwt in localStorage
+                    setAuthorizationToken(token);
                 });
         }
     };
@@ -86,8 +91,11 @@ class Login extends Component {
             password: '',
             validation: this.validator.valid(),
         };
+        
+        setAuthorizationToken(localStorage.jwtToken);
     };
 
+    
 
     render() {
         // Setting validation conditionally

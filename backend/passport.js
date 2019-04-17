@@ -11,7 +11,7 @@ const User = require('./models/userModel');
 //and inside the function, using the secret and the the actual token
 //passport will decode the token from the payload (token data)
 passport.use(new JwtStrategy({
-    jwtFromRequest: ExtractJwt.fromHeader('authorisation'),
+    jwtFromRequest: ExtractJwt.fromHeader('authorization'),
     secretOrKey: config.JWT_SECRET
 }, async (payload, done) => {
     try {
