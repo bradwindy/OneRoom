@@ -52,7 +52,7 @@ userSchema.methods.isValidPassword = async function(newPassword) {
   } catch(error) {
     throw new Error(error);
   }
-}
+};
 
 // Create the model
 const User = mongoose.model("user", userSchema);
