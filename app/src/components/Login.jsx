@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import FormValidator from './FormValidator';
 
-
+// DOM purify to be used in this file
 class Login extends Component {
     state = {
         email: '',
