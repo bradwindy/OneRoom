@@ -120,7 +120,6 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            checkbox: false,
             validation: this.validator.valid(),
         };
 
