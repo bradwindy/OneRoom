@@ -48,7 +48,7 @@ class Login extends Component {
                     console.log(res.data);
                     // take json web token (JWT) that was returned from server
                     // we'll save it in local storage
-                    const token = res.data.token; //capture jwt 
+                    const token = res.data.token; //capture jwt
                     localStorage.setItem('jwtToken', token);// set jwt in localStorage
                     setAuthorizationToken(token);
                 });
