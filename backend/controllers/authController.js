@@ -2,6 +2,17 @@ const JWT = require('jsonwebtoken');
 //const db = require("../database");
 const User = require("../models/userModel");
 const { JWT_SECRET } = require('../configuration');
+const express = require('express');
+const server = express();
+
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
+server.use(cookieParser());
+server.use(session({secret: JWT_SECRET,
+                    saveUninitialized: true,
+                    resave: true })); 
+
 
 signToken = user => {
   return JWT.sign({
@@ -66,6 +77,8 @@ module.exports = {
     const token = signToken(req.user);
     res.status(200).json({ token });
     //console.log("Login Succes!");
+    console.log(req.cookies);
+    console.log(req.session);
   },
 
   secret: async (req, res, next) => {
