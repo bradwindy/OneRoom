@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import { Link, Route } from 'react-router-dom';
 import moment from 'moment';
-import DatePicker, { DateInput, TimeInput } from '@trendmicro/react-datepicker';
+import DatePicker from '@trendmicro/react-datepicker';
 import '@trendmicro/react-datepicker/dist/react-datepicker.css';
-import TimePicker from 'rc-time-picker';
 
 class Book extends Component {
     state = {
@@ -76,8 +75,8 @@ class BookPage extends Component {
                         <div className="form-group row">
                             <label htmlFor="time-select" className="col-sm-2 col-form-label">Time:</label>
                             <div className="col-sm-10">
-                                <select className="custom-select" id="time-select">
-                                    <option selected>8:00am</option>
+                                <select defaultValue="0" className="custom-select" id="time-select">
+                                    <option value="0">8:00am</option>
                                     <option value="1">9:00am</option>
                                     <option value="2">10:00am</option>
                                     <option value="3">11:00am</option>
@@ -99,8 +98,8 @@ class BookPage extends Component {
                         <div className="form-group row">
                             <label htmlFor="duration-select" className="col-sm-2 col-form-label">Duration:</label>
                             <div className="col-sm-10">
-                                <select className="custom-select" id="duration-select">
-                                    <option selected>1 Hour</option>
+                                <select defaultValue="0" className="custom-select" id="duration-select">
+                                    <option value="0">1 Hour</option>
                                     <option value="1">2 Hours</option>
                                     <option value="2">3 Hours</option>
                                 </select>
@@ -110,8 +109,6 @@ class BookPage extends Component {
                 </div>
             );
         }
-
-
     }
 }
 

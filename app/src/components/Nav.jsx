@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 class Nav extends Component {
     render() {
+        // noinspection HtmlUnknownTarget
         return (
             // nave bar component, will update later on to dynamically render its elements depending on if the user is
             // logged in or not.
