@@ -91,8 +91,11 @@ class Login extends Component {
             password: '',
             validation: this.validator.valid(),
         };
+        
+        setAuthorizationToken(localStorage.jwtToken);
     };
 
+    
 
     render() {
         // Setting validation conditionally
