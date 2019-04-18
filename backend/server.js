@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const Room = require("./models/roomModel");
-
+const auth = require("./passport");
 /** Connecting to local instance of MongoDB
  *  If connection is successful, check if the old room collection is present and delete it.
  *  Then insert, Mock room data is automatically created in database.
@@ -57,6 +57,7 @@ server.use(
     extended: false
   })
 );
+server.use(auth.initialize);
 
 // Allows our server to use cross origin requests. This allows us to test our backend and frontend simultaneously on localhost.
 // https://github.com/axios/axios/issues/853
@@ -93,8 +94,8 @@ server.route("/api/booking/:id").delete((req, res) => {
 *   to the variable that the environment in which a process runs.
 *   The value is set outside the environment. */
 
-// If the PORT for the environment is set then use "port" otherwise use 3000
-const port = process.env.PORT || 3000;
+// If the PORT for the environment is set then use "port" otherwise use 5000
+const port = process.env.PORT || 5000;
 // Port 8080 for Google App Engine
-//server.set('port', process.env.PORT || 3000);
+//server.set('port', process.env.PORT || 5000);
 server.listen(port, () => console.log(`Listening on port ${port}...`));
