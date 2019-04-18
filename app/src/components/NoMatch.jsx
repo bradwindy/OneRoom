@@ -22,7 +22,7 @@ class NoMatch extends Component {
                         </h4>
                     </div>
                     <div className="pl-4 pr-4 row justify-content-center align-items-center pt-4">
-                        <a className="btn btn-primary font-weight-bold" href="/" role="button">Go back Home</a>
+                        <a className="btn btn-primary" href="/" role="button">Go back Home</a>
                     </div>
                 </div>
             </div>

@@ -4,33 +4,12 @@ const Schema = mongoose.Schema;
 
 // Create schema
 const userSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  studentId: {
-    type: String,
-    required: true,
-    unqiue: true
-  },
-  username: {
-    type: String,
-    required: true,
-    unqiue: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unqiue: true,
-    lowercase: true,
-    index: true
-  },
-  password: {
-    type: String,
-    required: true
-  }
+  name: { type: String, required: true },
+  studentId: { type: String, required: true, unqiue: true },
+  username: { type: String, required: true, unqiue: true },
+  email: { type: String, required: true, unqiue: true, lowercase: true, index: true },
+  password: { type: String, required: true }
 });
-
 
 userSchema.pre("save", async function(next) {
   try {
@@ -49,13 +28,12 @@ userSchema.pre("save", async function(next) {
 userSchema.methods.isValidPassword = async function(newPassword) {
   try {
     return await bcrypt.compare(newPassword, this.password);
-  } catch(error) {
+  } catch (error) {
     throw new Error(error);
   }
 };
 
 // Create the model
 const User = mongoose.model("user", userSchema);
-
 // Export the model
 module.exports = User;

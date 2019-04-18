@@ -25,10 +25,7 @@ const roomSchema = new Schema({
     bookings: [bookingSchema],
 });
 
-
 // Create the model
 const Room = mongoose.model("room", roomSchema);
-
-
 // Export the model
 module.exports = Room;
