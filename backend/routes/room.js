@@ -1,17 +1,16 @@
 const express = require('express');
 const server = express();
-const router = express.Router();
-
+const router = require('express-promise-router')();
+const passport = require('passport');
+const { authJWT } = require('../passport');
 const RoomController = require('../controllers/roomController.js');
 
 //Get list of rooms from the database
-router
-    .route("/")
-    .get(RoomController.roomlist);
+router.route('/all')
+    .get(authJWT, RoomController.allRooms, function(req, res) {});
 
 //Get room details based on room names
-router
-    .route("/:name")
-    .get(RoomController.byname);
+router.route('/:name')
+    .get(authJWT, RoomController.roomDetail);
 
 module.exports = router;
