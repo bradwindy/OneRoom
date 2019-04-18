@@ -3,7 +3,7 @@ import axios from 'axios';
 import FormValidator from './FormValidator';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
-
+// DOM purify to be used in this file
 class Login extends Component {
     state = {
         email: '',
@@ -137,6 +137,7 @@ class Login extends Component {
     render() {
         // Setting validation conditionally
         let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation;
+        // noinspection HtmlUnknownTarget
         return (
             // log in page, below, validation.x.y are values from within validation object
             <div className="container p-4">

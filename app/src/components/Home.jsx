@@ -12,10 +12,10 @@ class Home extends Component {
                             <h4 className="card-title"><b>Study Group</b></h4>
                             <ul className="card-text list-unstyled">
                                 <li>
-                                    <b>Date: </b>Mon 11th September
+                                    <b>Date: </b>Sun 10th September
                                 </li>
                                 <li>
-                                    <b>Time: </b>9:00am - 11:00am
+                                    <b>Time: </b>8:00am - 10:00am
                                 </li>
                                 <li>
                                     <b>Location: </b>Room 12
@@ -23,9 +23,9 @@ class Home extends Component {
                             </ul>
 
 
-                            <a href="#" className="btn btn-primary mr-2">Directions</a>
-                            <a href="#" className="btn btn-secondary">More</a>
-                            <a href="#" className="btn btn-danger float-right">Cancel</a>
+                            <a href="/" className="btn btn-primary mr-2">Directions</a>
+                            <a href="/" className="btn btn-secondary">More</a>
+                            <a href="/" className="btn btn-danger float-right">Cancel</a>
                         </div>
                     </div>
                 </div>
@@ -47,9 +47,9 @@ class Home extends Component {
                             </ul>
 
 
-                            <a href="#" className="btn btn-primary mr-2">Directions</a>
-                            <a href="#" className="btn btn-secondary">More</a>
-                            <a href="#" className="btn btn-danger float-right">Cancel</a>
+                            <a href="/" className="btn btn-primary mr-2">Directions</a>
+                            <a href="/" className="btn btn-secondary">More</a>
+                            <a href="/" className="btn btn-danger float-right">Cancel</a>
                         </div>
                     </div>
                 </div>

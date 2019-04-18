@@ -26,7 +26,7 @@ class Register extends Component {
         this.setState({
             [event.target.name]: event.target.value
         })
-    }
+    };
 
     /** HandleSubmit is triggered when the sign up form is submitted */
     handleSubmit = event => {
