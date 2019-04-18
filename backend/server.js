@@ -1,20 +1,11 @@
-// Just trying out Express.js
-// Express see’s that we have a GET request hitting our route, runs the query against our
-// Google SQL database and returns the result as JSON. We can now consume this API in our
-// mobile app, our web app, or wherever we want!
-
-// As we add more complexity to add a user, query a room, make a booking etc. Our API will
-// get a lot bigger. So We will store/organise all our routes into a "routes" directory.
-// Similarly, we will have a "controllers" directory which will store all our MySQL query logic.
-
-require("dotenv").config();
+/** Main backend file
+ *  Launches server, database and installs middleware for processing data. */
 
 const express = require("express");
 const server = express();
 const fs = require("fs");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-//const db = require('./database');
 const mongoose = require("mongoose");
 const Room = require("./models/roomModel");
 
@@ -82,14 +73,6 @@ server.use(function(req, res, next) {
 server.use("/auth", require("./routes/auth"));
 server.use("/room", require("./routes/room"));
 
-// Route to retrive room details from database and send it to frontend
-server.route("/api/rooms").get((req, res, next) => {
-  const query = "SELECT * FROM `room`";
-  db.query(query, (error, results, fields) => {
-    if (error) throw error;
-    res.json(results);
-  });
-});
 
 // Skeleton To delete a booking
 server.route("/api/booking/:id").delete((req, res) => {
@@ -105,35 +88,10 @@ server.route("/api/booking/:id").delete((req, res) => {
     return res.status(404).send("The booking with the given ID was not found");
 });
 
-// This is a route. Route's perform a specific task by calling our API.
-// the /user route helps us retrieve all the users from our Cloud SQL and displays it onto a web page as JSON.
-server.route("/user").get(function(req, res, next) {
-  db.query("SELECT * FROM `user`", function(error, results, fields) {
-    if (error) throw error;
-    res.json(results);
-  });
-});
-
-// Route to return a user based of the ID that is passed on from the front end
-// This route will also provide the way we should implement SQL securely, effectively
-// and efficiently.
-server.route("/user/:id").get(function(req, res, next) {
-  const userID = req.params.id;
-  const query = "SELECT * FROM `user` where user_ID = ?";
-  console.log("Fetching user with id: " + req.params.id);
-  db.query(query, [userID], (error, results, fields) => {
-    if (error) throw error;
-    res.json(results);
-  });
-});
-
-server.get("/status", (req, res) => res.send("Working!"));
-
-/** Server Information */
-
-// PORT is an environment (env) variable. Environment variables refers
-// to the variable that the environment in which a process runs.
-// The value is set outside the environment.
+/** Server Information
+*   PORT is an environment (env) variable. Environment variables refers
+*   to the variable that the environment in which a process runs.
+*   The value is set outside the environment. */
 
 // If the PORT for the environment is set then use "port" otherwise use 3000
 const port = process.env.PORT || 3000;

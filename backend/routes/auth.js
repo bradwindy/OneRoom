@@ -21,7 +21,6 @@ router.route('/register')
 router.route('/signin')
     .post(validateBody(schemas.authSchema), passportSignIn, AuthController.signIn);
     
-
 //hold the token    
 router.route('/secret')
     .get(passportJWT, AuthController.secret);
