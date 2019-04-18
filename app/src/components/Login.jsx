@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import FormValidator from './FormValidator';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 // DOM purify to be used in this file
 class Login extends Component {
     state = {
         email: '',
         password: '',
+        checkbox: false
     };
 
     /** Takes the value of anything that is typed by the user for the form fields
@@ -15,10 +17,26 @@ class Login extends Component {
     */
 
     handleChange = event => {
+        
         this.setState({
             [event.target.name]: event.target.value
         })
+        const input = event.target;
+        const value = input.type === 'checkbox' ? input.checked : input.value;
+    
+        this.setState({ [input.name]: value });
     };
+
+
+    // handleClearForm(event) {  
+    //     event.preventDefault();
+    //     this.setState({
+    //         email:'',
+    //         password:'',
+              
+    //     });
+    //   };
+
 
     /** HandleSubmit is triggered when the sign up form is submitted */
     handleSubmit = event => {
@@ -31,6 +49,14 @@ class Login extends Component {
             password: this.state.password,
         };
 
+        const { email, password, checkbox } = this.state;
+        
+        localStorage.setItem('email', checkbox ? email : '');
+        localStorage.setItem('password', checkbox ? password : '');
+        localStorage.setItem('checkbox', checkbox);
+        
+        
+
         // Calling a validator to validate state on submit
         const validation = this.validator.validate(this.state);
         // setting validation within state
@@ -41,18 +67,28 @@ class Login extends Component {
         // Only POST using axios if the form is all valid
         if (validation.isValid) {
             /** Using Axios to POST this to our /API/Login and passing the userLogin object as a payload */
-            axios.post('/auth/signin', userLogin )
+            axios.post('/auth/signin', userLogin)
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
-                    //window.location.href = "/register";
+                    // take json web token (JWT) that was returned from server
+                    // we'll save it in local storage
+                    const token = res.data.token; //capture jwt
+                    localStorage.setItem('jwtToken', token);// set jwt in localStorage
+                    setAuthorizationToken(token);
                 });
         }
+        
+        //this.handleClearForm(event);
+        
     };
+
+
 
     // Constructor for login object
     constructor(props) {
         super(props);
+        //this.handleClearForm = this.handleClearForm.bind(this);
 
         // Validator created from FormValidator class
         this.validator = new FormValidator([
@@ -86,9 +122,18 @@ class Login extends Component {
             password: '',
             validation: this.validator.valid(),
         };
+
+        setAuthorizationToken(localStorage.jwtToken);
     };
 
+    componentDidMount() {
+        const checkbox = localStorage.getItem('checkbox') === 'true';
+        const email = checkbox ? localStorage.getItem('email') : '';
+        const password = checkbox ? localStorage.getItem('password') : '';
+        this.setState({ email, password, checkbox });
+      };
 
+ 
     render() {
         // Setting validation conditionally
         let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation;
@@ -107,11 +152,13 @@ class Login extends Component {
                         <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email:</label>
                         <div className="col-sm-10 input-group">
                             <input type="text"
-                                   className={validation.email.classText}
-                                   id="inputEmail3"
-                                   placeholder="user123"
-                                   name="email"
-                                   onChange={this.handleChange}
+                                className={validation.email.classText}
+                                id="inputEmail3"
+                                placeholder="user123"
+                                name="email"
+                                value={this.state.email}
+                                onChange={this.handleChange}
+                                
                             />
                             <div className="input-group-append">
                                 <span className="input-group-text" id="basic-addon2">@student.otago.ac.nz</span>
@@ -130,11 +177,13 @@ class Login extends Component {
                         <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password:</label>
                         <div className="col-sm-10">
                             <input type="password"
-                                   className={validation.password.classText}
-                                   id="inputPassword3"
-                                   placeholder="Password"
-                                   name="password"
-                                   onChange={this.handleChange}
+                                className={validation.password.classText}
+                                id="inputPassword3"
+                                placeholder="Password"
+                                name="password"
+                                value={this.state.password}
+                                onChange={this.handleChange}
+                                
                             />
                             <small id="" className="form-text text-danger pl-1">
                                 {validation.password.message}
@@ -148,7 +197,11 @@ class Login extends Component {
                         <div className="col-sm-10 pl-3 mb-0">
                             <div className="checkbox">
                                 <label className="mb-0">
-                                    <input type="checkbox" /> Remember me
+                                    <input type="checkbox"
+                                    name="checkbox"
+                                    value={this.state.checkbox}
+                                    onChange={this.handleChange}
+                                    /> Remember me
                                 </label>
                             </div>
                         </div>
@@ -157,7 +210,7 @@ class Login extends Component {
                         <div className="col-sm-2">
                         </div>
                         <div className="col-sm-10">
-                            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Log in</button>
+                            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit} >Log in</button>
                             <a className="btn btn-outline-secondary ml-2" href="/register" role="button">Register</a>
                         </div>
                     </div>

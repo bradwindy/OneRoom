@@ -2,6 +2,8 @@ const JWT = require('jsonwebtoken');
 //const db = require("../database");
 const User = require("../models/userModel");
 const { JWT_SECRET } = require('../configuration');
+const express = require('express');
+const server = express();
 
 signToken = user => {
   return JWT.sign({
