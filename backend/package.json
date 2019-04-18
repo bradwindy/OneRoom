@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "app": "cd ../app/ && npm start",
+    "dev": "concurrently --kill-others-on-fail \"npm run start\" \"npm run app\""
   },
   "author": "",
   "license": "ISC",
