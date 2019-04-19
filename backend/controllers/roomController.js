@@ -1,5 +1,5 @@
 //const db = require('../database');
-const Room = require('../models/roomModel')
+const Room = require('../models/roomModel');
 const express = require('express');
 const server = express();
 
@@ -18,8 +18,8 @@ module.exports = {
       Room.findOne({name:req.params.name}, function(room){
         res.send(room)
       })   
-    }
-  };
+    },
+
     //GET room details using the room name and display details from database in JSON
     roomDetail: async (req, res) => {
       const name = req.params.name;
