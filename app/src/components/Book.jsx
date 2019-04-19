@@ -6,13 +6,25 @@ import '@trendmicro/react-datepicker/dist/react-datepicker.css';
 
 class Book extends Component {
     state = {
-        text: "Hello",
-        date: moment().format('YYYY-MM-DD')
+        date: moment().format('YYYY-MM-DD'),
+        timePos: 0,
+        durationPos: 0
     };
 
     // make this callback universal for each page, not just for date.
-    myCallback = (dataFromChild) => {
-        this.setState({ date: dataFromChild });
+    callback = (dataFromChild, fieldNum, pageName) => {
+        if (pageName === "date"){
+            this.setState({ date: dataFromChild });
+            console.log("Date success " + dataFromChild)
+        } else if (pageName === "time"){
+            if(fieldNum === 0){
+                this.setState({ timePos: dataFromChild });
+                console.log("Time Pos success " + dataFromChild)
+            }else if (fieldNum === 1){
+                this.setState({ durationPos: dataFromChild });
+                console.log("Duration Pos success " + dataFromChild)
+            }
+        }
     };
 
     render() {
@@ -24,7 +36,7 @@ class Book extends Component {
                         <BookNav
                             {...props}
                             parentState={this.state}
-                            callbackFromParent={this.myCallback}
+                            callbackFromParent={this.callback}
                         />
                     }
                 />
@@ -34,7 +46,7 @@ class Book extends Component {
                         <BookPage
                             {...props}
                             parentState={this.state}
-                            callbackFromParent={this.myCallback}
+                            callbackFromParent={this.callback}
                         />
                     }
                 />
@@ -55,7 +67,7 @@ class BookPage extends Component {
                         <DatePicker className="pb-4"
                                     date={this.props.parentState.date}
                                     onSelect={date => {
-                                        this.props.callbackFromParent(date);
+                                        this.props.callbackFromParent(date, 0, page);
                                     }}
                         />
 
@@ -75,7 +87,12 @@ class BookPage extends Component {
                         <div className="form-group row">
                             <label htmlFor="time-select" className="col-sm-2 col-form-label">Time:</label>
                             <div className="col-sm-10">
-                                <select defaultValue="0" className="custom-select" id="time-select">
+                                <select
+                                    defaultValue={this.props.parentState.timePos}
+                                    className="custom-select"
+                                    id="time-select"
+                                    onChange={(event) => this.props.callbackFromParent(event.target.value, 0, page)}
+                                >
                                     <option value="0">8:00am</option>
                                     <option value="1">9:00am</option>
                                     <option value="2">10:00am</option>
@@ -98,7 +115,11 @@ class BookPage extends Component {
                         <div className="form-group row">
                             <label htmlFor="duration-select" className="col-sm-2 col-form-label">Duration:</label>
                             <div className="col-sm-10">
-                                <select defaultValue="0" className="custom-select" id="duration-select">
+                                <select defaultValue={this.props.parentState.durationPos}
+                                        className="custom-select"
+                                        id="duration-select"
+                                        onChange={(event) => this.props.callbackFromParent(event.target.value, 1, page)}
+                                >
                                     <option value="0">1 Hour</option>
                                     <option value="1">2 Hours</option>
                                     <option value="2">3 Hours</option>
