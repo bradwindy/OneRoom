@@ -1,5 +1,4 @@
-//const db = require('../database');
-const Room = require('../models/roomModel');
+const Room = require('../models/userModel');
 const express = require('express');
 const server = express();
 

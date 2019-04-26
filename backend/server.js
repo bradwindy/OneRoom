@@ -73,6 +73,7 @@ server.use(function(req, res, next) {
 /** Routes */
 server.use("/auth", require("./routes/auth"));
 server.use("/room", require("./routes/room"));
+server.use("/user", require("./routes/user"));
 
 
 // Skeleton To delete a booking

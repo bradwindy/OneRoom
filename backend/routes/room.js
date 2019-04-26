@@ -7,7 +7,7 @@ const RoomController = require('../controllers/roomController.js');
 
 //Get list of rooms from the database
 router.route('/all')
-    .get(authJWT, RoomController.allRooms, function(req, res) {});
+    .get(authJWT, RoomController.allRooms);
 
 //Get room details based on room names
 router.route('/:name')
