@@ -41,8 +41,8 @@ module.exports = {
             }).required(),
             password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required()
         }),
-        // bookingSchema : Joi.object().keys({
-
-        // })
+        bookingSchema : Joi.object().keys({
+            title: Joi.string().max(25).required()
+        })
     }
 }
