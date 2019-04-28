@@ -8,7 +8,7 @@ module.exports = {
      */
     validateBody: (schema) => {
         return (req, res, next) => {
-            const result = Joi.validate(req.body.user, schema);
+            const result = Joi.validate(req.body, schema);
             if (result.error) {
                 // Helps us retrieve the error message. We can collect multiple errors from the details array
                 // and concatenate the errors to display them all to the user.
@@ -40,6 +40,9 @@ module.exports = {
                 minDomainAtoms: 4
             }).required(),
             password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required()
-        })
+        }),
+        // bookingSchema : Joi.object().keys({
+
+        // })
     }
 }

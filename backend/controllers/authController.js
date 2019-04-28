@@ -5,7 +5,7 @@ const server = express();
 module.exports = {
   register: async (req, res, next) => {
     // Need to get user details from front end
-    const { name, studentId, username, email, password } = req.body.user;
+    const { name, studentId, username, email, password } = req.body;
     // Check if there is an existing user with the same email
     const foundUser = await User.findOne({ email });
     if (foundUser) {
@@ -21,7 +21,8 @@ module.exports = {
     const newUser = new User({ name, studentId, username, email, password });
     // Store the user into the database and wiat for this to finish before moving on
     await newUser.save();
-    next();
+    res.status(200).json({ success: "New user registered!" });
+    //next();
   },
 
   secret: async (req, res, next) => {

@@ -11,7 +11,7 @@ const AuthController = require('../controllers/authController');
  *  3. Then, the AuthController.register will have access to all the data and will store the data into the database.
 */
 router.route('/register')
-    .post(validateBody(schemas.registerSchema), AuthController.register, signToken);
+    .post(validateBody(schemas.registerSchema), AuthController.register);
 
 // User Sign in
 router.route('/signin')
