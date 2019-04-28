@@ -74,21 +74,8 @@ server.use(function(req, res, next) {
 server.use("/auth", require("./routes/auth"));
 server.use("/room", require("./routes/room"));
 server.use("/user", require("./routes/user"));
+server.use("/booking", require("./routes/booking"));
 
-
-// Skeleton To delete a booking
-server.route("/api/booking/:id").delete((req, res) => {
-  /** Delete Logic Flow
-   *  1. Look for the item, if not existing, return 404 and exit route.
-   *  2. If existing, delete the item
-   *  3. Return the deleted item confirmation to user
-   */
-
-  // If booking is not found, return 404 and exit route. The "return" prevents
-  // the rest of the route code from being run
-  if (!booking)
-    return res.status(404).send("The booking with the given ID was not found");
-});
 
 /** Server Information
 *   PORT is an environment (env) variable. Environment variables refers
