@@ -10,8 +10,8 @@ router.route('/all')
     .get(authJWT, RoomController.allRooms);
 
 //Get list of available rooms from the database
-router.route('/available')
-    .get(authJWT, RoomController.available);
+// router.route('/available')
+//     .get(authJWT, RoomController.available);
 
 //Get room details based on room names
 router.route('/:name')
