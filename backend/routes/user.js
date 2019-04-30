@@ -6,6 +6,6 @@ const UserController = require('../controllers/userController.js');
 
 // Route to return all info about a certain user
 router.route('/:username')
-    .get(authJWT, UserController.userInfo);
+    .get(UserController.userInfo);
 
 module.exports = router;
