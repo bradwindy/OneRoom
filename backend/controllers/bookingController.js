@@ -3,6 +3,21 @@ const express = require("express");
 const server = express();
 
 module.exports = {
+   // GET - Get rooms that are available from database
+   /** 
+     * 1. GET all room documents and get their bookings
+     * 2. Using the date and time passed from the user, loop through each booking for
+     *    each room and return false if there is a clash for the given time and date.
+     * 3. Put all rooms which have a true value into an array - these are the rooms which
+     *    are availble for the time and date the user asked for.
+     * 4. Send the array of available rooms back to the frontend.
+     */
+   available: async (req, res) => {
+    Room.find({}).then(function(rooms) {
+      res.send(rooms);
+    });
+  },
+
   // POST - Make a new booking and store it in database
   new: async (req, res) => {
     Room.find({}).then(function(rooms) {
