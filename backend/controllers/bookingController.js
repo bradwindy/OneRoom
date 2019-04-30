@@ -1,6 +1,7 @@
 const Room = require("../models/roomModel");
 const express = require("express");
 const server = express();
+const moment = require('moment')
 
 module.exports = {
    // GET - Get rooms that are available from database
@@ -15,6 +16,45 @@ module.exports = {
    available: async (req, res) => {
     Room.find({}).then(function(rooms) {
       res.send(rooms);
+
+      //To check if room is available
+      bookingSchema.path('bookingStart').validate(function(value){
+        let roomId = this.roomId
+
+        //Get new booking start and end times based on users parameters and convert into number value
+        let newBookingStart = value.getTime()
+        let newBookingEnd = value.getTime()
+
+        //Function to check booking clashes
+        let bookingClash = (existingBookingStart, existingBookingEnd, newBookingStart, newBookingEnd)=>{
+          if (newBookingStart >= existingBookingStart && newBookingStart < existingBookingEnd || 
+            existingBookingStart >= newBookingStart && existingBookingStart < newBookingEnd) {
+            
+              throw new Error(
+                'Booking could not be saved, There is a clash with existing booking'
+              )
+            }
+            return false
+        }
+        //Locate the room document containing bookings
+        return Room.findById(roomId).then(room=>{
+         
+          //Loop through each existing booking and return false if there is a clash
+          return room.bookings.every(booking=>{
+            //Convert existing booking Date objects into number values
+            let existingBookingStart = new Date(booking.bookingStart).getTime()
+            let existingBookingEnd = new Date(booking.bookingEnd).getTime()
+            
+            //Check clash between new and existing booking
+            return !bookingClash(
+              existingBookingStart,
+              existingBookingEnd,
+              newBookingStart,
+              newBookingEnd
+            )
+          })
+        })
+      })
     });
   },
 
