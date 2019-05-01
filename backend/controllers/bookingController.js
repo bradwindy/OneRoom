@@ -59,7 +59,6 @@ module.exports = {
   },
 
   // POST - Make a new booking and store it in database
-  
   new: async (req, res, next) => {
     //Get booking details from frontend
     const { _bookingId, user, roomId, bookingStart, bookingEnd, startHour, duration } = req.body;
