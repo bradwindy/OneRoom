@@ -77,13 +77,14 @@ module.exports = {
       return difference.hours() + difference.minutes() / 60
     }
 
-    // Need to get booking details from front end
+    // Get most important booking details from body
     const {
       roomId,
       startTime,
       endTime
     } = req.body;
-
+    
+    // Find the room in MongoDB. Then access the bookings and add this new booking.
     await Room.findOneAndUpdate(
       roomId,
       {
@@ -101,9 +102,11 @@ module.exports = {
       },
       { new: true, runValidators: true, context: 'query' }
       )
+      // If successful return the room with the added booking in JSON
     .then(room => {
       res.status(201).json(room)
     })
+    // If not successful return a 400 error
     .catch(error => {
       res.status(400).json({ error })
     });
