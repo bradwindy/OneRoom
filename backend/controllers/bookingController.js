@@ -59,7 +59,50 @@ module.exports = {
   },
 
   // POST - Make a new booking and store it in database
-  new: async (req, res) => {
+  
+  new: async (req, res, next) => {
+    //Get booking details from frontend
+    const { _bookingId, user, roomId, bookingStart, bookingEnd, startHour, duration } = req.body;
+
+    //To check if room is available
+    bookingSchema.path('bookingStart').validate(function(value){
+      let roomId = this.roomId
+
+      //Get new booking start and end times based on users parameters and convert into number value
+      let newBookingStart = value.getTime()
+      let newBookingEnd = value.getTime()
+
+      //Function to check booking clashes
+      let bookingClash = (existingBookingStart, existingBookingEnd, newBookingStart, newBookingEnd)=>{
+        if (newBookingStart >= existingBookingStart && newBookingStart < existingBookingEnd || 
+          existingBookingStart >= newBookingStart && existingBookingStart < newBookingEnd) {
+          
+            throw new Error(
+              'Booking could not be saved, There is a clash with existing booking'
+            )
+          }
+          return false
+        }
+
+        // Checking if our JSON data passed from Axios (frontend) is recieved by our api in the backend.
+        console.log(_bookingId);
+        console.log(user);
+        console.log(roomId);
+        console.log(bookingStart);
+        console.log(bookingEnd);
+        console.log(startHour);
+        console.log(duration);
+
+        //Create new Booking object using the Booking Model schema
+        const newBooking = new Booking({ _bookingId, user, roomId, bookingStart, bookingEnd, startHour, duration });
+
+        await newBooking.save();
+        res.status(200).json({ success: "New booking registered!" });
+    
+  },
+  
+  //To be deleted
+  originalnew: async (req, res) => {
     Room.find({}).then(function(rooms) {
       res.send(rooms);
     });
