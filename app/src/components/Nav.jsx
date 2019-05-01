@@ -1,6 +1,15 @@
 import React, {Component} from 'react';
 
+
 class Nav extends Component {
+
+    logout = event => {
+        // Stopping the browser from reloading the page
+        //event.preventDefault();
+        localStorage.removeItem('jwtToken')// remove stored local storage JWT token 
+        window.location.href = "/login";
+    };
+
     render() {
         // noinspection HtmlUnknownTarget
         return (
@@ -18,7 +27,10 @@ class Nav extends Component {
                         </li>
 
                         <li className="nav-item">
-                            <a className="btn btn-success" href="/book/date" role="button">Book Room</a>
+                            <a className="btn btn-success mr-2" href="/book/date" role="button">Book Room</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="btn btn-danger" onClick={this.logout} role="button">Log Out</a>
                         </li>
                     </ul>
                 </div>
