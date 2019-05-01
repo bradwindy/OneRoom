@@ -21,6 +21,11 @@ class Rooms extends Component {
         return (
             <React.Fragment>
             <ul>
+
+                //https://medium.com/javascript-in-plain-english/how-to-loop-through-arrays-in-react-3eaa8a14445
+            
+            
+);
                 {this.state.rooms.map(rooms => <li key={Rooms.id}>{rooms.name}</li>)}
             </ul>
                 <div class="card" style="width: 18rem;">
