@@ -5,9 +5,9 @@ const { authJWT } = require('../passport');
 const { validateBody, schemas } = require('../helpers/routeHelpers'); // calling both things present in the helper file
 const BookingController = require('../controllers/bookingController.js');
 
-// POST a booking - Make a booking
-router.route('/newBooking')
-    .post(validateBody(schemas.bookingSchema), BookingController.new);
+// PUT a booking - Make a booking
+router.route('/newBooking/:name')
+    .put(validateBody(schemas.bookingSchema), BookingController.new);
 
 // GET details about a booking
 router.route('/showBooking')
