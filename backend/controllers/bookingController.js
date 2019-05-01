@@ -1,7 +1,8 @@
 const Room = require("../models/roomModel");
 const express = require("express");
 const server = express();
-const moment = require('moment')
+const moment = require('moment');
+const momentTimezone = require('moment-timezone');
 
 module.exports = {
    // GET - Get rooms that are available from database
@@ -58,12 +59,59 @@ module.exports = {
     });
   },
 
-  // POST - Make a new booking and store it in database
+  // PUT - Make a new booking and store it in database
   new: async (req, res) => {
-    Room.find({}).then(function(rooms) {
-      res.send(rooms);
+    // Function to convert UTC JS Date object to a Moment.js object in AEST
+    const dateAEST = date => {
+      return momentTimezone(date).tz('Pacific/Auckland')
+    }
+
+    // Function to calculate the duration of the hours between the start and end of the booking
+    const durationHours = (startTime, endTime) => {
+      // convert the UTC Date objects to Moment.js objects
+      let startDateLocal = dateAEST(startTime)
+      let endDateLocal = dateAEST(endTime)
+      // calculate the duration of the difference between the two times
+      let difference = moment.duration(endDateLocal.diff(startDateLocal))
+      // return the difference in decimal format
+      return difference.hours() + difference.minutes() / 60
+    }
+
+    // Get most important booking details from body
+    const {
+      roomId,
+      startTime,
+      endTime
+    } = req.body;
+    
+    // Find the room in MongoDB. Then access the bookings and add this new booking.
+    await Room.findOneAndUpdate(
+      roomId,
+      {
+        $addToSet: {
+          bookings: {
+            user: req.user,
+            // The hour on which the booking starts, calculated from 12:00AM as time = 0
+            startHour: dateAEST(startTime).format('H.mm'),
+            // The duration of the booking in decimal format
+            duration: durationHours(startTime, endTime),
+            // Spread operator for remaining attributes
+            ...req.body
+          }
+        }
+      },
+      { new: true, runValidators: true, context: 'query' }
+      )
+      // If successful return the room with the added booking in JSON
+    .then(room => {
+      res.status(201).json(room)
+    })
+    // If not successful return a 400 error
+    .catch(error => {
+      res.status(400).json({ error })
     });
-  },
+},
+
 
   // GET - Show deatils about a certain booking by accesing the database and retriving the details in JSON
   details: async (req, res) => {
