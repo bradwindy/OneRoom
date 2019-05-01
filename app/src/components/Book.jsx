@@ -47,7 +47,7 @@ class Book extends Component {
 
         const request = {date: this.state.date, time: timeList[this.state.timePos], duration: this.state.duration};
 
-        axios.post(`https://jsonplaceholder.typicode.com/users`, {request})
+        axios.post(`https://jsonplaceholder.typicode.com/users`, request)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
