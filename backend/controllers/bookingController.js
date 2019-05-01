@@ -1,7 +1,8 @@
 const Room = require("../models/roomModel");
 const express = require("express");
 const server = express();
-const moment = require('moment')
+const moment = require('moment');
+const momentTimezone = require('moment-timezone');
 
 module.exports = {
    // GET - Get rooms that are available from database
@@ -58,55 +59,57 @@ module.exports = {
     });
   },
 
-  // POST - Make a new booking and store it in database
-  
-  new: async (req, res, next) => {
-    //Get booking details from frontend
-    const { _bookingId, user, roomId, bookingStart, bookingEnd, startHour, duration } = req.body;
+  // PUT - Make a new booking and store it in database
+  new: async (req, res) => {
+    // Function to convert UTC JS Date object to a Moment.js object in AEST
+    const dateAEST = date => {
+      return momentTimezone(date).tz('Pacific/Auckland')
+    }
 
-    //To check if room is available
-    bookingSchema.path('bookingStart').validate(function(value){
-      let roomId = this.roomId
+    // Function to calculate the duration of the hours between the start and end of the booking
+    const durationHours = (startTime, endTime) => {
+      // convert the UTC Date objects to Moment.js objects
+      let startDateLocal = dateAEST(startTime)
+      let endDateLocal = dateAEST(endTime)
+      // calculate the duration of the difference between the two times
+      let difference = moment.duration(endDateLocal.diff(startDateLocal))
+      // return the difference in decimal format
+      return difference.hours() + difference.minutes() / 60
+    }
 
-      //Get new booking start and end times based on users parameters and convert into number value
-      let newBookingStart = value.getTime()
-      let newBookingEnd = value.getTime()
+    // Need to get booking details from front end
+    const {
+      bookingName,
+      roomId,
+      startTime,
+      endTime
+    } = req.body;
 
-      //Function to check booking clashes
-      let bookingClash = (existingBookingStart, existingBookingEnd, newBookingStart, newBookingEnd)=>{
-        if (newBookingStart >= existingBookingStart && newBookingStart < existingBookingEnd || 
-          existingBookingStart >= newBookingStart && existingBookingStart < newBookingEnd) {
-          
-            throw new Error(
-              'Booking could not be saved, There is a clash with existing booking'
-            )
+    await Room.findByIdAndUpdate(
+      roomId,
+      {
+        $addToSet: {
+          bookings: {
+            user: req.user,
+            // The hour on which the booking starts, calculated from 12:00AM as time = 0
+            startHour: dateAEST(startTime).format('H.mm'),
+            // The duration of the booking in decimal format
+            duration: durationHours(startTime, endTime),
+            // Spread operator for remaining attributes
+            ...req.body
           }
-          return false
         }
-
-        // Checking if our JSON data passed from Axios (frontend) is recieved by our api in the backend.
-        console.log(_bookingId);
-        console.log(user);
-        console.log(roomId);
-        console.log(bookingStart);
-        console.log(bookingEnd);
-        console.log(startHour);
-        console.log(duration);
-
-        //Create new Booking object using the Booking Model schema
-        const newBooking = new Booking({ _bookingId, user, roomId, bookingStart, bookingEnd, startHour, duration });
-
-        await newBooking.save();
-        res.status(200).json({ success: "New booking registered!" });
-    
-  },
-  
-  //To be deleted
-  originalnew: async (req, res) => {
-    Room.find({}).then(function(rooms) {
-      res.send(rooms);
+      },
+      { new: true, runValidators: true, context: 'query' }
+      )
+    .then(room => {
+      res.status(201).json(room)
+    })
+    .catch(error => {
+      res.status(400).json({ error })
     });
-  },
+},
+
 
   // GET - Show deatils about a certain booking by accesing the database and retriving the details in JSON
   details: async (req, res) => {
