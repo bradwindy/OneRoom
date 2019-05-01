@@ -79,13 +79,12 @@ module.exports = {
 
     // Need to get booking details from front end
     const {
-      bookingName,
       roomId,
       startTime,
       endTime
     } = req.body;
 
-    await Room.findByIdAndUpdate(
+    await Room.findOneAndUpdate(
       roomId,
       {
         $addToSet: {
