@@ -8,8 +8,8 @@ const bookingSchema = new Schema({
   bookingName: String,
   user: { type: Schema.ObjectId, ref: 'User' },
   roomId: { type: Schema.ObjectId, ref: 'Room' },
-  bookingStart: Date,
-  bookingEnd: Date,
+  startTime: Date,
+  endTime: Date,
   startHour: Number,
   duration: Number
 });

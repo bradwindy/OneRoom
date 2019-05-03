@@ -6,8 +6,8 @@ const { validateBody, schemas } = require('../helpers/routeHelpers'); // calling
 const BookingController = require('../controllers/bookingController.js');
 
 // PUT a booking - Make a booking
-router.route('/newBooking/:name')
-    .put(validateBody(schemas.bookingSchema), BookingController.new);
+router.route('/newBooking/:id')
+    .put(BookingController.new);
 
 // GET details about a booking
 router.route('/showBooking')
@@ -16,7 +16,7 @@ router.route('/showBooking')
 // PUT - Update a booking
 router.route('/editBooking')
     .put(BookingController.edit);
-    /** Update Logic Flow
+    /** Update Logic Flows
      *  1. Look for the item, if not existing, return 404 and exit route.
      *  2. If exisiting, validate the update using Joi and check that there are no time clashes.
      *  3. If validation fails, return 400 - bad request
