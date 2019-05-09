@@ -1,0 +1,22 @@
+//This is importing all of the bootstrap elements. 
+@import "node_modules/bootstrap/scss/bootstrap";
+
+
+//To change the overall colors of the page. 
+$theme-colors: (
+  "primary": #437097,
+  "danger": #eb7f7a
+);
+
+
+//To change all of the button colors. 
+.btn { 
+    border-radius: 5;
+    color: #eb7f7a
+}
+
+
+
+
+
+
