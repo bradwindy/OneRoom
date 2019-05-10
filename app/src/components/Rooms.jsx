@@ -26,14 +26,15 @@ async componentDidMount() {
 
 //Handle booking - recieves the room id of the room to be booked. Passes this through. 
 handleBook = (roomId) => {
-    console.log("Room is booked");
-    axios.patch('/booking', {roomiD: roomId});
+    console.log(roomId);
+    //Need to check if this is working. 
+    axios.patch('/newBooking/' + roomId);
     console.log("Room Id: ", roomId);
 
     //Update the rooms list to not show the room that has been booked. 
     //This could be a backend thing. 
-    //const rooms = this.state.rooms.filter(r => r.id !== room.id);
-    //this.setState({rooms});
+    const rooms = this.state.rooms.filter(r => r._id !== roomId);
+    this.setState({rooms});
     
 };
 
@@ -46,13 +47,13 @@ handleBook = (roomId) => {
         //This is if we want to keep it all within the same class. 
         return this.state.rooms.map((room, key) => 
 
-            <div className="card m-2" key={room.id}>
+            <div className="card m-2" key={room._id}>
                 <div className="card-body">
                     <h5 className="card-title">Room: {room.name}</h5>
                     <p className="card-text"><b>Room Capacity:</b> {room.capacity}</p>          
                     <p className="card-text"><b>Room Facilities</b> {room.facilities.tv}</p>
                     <p className="card-text"><b>Available</b> {room.available}</p>
-                    <button onClick={ () => this.handleBook(room.id)} className="btn btn-primary mt-2">Book</button>
+                    <button onClick={ () => this.handleBook(room._id)} className="btn btn-primary mt-2">Book</button>
                 </div>
                 
             </div>
