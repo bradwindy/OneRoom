@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import SweetAlert from 'sweetalert2-react';
 
 class Home extends Component {
-    state = {
-        users: []
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            users: [],
+            interpretedAlert: null,
+        };
+
+        // This binding is necessary to make `this` work in the callback
+        this.cancelBooking = this.cancelBooking.bind(this);
+        this.cancelConfirm = this.cancelConfirm.bind(this);
+    }
 
     componentDidMount() {
         axios.get(`https://jsonplaceholder.typicode.com/users`)
@@ -16,16 +24,41 @@ class Home extends Component {
     };
 
     cancelBooking = (bookingId) => {
+        const interpretedAlert = (
+            <SweetAlert
+                onConfirm={() => {this.cancelConfirm(bookingId)}}
+                onCancel={() => {this.setState({ interpretedAlert: null })}}
+                show={true}
+                showConfirmButton = {false}
+                showCancelButton
+                text={'Are you sure you want to delete this booking?'}
+                title={'Caution'}
+                type={'warning'}
+            />
+        );
+
+        this.setState({ interpretedAlert: interpretedAlert });
+    };
+
+    cancelConfirm = (bookingId) => {
         axios.delete(`https://jsonplaceholder.typicode.com/users/${bookingId}`)
             .then(res => {
                 console.log(res);
-            })
+            });
+
+        this.setState({ interpretedAlert: null });
+
+        console.log("Bef reload");
+
+        window.location.reload();
     };
 
     render() {
         return (
             // "Home" component, a scrollable list of cards with booking info and buttons. Just example info for now
             <div className="container pt-4 p-2">
+                {this.state.interpretedAlert}
+
                 <h2 className="pl-3 pb-3 pt-2"><b>My Bookings:</b></h2>
 
                 {this.state.users.map(user =>
