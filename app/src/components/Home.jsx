@@ -57,6 +57,8 @@ class Home extends Component {
         return (
             // "Home" component, a scrollable list of cards with booking info and buttons. Just example info for now
             <div className="container pt-4 p-2">
+                {this.state.interpretedAlert}
+
                 <h2 className="pl-3 pb-3 pt-2"><b>My Bookings:</b></h2>
 
                 {this.state.users.map(user =>
