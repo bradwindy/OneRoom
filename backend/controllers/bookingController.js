@@ -59,29 +59,6 @@ module.exports = {
     });
   },
 
-<<<<<<< HEAD
-  // POST - Make a new booking and store it in database
-  new: async (req, res, next) => {
-    //Get booking details from frontend
-    const { _bookingId, user, roomId, bookingStart, bookingEnd, startHour, duration } = req.body;
-
-    //To check if room is available
-    bookingSchema.path('bookingStart').validate(function(value){
-      let roomId = this.roomId
-
-      //Get new booking start and end times based on users parameters and convert into number value
-      let newBookingStart = value.getTime()
-      let newBookingEnd = value.getTime()
-
-      //Function to check booking clashes
-      let bookingClash = (existingBookingStart, existingBookingEnd, newBookingStart, newBookingEnd)=>{
-        if (newBookingStart >= existingBookingStart && newBookingStart < existingBookingEnd || 
-          existingBookingStart >= newBookingStart && existingBookingStart < newBookingEnd) {
-          
-            throw new Error(
-              'Booking could not be saved, There is a clash with existing booking'
-            )
-=======
   // PUT - Make a new booking and store it in database
   new: async (req, res) => {
     // Function to convert UTC JS Date object to a Moment.js object in AEST
@@ -120,7 +97,6 @@ module.exports = {
             duration: durationHours(startTime, endTime),
             // Spread operator for remaining attributes
             ...req.body
->>>>>>> 954b653720e3d4371c8ec2873151519fbb624c22
           }
         }
       },
