@@ -5,10 +5,11 @@ const Schema = mongoose.Schema;
 // DO NOT MOVE THE BOOKING SCHEMA TO ANOTHER FILE. IT MESSES THE SYSTEM UP.
 const bookingSchema = new Schema({
   _bookingId: Schema.Types.ObjectId,
+  bookingName: String,
   user: { type: Schema.ObjectId, ref: 'User' },
   roomId: { type: Schema.ObjectId, ref: 'Room' },
-  bookingStart: Date,
-  bookingEnd: Date,
+  startTime: Date,
+  endTime: Date,
   startHour: Number,
   duration: Number
 });
