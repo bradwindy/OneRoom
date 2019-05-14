@@ -82,7 +82,7 @@ module.exports = {
       startTime,
       endTime
     } = req.body;
-
+    
     // Find the room in MongoDB. Then access the bookings and add this new booking.
     await Room.findOneAndUpdate(
       roomId,
