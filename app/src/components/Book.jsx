@@ -212,7 +212,10 @@ class BookNav extends Component{
                     {/*Same with this button, next page rather than specific page, have a variable generated
                     depending this.props.match.params.bookPage in render(), which contains next page and then added to
                     this url instead of /time }*/}
-                    <button onClick={this.props.searchFunc} className="btn btn-primary font-weight-bold">Search</button>
+                    <Link className="btn btn-primary font-weight-bold" to={{
+                        pathname: '/rooms',
+                        data: this.props.parentState,
+                    }}>Search</Link>
                 </div>
             </div>
         );
