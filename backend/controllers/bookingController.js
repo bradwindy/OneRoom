@@ -6,7 +6,7 @@ const momentTimezone = require('moment-timezone');
 
 module.exports = {
     // GET - Get rooms that are available from database
-    /** 
+    /**
      * 1. GET all room documents and get their bookings
      * 2. Using the date and time passed from the user, loop through each booking for
      *    each room and return false if there is a clash for the given time and date.
@@ -78,7 +78,7 @@ module.exports = {
     //       })
     //     });
     },
-    
+
   // PUT - Make a new booking and store it in database
   new: async (req, res) => {
     // Function to convert UTC JS Date object to a Moment.js object in AEST
@@ -103,7 +103,7 @@ module.exports = {
       startTime,
       endTime
     } = req.body;
-    
+
     // Find the room in MongoDB. Then access the bookings and add this new booking.
     await Room.findOneAndUpdate(
       roomId,
