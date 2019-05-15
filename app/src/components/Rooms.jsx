@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 
 
@@ -21,6 +22,7 @@ class Rooms extends Component {
 //decorate the function with async as we are using the await method
 
 async componentDidMount() {
+    setAuthorizationToken(localStorage.jwtToken);
     const {data: rooms} = await axios.get('/room/all');
     //pending > resolved (success) or rejected(failure)
     this.setState({ rooms });  
