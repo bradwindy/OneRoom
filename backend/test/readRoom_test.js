@@ -3,12 +3,6 @@ const assert = require('assert');
 const fs = require("fs");
 const Room = require("../models/roomModel");
 
-const resolvingPromise = new Promise((resolve) =>
-  resolve('promise resolved')
-);
-const rejectingPromise = new Promise((resolve, reject) =>
-  reject(new Error('promise rejected'))
-);
 
 
 describe('Reading room details', () => {
