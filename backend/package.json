@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha",
+    "test": "nodemon --exec 'mocha */**_test.js'",
     "start": "nodemon server.js",
     "app": "cd ../app/ && npm start",
     "dev": "concurrently --kill-others-on-fail \"npm run start\" \"npm run app\""
