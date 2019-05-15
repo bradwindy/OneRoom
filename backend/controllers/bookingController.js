@@ -15,47 +15,68 @@ module.exports = {
      * 4. Send the array of available rooms back to the frontend.
      */
     available: async (req, res) => {
-      // Room.find({}).then(function (rooms) {
-      //   res.send(rooms);
+      Room.find({}).then(function(rooms){
+        rooms.map(room => {
+          res.send(room.name);
+        })
+        res.send(rooms);
+    });
+    //   Room.find({}, (err, rooms) => {
+    //     if(err) //do something
 
-        //To check if room is available
-        bookingSchema.path('startTime').validate(function (value) {
-          let roomId = this.roomId
+    //     rooms.map(room => {
+    //       res.send('Success');
+    //     })
+    //   })
+    //   ).then(function (rooms) {
+    //   res.send(rooms);
 
-          //Get new booking start and end times based on users parameters and convert into number value
-          let newBookingStart = value.getTime()
-          let newBookingEnd = value.getTime()
+    //   // Get most important booking details from body
+    // const {
+    //   roomId,
+    //   startTime,
+    //   endTime
+    // } = req.body;
 
-          //Function to check booking clashes
-          let bookingClash = (existingBookingStart, existingBookingEnd, newBookingStart, newBookingEnd) => {
-            if (newBookingStart >= existingBookingStart && newBookingStart < existingBookingEnd ||
-              existingBookingStart >= newBookingStart && existingBookingStart < newBookingEnd) {
+    //     //To check if room is available
+    //     bookingSchema.path('startTime').validate(function (value) {
+    //       let roomId = this.roomId
 
-              throw new Error(
-                'Booking could not be saved, There is a clash with existing booking'
-              )
-            }
-            return false
-          }
-          //Locate the room document containing bookings
-          return Room.findById(roomId).then(room => {
+    //       //Get new booking start and end times based on users parameters and convert into number value
+    //       let newBookingStart = value.getTime()
+    //       let newBookingEnd = value.getTime()
 
-            //Loop through each existing booking and return false if there is a clash
-            return room.bookings.every(booking => {
-              //Convert existing booking Date objects into number values
-              let existingBookingStart = new Date(booking.startTime).getTime()
-              let existingBookingEnd = new Date(booking.endTime).getTime()
+    //       //Function to check booking clashes
+    //       let bookingClash = (existingBookingStart, existingBookingEnd, newBookingStart, newBookingEnd) => {
+    //         if (newBookingStart >= existingBookingStart && newBookingStart < existingBookingEnd ||
+    //           existingBookingStart >= newBookingStart && existingBookingStart < newBookingEnd) {
 
-              //Check clash between new and existing booking
-              return !bookingClash(
-                existingBookingStart,
-                existingBookingEnd,
-                newBookingStart,
-                newBookingEnd
-              )
-            })
-          })
-        });
+    //           throw new Error(
+    //             'Booking could not be saved, There is a clash with existing booking'
+    //           )
+    //         }
+    //         return false
+    //       }
+
+    //       //Locate the room document containing bookings
+    //       Room.findById(roomId).then(room => {
+
+    //         //Loop through each existing booking and return false if there is a clash
+    //         return room.bookings.every(booking => {
+    //           //Convert existing booking Date objects into number values
+    //           let existingBookingStart = new Date(booking.startTime).getTime()
+    //           let existingBookingEnd = new Date(booking.endTime).getTime()
+
+    //           //Check clash between new and existing booking
+    //           return !bookingClash(
+    //             existingBookingStart,
+    //             existingBookingEnd,
+    //             newBookingStart,
+    //             newBookingEnd
+    //           )
+    //         })
+    //       })
+    //     });
     },
     
   // PUT - Make a new booking and store it in database
