@@ -1,29 +1,36 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import moment from 'moment';
-
-//import Room from '/Room';
+import {
+    Redirect,
+} from "react-router-dom";
 
 class Rooms extends Component {
+
     constructor(props){
         super(props);
 
-        //Have just hardcoded data to test
         this.state = {
-            rooms: []
+            rooms: [],
+            redirect: false,
+            bookingID: ""
+        };
+
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.handleBook = this.handleBook.bind(this);
+    }
+
+
+    //decorate the function with async as we are using the await method
+
+    componentDidMount = async () => {
+        this._isMounted = true;
+        const {data: rooms} = await axios.get('/room/all');
+        //pending > resolved (success) or rejected(failure)
+        this.setState({ rooms });
+        this.setState({ redirect: false });
+
     };
-
-    this.componentDidMount = this.componentDidMount.bind(this);
-}
-
-
-//decorate the function with async as we are using the await method
-
-componentDidMount = async () => {
-    const {data: rooms} = await axios.get('/room/all');
-    //pending > resolved (success) or rejected(failure)
-    this.setState({ rooms });
-};
 
     //Function to loop through the array of rooms and display them as individual rooms
     getRoomCards(){
@@ -59,22 +66,51 @@ componentDidMount = async () => {
 
     };
 
-    handleBook = (roomName, roomID) => {
+    handleBook = async (roomName, roomID) => {
         const bookingData = this.props.location.data;
-        const timeList = ["0800", "0900", "1000", "1100", "1200", "1300", "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200"];
-        const start = moment(timeList[bookingData.timePos], "hmm").format("HH:mm");
-        const end = moment(timeList[(bookingData.timePos)+(bookingData.duration)], "hmm").format("HH:mm");
+        let proposedDate = bookingData.date + "T00:00:00.000Z";
 
-        axios.patch(`/booking/newBooking/${roomID}`, {startTime: start, endTime: end, roomId: roomID});
+        const timeNumList = [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
+
+        let momentDateStart = moment(proposedDate).add(timeNumList[bookingData.timePos], 'hour');
+        let momentDateEnd = moment(proposedDate).add(timeNumList[parseInt(bookingData.timePos)+parseInt(bookingData.duration)], 'hour');
+
+        console.log((bookingData.timePos));
+        console.log((bookingData.duration));
+        let formatDateStart = moment.utc(momentDateStart).format();
+        let formatDateEnd = moment.utc(momentDateEnd).format();
+
+        const bookingName = roomName;
+        const user = "5cb55db0df1cb758b50bf2a4";
+
+        await axios.put('/booking/newBooking/' + roomID, {
+            startTime: formatDateStart, endTime: formatDateEnd, roomId: roomID, bookingName, user})
+            .then(res => {
+                console.log(res.data.bookings);
+                let booking = res.data.bookings[res.data.bookings.length - 1];
+                console.log(booking._id);
+                this.setState({ bookingID: booking._id });
+        });
+
+        console.log(this.state.bookingID);
+
+        let newBooking = {startTime: formatDateStart, endTime: formatDateEnd, roomId: roomID, bookingName: bookingName, bookingId: this.state.bookingID, bookingDate: moment(proposedDate).format('MMM Do YY')};
+
+        this.props.appendBookingFunc(newBooking);
+
+        this.setState({ redirect: true });
     };
 
 
     render() {
+        if(this.state.redirect){
+            return <Redirect to={"/"} />;
+        }
+
         return(
             <div>
                 {this.getRoomCards()}
             </div>
-            
         )
         
     }
