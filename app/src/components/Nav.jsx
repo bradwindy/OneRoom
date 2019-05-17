@@ -12,10 +12,10 @@ class Nav extends Component {
     };
 
     render() {
-        console.log(this.props.location);
-        let regex = /\/book.+/g;
+        let regexBook = /\/book.+/g;
+        let regexRooms = /\/rooms/g;
         let url = this.props.location.pathname.toString();
-        if (url.match(regex)) {
+        if (url.match(regexBook) || url.match(regexRooms)) {
             return (
                 <header
                     className="navbar fixed-bottom navbar-expand navbar-light bg-light flex-column flex-md-row bd-navbar">

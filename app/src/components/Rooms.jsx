@@ -33,6 +33,14 @@ class Rooms extends Component {
         this.setState({redirect: false});
     };
 
+    trueFalsetoYesNo(bool) {
+        if (bool) {
+            return "Yes"
+        } else {
+            return "No"
+        }
+    }
+
     //Function to loop through the array of rooms and display them as individual rooms
     getRoomCards() {
 
@@ -49,18 +57,22 @@ class Rooms extends Component {
                             <h5 className="card-title font-weight-bold">Room: {room.name}</h5>
                             <ul className="card-text list-unstyled">
                                 <li>
-                                    <b>Room Capacity:</b> {room.capacity}
+                                    <b>Capacity:</b> {room.capacity}
                                 </li>
                                 <li>
-                                    <b>Room TV:</b> {room.facilities.tv.toString()}
+                                    <b>Room TV:</b> {this.trueFalsetoYesNo(room.facilities.tv)}
                                 </li>
                                 <li>
-                                    <b>Room ID:</b> {room._id}
+                                    <b>Room Projector:</b> {this.trueFalsetoYesNo(room.facilities.projector)}
+                                </li>
+                                <li>
+                                    <b>Room Whiteboard:</b> {this.trueFalsetoYesNo(room.facilities.whiteboard)}
                                 </li>
                             </ul>
                             <button onClick={() => {
+                                // noinspection JSIgnoredPromiseFromCall
                                 this.handleBook(room.name, room._id)
-                            }} className="btn btn-primary mt-2">Book
+                            }} className="btn btn-success mt-2">Book
                             </button>
                         </div>
                     </div>
@@ -82,7 +94,7 @@ class Rooms extends Component {
         let formatDateStart = moment.utc(momentDateStart).format();
         let formatDateEnd = moment.utc(momentDateEnd).format();
 
-        const bookingName = "Test";
+        const bookingName = bookingData.name;
         const user = "5cb55db0df1cb758b50bf2a4";
 
         await axios.put('/booking/newBooking/' + roomID, {
@@ -94,7 +106,7 @@ class Rooms extends Component {
             });
 
         let newBooking = {
-            time: moment(formatDateStart).format('HH:mm') + " - " + moment(formatDateEnd).format('HH:mm'),
+            time: moment.utc(formatDateStart).format('hh:mm a') + " - " + moment.utc(formatDateEnd).format('hh:mm a'),
             roomId: roomID,
             bookingName: bookingName,
             bookingId: this.state.bookingID,

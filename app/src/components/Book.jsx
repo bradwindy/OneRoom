@@ -15,6 +15,7 @@ class Book extends Component {
             date: moment().format('YYYY-MM-DD'),
             timePos: 0,
             duration: 1,
+            name: "",
         };
     }
 
@@ -30,6 +31,8 @@ class Book extends Component {
             } else if (fieldNum === 1) {
                 this.setState({duration: dataFromChild});
             }
+        } else if (pageName === "name") {
+            this.setState({name: dataFromChild});
         }
     };
 
@@ -74,9 +77,9 @@ class BookPage extends Component {
         // conditional rendering of the content of the page depending on the URL
         if (page === 'date') {
             return (
-                <div className="container align-middle">
+                <div className="container">
                     <div className="row justify-content-center align-items-center no-gutters">
-                        <h1 className="font-weight-bold mb-4 mt-4 pt-4">Select Date</h1>
+                        <h2 className="pl-3 pb-3 pt-4 mt-2 font-weight-bold">Select Date:</h2>
                         <DatePicker className="pb-4"
                                     date={this.props.parentState.date}
                                     onSelect={date => {
@@ -92,8 +95,8 @@ class BookPage extends Component {
                 <div className="container">
                     <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
                         <div className="form-group row">
-                            <div className="col-sm-10">
-                                <h1 className="pt-4"><b>Select Time</b></h1>
+                            <div className="col-sm-10 p-0">
+                                <h2 className="pl-3 mt-2 font-weight-bold">Select Time:</h2>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -145,6 +148,34 @@ class BookPage extends Component {
                     </form>
                 </div>
             );
+        } else if (page === 'name') {
+            return (
+                <div className="container">
+                    <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
+                        <div className="form-group row">
+                            <div className="col-sm-10 p-0">
+                                <h2 className="pl-3 mt-2 font-weight-bold">Name Booking:</h2>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label htmlFor="time-select"
+                                   className="col-sm-2 col-form-label font-weight-bold">Time:</label>
+                            <div className="col-sm-10">
+                                <input type="text"
+                                       className="form-control"
+                                       id="name"
+                                       placeholder="Booking Name"
+                                       name="email"
+                                       value={this.props.parentState.name}
+                                       onChange={(event) => this.props.callbackFromParent(event.target.value, 0, page)}
+
+                                />
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            );
         }
     }
 }
@@ -159,6 +190,9 @@ class BookNav extends Component {
             nextPath = this.props.match.url + "/time";
             return this.navButtons(nextPath);
         } else if (pageURL === "/book/time") {
+            nextPath = this.props.match.url + "/name";
+            return this.navButtons(nextPath);
+        } else if (pageURL === "/book/name") {
             return this.searchNavButtons();
         }
     }
