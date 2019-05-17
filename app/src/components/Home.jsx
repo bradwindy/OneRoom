@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import SweetAlert from 'sweetalert2-react';
 
 class Home extends Component {
     constructor(props) {
@@ -37,7 +35,7 @@ class Home extends Component {
         window.location.reload();
     };
 
-    cancelConfirm = (bookingId) => {
+    cancelConfirm = () => {
 
     };
 

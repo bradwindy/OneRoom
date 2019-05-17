@@ -3,7 +3,6 @@ import { Link, Route } from 'react-router-dom';
 import moment from 'moment';
 import DatePicker from '@trendmicro/react-datepicker';
 import '@trendmicro/react-datepicker/dist/react-datepicker.css';
-import axios from 'axios';
 
 class Book extends Component {
 
@@ -17,9 +16,6 @@ class Book extends Component {
             timePos: 0,
             duration: 1,
         };
-
-        // binding here happens so we can access state within room request method
-        this.roomRequest = this.roomRequest.bind(this);
     }
 
     // Because of the routing and componentisation of this booking page. It is necessary to have a callback function
@@ -35,18 +31,6 @@ class Book extends Component {
                 this.setState({ duration: dataFromChild });
             }
         }
-    };
-
-    // This method constructs a request object and posts it using axios
-    roomRequest(){
-        const timeList = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00",
-                          "18:00", "19:00", "20:00", "21:00", "22:00"];
-
-        const request = {date: this.state.date, time: timeList[this.state.timePos], duration: this.state.duration};
-
-        axios.post(`https://jsonplaceholder.typicode.com/users`, request)
-            .then(res => {
-            })
     };
 
     // Renders the Booking pages.
