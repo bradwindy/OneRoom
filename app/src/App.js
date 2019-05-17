@@ -7,6 +7,7 @@ import Login from "./components/Login"
 import Book from "./components/Book"
 import Rooms from "./components/Rooms"
 import NoMatch from "./components/NoMatch"
+import Register from "./components/Register"
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -64,7 +65,7 @@ class App extends Component {
                     />
                     <Route path={"/login/"} component={Login}/>
                     <Route path={"/book/"} component={Book}/>
-                    <Route path={"/register/"} />
+                    <Route path={"/register/"} component={Register}/>
                     <Route path={"/rooms/"}
                            render={(props) =>
                                <Rooms
