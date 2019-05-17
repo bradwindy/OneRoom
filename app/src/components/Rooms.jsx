@@ -6,9 +6,7 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 //import Room from '/Room';
 import moment from 'moment';
-import {
-    Redirect,
-} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 class Rooms extends Component {
 
