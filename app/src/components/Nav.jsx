@@ -6,7 +6,7 @@ class Nav extends Component {
     logout = event => {
         // Stopping the browser from reloading the page
         //event.preventDefault();
-        localStorage.removeItem('jwtToken')// remove stored local storage JWT token 
+        localStorage.removeItem('jwtToken');// remove stored local storage JWT token
         window.location.href = "/login";
     };
 
@@ -21,16 +21,14 @@ class Nav extends Component {
                         <li className="nav-item">
                             <a className="navbar-brand" href="/"><b>RoomEase</b></a>
                         </li>
-
                         <li className="nav-item">
                             <a className="btn btn-outline-secondary mr-2" href="/login" role="button">Log In</a>
                         </li>
-
                         <li className="nav-item">
-                            <a className="btn btn-success mr-2" href="/book/date" role="button">Book Room</a>
+                            <button className="btn btn-outline-danger mr-2" onClick={this.logout}>Log Out</button>
                         </li>
                         <li className="nav-item">
-                            <a className="btn btn-danger" onClick={this.logout} role="button">Log Out</a>
+                            <a className="btn btn-success" href="/book/date" role="button">Book</a>
                         </li>
                     </ul>
                 </div>
