@@ -80,7 +80,7 @@ class Rooms extends Component {
         let formatDateStart = moment.utc(momentDateStart).format();
         let formatDateEnd = moment.utc(momentDateEnd).format();
 
-        const bookingName = roomName;
+        const bookingName = "Test";
         const user = "5cb55db0df1cb758b50bf2a4";
 
         await axios.put('/booking/newBooking/' + roomID, {
@@ -90,7 +90,15 @@ class Rooms extends Component {
                 this.setState({ bookingID: booking._id });
         });
 
-        let newBooking = {startTime: formatDateStart, endTime: formatDateEnd, roomId: roomID, bookingName: bookingName, bookingId: this.state.bookingID, bookingDate: moment(proposedDate).format('MMM Do YY')};
+        let newBooking = {
+            time: moment(formatDateStart).format('HH:mm') + " - " + moment(formatDateEnd).format('HH:mm'),
+            roomId: roomID,
+            bookingName: bookingName,
+            bookingId: this.state.bookingID,
+            bookingDate: moment(proposedDate).format('dddd MMMM Do'),
+            bookingRoomName: roomName,
+        };
+
         this.props.appendBookingFunc(newBooking);
         this.setState({ redirect: true });
     };

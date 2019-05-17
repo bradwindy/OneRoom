@@ -66,24 +66,14 @@ class Home extends Component {
                                         <b>Date: </b>{booking.bookingDate}
                                     </li>
                                     <li>
-                                        <b>Time: </b>{booking.startTime}
+                                        <b>Time: </b>{booking.time}
+                                    </li>
+                                    <li>
+                                        <b>Room: </b>{booking.bookingRoomName}
                                     </li>
                                 </ul>
 
                                 <div className="row m-0">
-                                    <button className="btn btn-primary mr-2">Find Room</button>
-                                    <div className="dropdown">
-                                        <button className="btn btn-secondary dropdown-toggle mr-2" type="button"
-                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                            More
-                                        </button>
-
-                                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            {/* TODO The room info link below will link to elora's room info page for the room associated with booking */}
-                                            <a className="dropdown-item" href="">Room Info</a>
-                                        </div>
-                                    </div>
                                     <button className="btn btn-danger float-right" onClick={() => {this.cancelBooking(booking.bookingId)}}>Cancel</button>
                                 </div>
                             </div>
