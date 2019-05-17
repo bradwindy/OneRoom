@@ -5,6 +5,7 @@ class FormValidator {
         // validations is an array of rules specific to a form
         this.validations = validations;
     }
+
     validate(state) {
         // start out assuming valid
         let validation = this.valid();
@@ -20,7 +21,7 @@ class FormValidator {
                 const validation_method = typeof rule.method === 'string' ? validator[rule.method] : rule.method;
 
                 // if rule not valid
-                if(validation_method(field_value, ...args, state) !== rule.validWhen) {
+                if (validation_method(field_value, ...args, state) !== rule.validWhen) {
                     validation[rule.field] = {
                         isInvalid: true,
                         message: rule.message,
@@ -37,9 +38,10 @@ class FormValidator {
     valid() {
         const validation = {};
         this.validations.map(rule => (
-            validation[rule.field] = { isInvalid: false, message: '', classText: "form-control" }
+            validation[rule.field] = {isInvalid: false, message: '', classText: "form-control"}
         ));
-        return { isValid: true, ...validation };
+        return {isValid: true, ...validation};
     }
 }
+
 export default FormValidator;

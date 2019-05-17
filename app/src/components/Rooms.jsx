@@ -3,14 +3,13 @@ import axios from 'axios';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 
-
 //import Room from '/Room';
 import moment from 'moment';
 import {Redirect} from "react-router-dom";
 
 class Rooms extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -30,20 +29,20 @@ class Rooms extends Component {
         setAuthorizationToken(localStorage.jwtToken);
         const {data: rooms} = await axios.get('/room/all');
         //pending > resolved (success) or rejected(failure)
-        this.setState({ rooms });
-        this.setState({ redirect: false });
+        this.setState({rooms});
+        this.setState({redirect: false});
     };
 
     //Function to loop through the array of rooms and display them as individual rooms
-    getRoomCards(){
-        
+    getRoomCards() {
+
         if (this.state.rooms.length === 0) return <p>There are no rooms available for this date.</p>;
 
-      
-        return(
+
+        return (
             <div className="container pt-4 p-2">
                 <h2 className="pl-3 pb-3 pt-2"><b>Availabilities:</b></h2>
-                {this.state.rooms.map((room, key) =>
+                {this.state.rooms.map((room) =>
 
                     <div className="card m-2" key={room.name}>
                         <div className="card-body">
@@ -59,7 +58,10 @@ class Rooms extends Component {
                                     <b>Room ID:</b> {room._id}
                                 </li>
                             </ul>
-                            <button onClick={() => {this.handleBook(room.name, room._id)}} className="btn btn-primary mt-2">Book</button>
+                            <button onClick={() => {
+                                this.handleBook(room.name, room._id)
+                            }} className="btn btn-primary mt-2">Book
+                            </button>
                         </div>
                     </div>
                 )}
@@ -72,10 +74,10 @@ class Rooms extends Component {
         const bookingData = this.props.location.data;
         let proposedDate = bookingData.date + "T00:00:00.000Z";
 
-        const timeNumList = [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
+        const timeNumList = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
         let momentDateStart = moment(proposedDate).add(timeNumList[bookingData.timePos], 'hour');
-        let momentDateEnd = moment(proposedDate).add(timeNumList[parseInt(bookingData.timePos)+parseInt(bookingData.duration)], 'hour');
+        let momentDateEnd = moment(proposedDate).add(timeNumList[parseInt(bookingData.timePos) + parseInt(bookingData.duration)], 'hour');
 
         let formatDateStart = moment.utc(momentDateStart).format();
         let formatDateEnd = moment.utc(momentDateEnd).format();
@@ -84,11 +86,12 @@ class Rooms extends Component {
         const user = "5cb55db0df1cb758b50bf2a4";
 
         await axios.put('/booking/newBooking/' + roomID, {
-            startTime: formatDateStart, endTime: formatDateEnd, roomId: roomID, bookingName, user})
+            startTime: formatDateStart, endTime: formatDateEnd, roomId: roomID, bookingName, user
+        })
             .then(res => {
                 let booking = res.data.bookings[res.data.bookings.length - 1];
-                this.setState({ bookingID: booking._id });
-        });
+                this.setState({bookingID: booking._id});
+            });
 
         let newBooking = {
             time: moment(formatDateStart).format('HH:mm') + " - " + moment(formatDateEnd).format('HH:mm'),
@@ -100,21 +103,21 @@ class Rooms extends Component {
         };
 
         this.props.appendBookingFunc(newBooking);
-        this.setState({ redirect: true });
+        this.setState({redirect: true});
     };
 
 
     render() {
-        if(this.state.redirect){
-            return <Redirect to={"/"} />;
+        if (this.state.redirect) {
+            return <Redirect to={"/"}/>;
         }
 
-        return(
+        return (
             <div>
                 {this.getRoomCards()}
             </div>
         )
-        
+
     }
 }
 

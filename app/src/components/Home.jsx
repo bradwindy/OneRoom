@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class Home extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class Home extends Component {
     componentDidMount = () => {
         let bookingArr = JSON.parse(localStorage.getItem('bookingArray'));
 
-        if(bookingArr == null) {
+        if (bookingArr == null) {
             bookingArr = [];
         }
 
@@ -40,15 +40,15 @@ class Home extends Component {
     };
 
     render() {
-        if(this.state.bookings === undefined || this.state.bookings.length === 0){
-            return(
+        if (this.state.bookings === undefined || this.state.bookings.length === 0) {
+            return (
                 <div className="container pt-4 p-2">
                     <h2 className="pl-3 pb-1 pt-2 font-weight-bold">My Bookings:</h2>
                     <h4 className="pl-3 pb-3 pt-2">You currently have no bookings.</h4>
                 </div>
             );
 
-        }else{
+        } else {
             return (
                 // "Home" component, a scrollable list of cards with booking info and buttons. Just example info for now
                 <div className="container pt-4 p-2">
@@ -72,7 +72,11 @@ class Home extends Component {
                                 </ul>
 
                                 <div className="row m-0">
-                                    <button className="btn btn-danger float-right" onClick={() => {this.cancelBooking(booking.bookingId)}}>Cancel</button>
+                                    <button className="btn btn-danger float-right" onClick={() => {
+                                        // noinspection JSIgnoredPromiseFromCall
+                                        this.cancelBooking(booking.bookingId)
+                                    }}>Cancel
+                                    </button>
                                 </div>
                             </div>
                         </div>

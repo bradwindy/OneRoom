@@ -57,7 +57,7 @@ class Login extends Component {
         
         this.setState({
             [event.target.name]: event.target.value
-        })
+        });
         const input = event.target;
         const value = input.type === 'checkbox' ? input.checked : input.value;
     

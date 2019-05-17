@@ -15,9 +15,10 @@ class Nav extends Component {
         console.log(this.props.location);
         let regex = /\/book.+/g;
         let url = this.props.location.pathname.toString();
-        if(url.match(regex)){
+        if (url.match(regex)) {
             return (
-                <header className="navbar fixed-bottom navbar-expand navbar-light bg-light flex-column flex-md-row bd-navbar">
+                <header
+                    className="navbar fixed-bottom navbar-expand navbar-light bg-light flex-column flex-md-row bd-navbar">
                     <div className="navbar-nav-scroll">
                         <ul className="navbar-nav bd-navbar-nav">
                             <li className="nav-item">
@@ -36,12 +37,13 @@ class Nav extends Component {
                     </div>
                 </header>
             );
-        }else{
+        } else {
             // noinspection HtmlUnknownTarget
             return (
                 // nav bar component, will update later on to dynamically render its elements depending on if the user is
                 // logged in or not.
-                <header className="navbar fixed-bottom navbar-expand navbar-light bg-light flex-column flex-md-row bd-navbar">
+                <header
+                    className="navbar fixed-bottom navbar-expand navbar-light bg-light flex-column flex-md-row bd-navbar">
                     <div className="navbar-nav-scroll">
                         <ul className="navbar-nav bd-navbar-nav">
                             <li className="nav-item">

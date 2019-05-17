@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link, Route } from 'react-router-dom';
+import {Link, Route} from 'react-router-dom';
 import moment from 'moment';
 import DatePicker from '@trendmicro/react-datepicker';
 import '@trendmicro/react-datepicker/dist/react-datepicker.css';
@@ -22,13 +22,13 @@ class Book extends Component {
     // This callback function takes data from the "child" (the function that calls it), and depending on the page and field,
     // Sets the state accordingly. This cannot be done within each routed component, and so a callback function is passed instead
     callback = (dataFromChild, fieldNum, pageName) => {
-        if (pageName === "date"){
-            this.setState({ date: dataFromChild });
-        } else if (pageName === "time"){
-            if(fieldNum === 0){
-                this.setState({ timePos: dataFromChild });
-            }else if (fieldNum === 1){
-                this.setState({ duration: dataFromChild });
+        if (pageName === "date") {
+            this.setState({date: dataFromChild});
+        } else if (pageName === "time") {
+            if (fieldNum === 0) {
+                this.setState({timePos: dataFromChild});
+            } else if (fieldNum === 1) {
+                this.setState({duration: dataFromChild});
             }
         }
     };
@@ -72,7 +72,7 @@ class BookPage extends Component {
         const page = this.props.match.params.bookPage;
 
         // conditional rendering of the content of the page depending on the URL
-        if (page === 'date'){
+        if (page === 'date') {
             return (
                 <div className="container align-middle">
                     <div className="row justify-content-center align-items-center no-gutters">
@@ -149,27 +149,30 @@ class BookPage extends Component {
     }
 }
 
-class BookNav extends Component{
+class BookNav extends Component {
     render() {
         const pageURL = this.props.location.pathname;
         let nextPath = "";
 
         // Here is conditional rendering of the navigation buttons depending on the URL
-        if (pageURL === "/book/date"){
+        if (pageURL === "/book/date") {
             nextPath = this.props.match.url + "/time";
             return this.navButtons(nextPath);
-        } else if (pageURL === "/book/time"){
+        } else if (pageURL === "/book/time") {
             return this.searchNavButtons();
         }
     }
 
     // This is the function that returns the navigation buttons for the date page.
-    navButtons(nextPath){
-        return(
+    navButtons(nextPath) {
+        return (
             <div className="container align-middle">
-                <div className="row col-sm-2 fixed-bottom p-3 pb-5 mb-5 justify-content-center align-items-center no-gutters">
+                <div
+                    className="row col-sm-2 fixed-bottom p-3 pb-5 mb-5 justify-content-center align-items-center no-gutters">
                     {/*Will need to make the link below go back to the previous page and always be consistent*/}
-                    <button onClick={this.props.history.goBack} className="btn btn-outline-primary font-weight-bold mr-3">Back</button>
+                    <button onClick={this.props.history.goBack}
+                            className="btn btn-outline-primary font-weight-bold mr-3">Back
+                    </button>
                     <h4 className="mr-2">----</h4>
                     {/*Same with this button, next page rather than specific page, have a variable generated
                     depending this.props.match.params.bookPage in render(), which contains next page and then added to
@@ -181,12 +184,15 @@ class BookNav extends Component{
     };
 
     // This is the function that returns the navigation buttons for the time page with a search button instead of a next button.
-    searchNavButtons(){
-        return(
+    searchNavButtons() {
+        return (
             <div className="container align-middle">
-                <div className="row col-sm-2 fixed-bottom p-3 pb-5 mb-5 justify-content-center align-items-center no-gutters">
+                <div
+                    className="row col-sm-2 fixed-bottom p-3 pb-5 mb-5 justify-content-center align-items-center no-gutters">
                     {/*Will need to make the link below go back to the previous page and always be consistent*/}
-                    <button onClick={this.props.history.goBack} className="btn btn-outline-primary font-weight-bold mr-3">Back</button>
+                    <button onClick={this.props.history.goBack}
+                            className="btn btn-outline-primary font-weight-bold mr-3">Back
+                    </button>
                     <h4 className="mr-2">----</h4>
                     {/*Same with this button, next page rather than specific page, have a variable generated
                     depending this.props.match.params.bookPage in render(), which contains next page and then added to
