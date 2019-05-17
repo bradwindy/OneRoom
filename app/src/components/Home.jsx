@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import SweetAlert from 'sweetalert2-react';
+import React, {Component} from 'react';
 
 class Home extends Component {
     constructor(props) {
@@ -19,7 +17,7 @@ class Home extends Component {
     componentDidMount = () => {
         let bookingArr = JSON.parse(localStorage.getItem('bookingArray'));
 
-        if(bookingArr == null) {
+        if (bookingArr == null) {
             bookingArr = [];
         }
 
@@ -37,20 +35,20 @@ class Home extends Component {
         window.location.reload();
     };
 
-    cancelConfirm = (bookingId) => {
+    cancelConfirm = () => {
 
     };
 
     render() {
-        if(this.state.bookings === undefined || this.state.bookings.length === 0){
-            return(
+        if (this.state.bookings === undefined || this.state.bookings.length === 0) {
+            return (
                 <div className="container pt-4 p-2">
                     <h2 className="pl-3 pb-1 pt-2 font-weight-bold">My Bookings:</h2>
                     <h4 className="pl-3 pb-3 pt-2">You currently have no bookings.</h4>
                 </div>
             );
 
-        }else{
+        } else {
             return (
                 // "Home" component, a scrollable list of cards with booking info and buttons. Just example info for now
                 <div className="container pt-4 p-2">
@@ -66,25 +64,19 @@ class Home extends Component {
                                         <b>Date: </b>{booking.bookingDate}
                                     </li>
                                     <li>
-                                        <b>Time: </b>{booking.startTime}
+                                        <b>Time: </b>{booking.time}
+                                    </li>
+                                    <li>
+                                        <b>Room: </b>{booking.bookingRoomName}
                                     </li>
                                 </ul>
 
                                 <div className="row m-0">
-                                    <button className="btn btn-primary mr-2">Find Room</button>
-                                    <div className="dropdown">
-                                        <button className="btn btn-secondary dropdown-toggle mr-2" type="button"
-                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                            More
-                                        </button>
-
-                                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            {/* TODO The room info link below will link to elora's room info page for the room associated with booking */}
-                                            <a className="dropdown-item" href="">Room Info</a>
-                                        </div>
-                                    </div>
-                                    <button className="btn btn-danger float-right" onClick={() => {this.cancelBooking(booking.bookingId)}}>Cancel</button>
+                                    <button className="btn btn-danger float-right" onClick={() => {
+                                        // noinspection JSIgnoredPromiseFromCall
+                                        this.cancelBooking(booking.bookingId)
+                                    }}>Cancel
+                                    </button>
                                 </div>
                             </div>
                         </div>

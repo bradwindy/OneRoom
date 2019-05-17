@@ -20,11 +20,11 @@ module.exports = {
 
         //To check if room is available
         bookingSchema.path('startTime').validate(function (value) {
-          let roomId = this.roomId
+            let roomId = this.roomId;
 
           //Get new booking start and end times based on users parameters and convert into number value
-          let newBookingStart = value.getTime()
-          let newBookingEnd = value.getTime()
+            let newBookingStart = value.getTime();
+            let newBookingEnd = value.getTime();
 
           //Function to check booking clashes
           let bookingClash = (existingBookingStart, existingBookingEnd, newBookingStart, newBookingEnd) => {

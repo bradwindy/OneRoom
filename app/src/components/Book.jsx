@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import { Link, Route } from 'react-router-dom';
+import {Link, Route} from 'react-router-dom';
 import moment from 'moment';
 import DatePicker from '@trendmicro/react-datepicker';
 import '@trendmicro/react-datepicker/dist/react-datepicker.css';
-import axios from 'axios';
 
 class Book extends Component {
 
@@ -16,37 +15,25 @@ class Book extends Component {
             date: moment().format('YYYY-MM-DD'),
             timePos: 0,
             duration: 1,
+            name: "",
         };
-
-        // binding here happens so we can access state within room request method
-        this.roomRequest = this.roomRequest.bind(this);
     }
 
     // Because of the routing and componentisation of this booking page. It is necessary to have a callback function
     // This callback function takes data from the "child" (the function that calls it), and depending on the page and field,
     // Sets the state accordingly. This cannot be done within each routed component, and so a callback function is passed instead
     callback = (dataFromChild, fieldNum, pageName) => {
-        if (pageName === "date"){
-            this.setState({ date: dataFromChild });
-        } else if (pageName === "time"){
-            if(fieldNum === 0){
-                this.setState({ timePos: dataFromChild });
-            }else if (fieldNum === 1){
-                this.setState({ duration: dataFromChild });
+        if (pageName === "date") {
+            this.setState({date: dataFromChild});
+        } else if (pageName === "time") {
+            if (fieldNum === 0) {
+                this.setState({timePos: dataFromChild});
+            } else if (fieldNum === 1) {
+                this.setState({duration: dataFromChild});
             }
+        } else if (pageName === "name") {
+            this.setState({name: dataFromChild});
         }
-    };
-
-    // This method constructs a request object and posts it using axios
-    roomRequest(){
-        const timeList = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00",
-                          "18:00", "19:00", "20:00", "21:00", "22:00"];
-
-        const request = {date: this.state.date, time: timeList[this.state.timePos], duration: this.state.duration};
-
-        axios.post(`https://jsonplaceholder.typicode.com/users`, request)
-            .then(res => {
-            })
     };
 
     // Renders the Booking pages.
@@ -88,11 +75,11 @@ class BookPage extends Component {
         const page = this.props.match.params.bookPage;
 
         // conditional rendering of the content of the page depending on the URL
-        if (page === 'date'){
+        if (page === 'date') {
             return (
-                <div className="container align-middle">
+                <div className="container">
                     <div className="row justify-content-center align-items-center no-gutters">
-                        <h1 className="font-weight-bold mb-4 mt-4 pt-4">Select Date</h1>
+                        <h2 className="pl-3 pb-3 pt-4 mt-2 font-weight-bold">Select Date:</h2>
                         <DatePicker className="pb-4"
                                     date={this.props.parentState.date}
                                     onSelect={date => {
@@ -108,8 +95,8 @@ class BookPage extends Component {
                 <div className="container">
                     <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
                         <div className="form-group row">
-                            <div className="col-sm-10">
-                                <h1 className="pt-4"><b>Select Time</b></h1>
+                            <div className="col-sm-10 p-0">
+                                <h2 className="pl-3 mt-2 font-weight-bold">Select Time:</h2>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -161,31 +148,65 @@ class BookPage extends Component {
                     </form>
                 </div>
             );
+        } else if (page === 'name') {
+            return (
+                <div className="container">
+                    <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
+                        <div className="form-group row">
+                            <div className="col-sm-10 p-0">
+                                <h2 className="pl-3 mt-2 font-weight-bold">Name Booking:</h2>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label htmlFor="time-select"
+                                   className="col-sm-2 col-form-label font-weight-bold">Time:</label>
+                            <div className="col-sm-10">
+                                <input type="text"
+                                       className="form-control"
+                                       id="name"
+                                       placeholder="Booking Name"
+                                       name="email"
+                                       value={this.props.parentState.name}
+                                       onChange={(event) => this.props.callbackFromParent(event.target.value, 0, page)}
+
+                                />
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            );
         }
     }
 }
 
-class BookNav extends Component{
+class BookNav extends Component {
     render() {
         const pageURL = this.props.location.pathname;
         let nextPath = "";
 
         // Here is conditional rendering of the navigation buttons depending on the URL
-        if (pageURL === "/book/date"){
+        if (pageURL === "/book/date") {
             nextPath = this.props.match.url + "/time";
             return this.navButtons(nextPath);
-        } else if (pageURL === "/book/time"){
+        } else if (pageURL === "/book/time") {
+            nextPath = this.props.match.url + "/name";
+            return this.navButtons(nextPath);
+        } else if (pageURL === "/book/name") {
             return this.searchNavButtons();
         }
     }
 
     // This is the function that returns the navigation buttons for the date page.
-    navButtons(nextPath){
-        return(
+    navButtons(nextPath) {
+        return (
             <div className="container align-middle">
-                <div className="row col-sm-2 fixed-bottom p-3 pb-5 mb-5 justify-content-center align-items-center no-gutters">
+                <div
+                    className="row col-sm-2 fixed-bottom p-3 pb-5 mb-5 justify-content-center align-items-center no-gutters">
                     {/*Will need to make the link below go back to the previous page and always be consistent*/}
-                    <button onClick={this.props.history.goBack} className="btn btn-outline-primary font-weight-bold mr-3">Back</button>
+                    <button onClick={this.props.history.goBack}
+                            className="btn btn-outline-primary font-weight-bold mr-3">Back
+                    </button>
                     <h4 className="mr-2">----</h4>
                     {/*Same with this button, next page rather than specific page, have a variable generated
                     depending this.props.match.params.bookPage in render(), which contains next page and then added to
@@ -197,12 +218,15 @@ class BookNav extends Component{
     };
 
     // This is the function that returns the navigation buttons for the time page with a search button instead of a next button.
-    searchNavButtons(){
-        return(
+    searchNavButtons() {
+        return (
             <div className="container align-middle">
-                <div className="row col-sm-2 fixed-bottom p-3 pb-5 mb-5 justify-content-center align-items-center no-gutters">
+                <div
+                    className="row col-sm-2 fixed-bottom p-3 pb-5 mb-5 justify-content-center align-items-center no-gutters">
                     {/*Will need to make the link below go back to the previous page and always be consistent*/}
-                    <button onClick={this.props.history.goBack} className="btn btn-outline-primary font-weight-bold mr-3">Back</button>
+                    <button onClick={this.props.history.goBack}
+                            className="btn btn-outline-primary font-weight-bold mr-3">Back
+                    </button>
                     <h4 className="mr-2">----</h4>
                     {/*Same with this button, next page rather than specific page, have a variable generated
                     depending this.props.match.params.bookPage in render(), which contains next page and then added to

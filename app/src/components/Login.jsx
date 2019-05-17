@@ -57,7 +57,7 @@ class Login extends Component {
         
         this.setState({
             [event.target.name]: event.target.value
-        })
+        });
         const input = event.target;
         const value = input.type === 'checkbox' ? input.checked : input.value;
     
@@ -106,8 +106,6 @@ class Login extends Component {
             /** Using Axios to POST this to our /API/Login and passing the userLogin object as a payload */
             await axios.post('/auth/signin', userLogin)
                 .then(res => {
-                    console.log(res);
-                    console.log(res.data);
                     // take json web token (JWT) that was returned from server
                     // we'll save it in local storage
                     const token = res.data.token; //capture jwt

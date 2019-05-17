@@ -15,7 +15,7 @@ const token = JWT.sign({
   }, config.JWT_SECRET);
    // Respond with token
    res.status(200).json({ token });
-}
+};
 
 /** JSON Web Token Strategy
  *   Logic: We are seeing where the token is contained and what is the secret
@@ -80,5 +80,5 @@ module.exports = {
   signToken,
   authJWT: passport.authenticate('jwt', { session: false }),
   signIn: passport.authenticate('local', { session: false })
-}
+};
 
