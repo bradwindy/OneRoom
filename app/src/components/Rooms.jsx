@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
+
+
+
+//import Room from '/Room';
 import moment from 'moment';
 import {
     Redirect,
@@ -24,12 +29,11 @@ class Rooms extends Component {
     //decorate the function with async as we are using the await method
 
     componentDidMount = async () => {
-        this._isMounted = true;
+        setAuthorizationToken(localStorage.jwtToken);
         const {data: rooms} = await axios.get('/room/all');
         //pending > resolved (success) or rejected(failure)
         this.setState({ rooms });
         this.setState({ redirect: false });
-
     };
 
     //Function to loop through the array of rooms and display them as individual rooms
