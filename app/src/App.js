@@ -32,8 +32,17 @@ class App extends Component {
         localStorage.setItem('bookingArray',  JSON.stringify(joined));
     };
 
-    bookingArrayRem = (bookingID) => {
-        // remove booking then set state
+    bookingArrayRem = (bookingIDRemove) => {
+        let bookingArr = JSON.parse(localStorage.getItem('bookingArray'));
+
+        for (let index = 0; index < bookingArr.length; ++index) {
+            if(bookingArr[index].bookingId === bookingIDRemove){
+                console.log(bookingArr[index]);
+                bookingArr.splice(index, 1);
+            }
+        }
+
+        localStorage.setItem('bookingArray',  JSON.stringify(bookingArr));
     };
 
     render() {

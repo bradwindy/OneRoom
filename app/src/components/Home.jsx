@@ -26,21 +26,19 @@ class Home extends Component {
         this.setState({bookings: bookingArr})
     };
 
-    cancelBooking = (bookingId) => {
-        console.log(this.props.parentState);
+    cancelBooking = async (bookingId) => {
+        this.props.removeBookingFunc(bookingId);
+
+        /*await axios.delete(`https://jsonplaceholder.typicode.com/users/${bookingId}`)
+            .then(res => {
+                console.log(res);
+            });*/
+
+        window.location.reload();
     };
 
     cancelConfirm = (bookingId) => {
-        axios.delete(`https://jsonplaceholder.typicode.com/users/${bookingId}`)
-            .then(res => {
-                console.log(res);
-            });
 
-        this.setState({ interpretedAlert: null });
-
-        console.log("Bef reload");
-
-        window.location.reload();
     };
 
     render() {
@@ -53,7 +51,6 @@ class Home extends Component {
             );
 
         }else{
-            console.log(this.state.bookings);
             return (
                 // "Home" component, a scrollable list of cards with booking info and buttons. Just example info for now
                 <div className="container pt-4 p-2">
@@ -87,7 +84,7 @@ class Home extends Component {
                                             <a className="dropdown-item" href="">Room Info</a>
                                         </div>
                                     </div>
-                                    <button className="btn btn-danger float-right" onClick={() => {this.cancelBooking(booking._id)}}>Cancel</button>
+                                    <button className="btn btn-danger float-right" onClick={() => {this.cancelBooking(booking.bookingId)}}>Cancel</button>
                                 </div>
                             </div>
                         </div>

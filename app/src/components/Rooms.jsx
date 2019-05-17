@@ -75,8 +75,6 @@ class Rooms extends Component {
         let momentDateStart = moment(proposedDate).add(timeNumList[bookingData.timePos], 'hour');
         let momentDateEnd = moment(proposedDate).add(timeNumList[parseInt(bookingData.timePos)+parseInt(bookingData.duration)], 'hour');
 
-        console.log((bookingData.timePos));
-        console.log((bookingData.duration));
         let formatDateStart = moment.utc(momentDateStart).format();
         let formatDateEnd = moment.utc(momentDateEnd).format();
 
@@ -86,18 +84,12 @@ class Rooms extends Component {
         await axios.put('/booking/newBooking/' + roomID, {
             startTime: formatDateStart, endTime: formatDateEnd, roomId: roomID, bookingName, user})
             .then(res => {
-                console.log(res.data.bookings);
                 let booking = res.data.bookings[res.data.bookings.length - 1];
-                console.log(booking._id);
                 this.setState({ bookingID: booking._id });
         });
 
-        console.log(this.state.bookingID);
-
         let newBooking = {startTime: formatDateStart, endTime: formatDateEnd, roomId: roomID, bookingName: bookingName, bookingId: this.state.bookingID, bookingDate: moment(proposedDate).format('MMM Do YY')};
-
         this.props.appendBookingFunc(newBooking);
-
         this.setState({ redirect: true });
     };
 

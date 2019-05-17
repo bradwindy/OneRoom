@@ -28,14 +28,11 @@ class Book extends Component {
     callback = (dataFromChild, fieldNum, pageName) => {
         if (pageName === "date"){
             this.setState({ date: dataFromChild });
-            console.log("Date success " + dataFromChild)
         } else if (pageName === "time"){
             if(fieldNum === 0){
                 this.setState({ timePos: dataFromChild });
-                console.log("Time Pos success " + dataFromChild)
             }else if (fieldNum === 1){
                 this.setState({ duration: dataFromChild });
-                console.log("Duration Pos success " + dataFromChild)
             }
         }
     };
@@ -49,8 +46,6 @@ class Book extends Component {
 
         axios.post(`https://jsonplaceholder.typicode.com/users`, request)
             .then(res => {
-                console.log(res);
-                console.log(res.data);
             })
     };
 
