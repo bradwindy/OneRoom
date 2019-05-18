@@ -10,7 +10,7 @@ router.route('/available')
     .get(BookingController.available);
 
 // PUT a booking - Make a booking
-router.route('/newBooking')
+router.route('/newBooking/:id')
     .put(BookingController.new);
 
 // GET details about a booking
