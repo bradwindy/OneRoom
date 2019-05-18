@@ -152,7 +152,7 @@ class Login extends Component {
                         </div>
                         <div className="form-group row">
                             <label htmlFor="inputEmail3" className="col-sm-2 col-form-label"></label>
-                            <div className="col-sm-10 input-group box-shadow-lg">
+                            <div className="col-sm-10 input-group shadow-lg p-3 mb-1 rounded ">
                                 <input type="text"
                                        className={validation.email.classText}
                                        id="inputEmail3"
@@ -177,7 +177,7 @@ class Login extends Component {
 
                         <div className="form-group row">
                             <label htmlFor="inputPassword3" className="col-sm-2 col-form-label"></label>
-                            <div className="col-sm-10 input-box-shadow">
+                            <div className="col-sm-10 shadow-lg p-3 mb-2 rounded">
                                 <input type="password"
                                        className={validation.password.classText}
                                        id="inputPassword3"

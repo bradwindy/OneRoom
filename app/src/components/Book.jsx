@@ -207,7 +207,7 @@ class BookNav extends Component {
                     <button onClick={this.props.history.goBack}
                             className="btn btn-outline-primary font-weight-bold mr-3">Back
                     </button>
-                    <h4 className="mr-2">----</h4>
+                    
                     {/*Same with this button, next page rather than specific page, have a variable generated
                     depending this.props.match.params.bookPage in render(), which contains next page and then added to
                     this url instead of /time }*/}
@@ -227,7 +227,7 @@ class BookNav extends Component {
                     <button onClick={this.props.history.goBack}
                             className="btn btn-outline-primary font-weight-bold mr-3">Back
                     </button>
-                    <h4 className="mr-2">----</h4>
+              
                     {/*Same with this button, next page rather than specific page, have a variable generated
                     depending this.props.match.params.bookPage in render(), which contains next page and then added to
                     this url instead of /time }*/}
