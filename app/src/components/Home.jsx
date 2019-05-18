@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
 
 class Home extends Component {
     constructor(props) {
@@ -72,10 +74,10 @@ class Home extends Component {
                                 </ul>
 
                                 <div className="row m-0">
-                                    <button className="btn btn-danger float-right" onClick={() => {
+                                    <button className="btn btn-sm btn-outline-danger float-right" onClick={() => {
                                         // noinspection JSIgnoredPromiseFromCall
                                         this.cancelBooking(booking.bookingId)
-                                    }}>Cancel
+                                    }}><FontAwesomeIcon icon="times"/> Cancel
                                     </button>
                                 </div>
                             </div>

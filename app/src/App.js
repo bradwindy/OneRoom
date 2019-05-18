@@ -12,6 +12,39 @@ import Register from "./components/Register"
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import ThankYou from "./components/ThankYou";
 
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {
+    faChevronLeft,
+    faChevronRight,
+    faSearch,
+    faSignOutAlt,
+    faBookmark,
+    faPlus,
+    faList,
+    faUsers,
+    faTv,
+    faChalkboard,
+    faVideo,
+    faTimes,
+    faTrash
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(
+    faChevronLeft,
+    faChevronRight,
+    faSearch,
+    faSignOutAlt,
+    faBookmark,
+    faPlus,
+    faList,
+    faUsers,
+    faTv,
+    faChalkboard,
+    faVideo,
+    faTimes,
+    faTrash
+);
+
 class App extends Component {
     constructor(props) {
         super(props);

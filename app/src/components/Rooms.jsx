@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 
 //import Room from '/Room';
@@ -55,25 +56,25 @@ class Rooms extends Component {
 
                     <div className="card m-2" key={room.name}>
                         <div className="card-body">
-                            <h5 className="card-title font-weight-bold">Room: {room.name}</h5>
+                            <h4 className="card-title font-weight-bold mb-2">{room.name}</h4>
                             <ul className="card-text list-unstyled">
                                 <li>
-                                    <b>Capacity:</b> {room.capacity}
-                                </li>
-                                <li>
-                                    <b>Room TV:</b> {this.trueFalseToYesNo(room.facilities.tv)}
-                                </li>
-                                <li>
-                                    <b>Room Projector:</b> {this.trueFalseToYesNo(room.facilities.projector)}
-                                </li>
-                                <li>
-                                    <b>Room Whiteboard:</b> {this.trueFalseToYesNo(room.facilities.whiteboard)}
+                                    <h5>
+                                        <span className="badge badge-info mr-2"><FontAwesomeIcon
+                                            icon="users"/> {room.capacity}</span>
+                                        <span className="badge badge-info mr-2"><FontAwesomeIcon
+                                            icon="tv"/> {this.trueFalseToYesNo(room.facilities.tv)}</span>
+                                        <span className="badge badge-info mr-2"><FontAwesomeIcon
+                                            icon="video"/> {this.trueFalseToYesNo(room.facilities.projector)}</span>
+                                        <span className="badge badge-info mr-2"><FontAwesomeIcon
+                                            icon="chalkboard"/> {this.trueFalseToYesNo(room.facilities.whiteboard)}</span>
+                                    </h5>
                                 </li>
                             </ul>
                             <button onClick={() => {
                                 // noinspection JSIgnoredPromiseFromCall
                                 this.handleBook(room.name, room._id)
-                            }} className="btn btn-success mt-2">Book
+                            }} className="btn btn-success"><FontAwesomeIcon icon="plus"/> Book
                             </button>
                         </div>
                     </div>

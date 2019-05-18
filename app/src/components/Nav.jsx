@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 
 class Nav extends Component {
@@ -27,7 +28,8 @@ class Nav extends Component {
 
         if (localStorage.getItem('jwtToken') !== null) {
             logButton = (<button className="btn btn-outline-danger mr-2" onClick={Nav.logout}>Log Out</button>);
-            bookButton = (<a className="btn btn-success" href="/book/date" role="button">Book a Room</a>);
+            bookButton = (
+                <a className="btn btn-success" href="/book/date" role="button"><FontAwesomeIcon icon="plus"/> Book</a>);
 
         } else {
             logButton = (<a className="btn btn-info mr-2" href="/login" role="button">Log In</a>);
@@ -49,7 +51,8 @@ class Nav extends Component {
                                 {logButton}
                             </li>
                             <li className="nav-item">
-                                <a className="btn btn-primary" href="/" role="button">Home</a>
+                                <a className="btn btn-primary" href="/" role="button"><FontAwesomeIcon
+                                    icon="list"/> Bookings</a>
                             </li>
                         </ul>
                     </div>
