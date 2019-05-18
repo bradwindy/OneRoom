@@ -7,7 +7,7 @@ const BookingController = require('../controllers/bookingController.js');
 
 //Get list of rooms from the database
 router.route('/all')
-    .get(RoomController.allRooms);
+    .get(authJWT, RoomController.allRooms);
 
 //Get list of available rooms from the database
 router.route('/available')

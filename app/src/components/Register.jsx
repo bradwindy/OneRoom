@@ -4,7 +4,7 @@
  *  request to the /register API Route.
  *  Source - https://youtu.be/oQnojIyTXb8
  */
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 import FormValidator from "./FormValidator";
 
@@ -17,7 +17,7 @@ class Register extends Component {
         password: '',
     };
 
-    /**  Takes the value of anything that is typed by the user for the form fields 
+    /**  Takes the value of anything that is typed by the user for the form fields
      *   and sets the state for the form field above.
      *   Source - https://reactjs.org/docs/forms.html
      */
@@ -45,7 +45,7 @@ class Register extends Component {
         // Calling a validator to validate state on submit
         const validation = this.validator.validate(this.state);
         // setting validation within state
-        this.setState({ validation });
+        this.setState({validation});
         // Letting the validator know in the future if we have submitted this form before
         this.submitted = true;
 
@@ -97,7 +97,7 @@ class Register extends Component {
             {
                 field: 'studentId',
                 method: 'isLength',
-                args: [{min:7, max: 8}],
+                args: [{min: 7, max: 8}],
                 validWhen: true,
                 message: 'Student ID must be 7 or 8 numbers in length'
             },
@@ -158,11 +158,11 @@ class Register extends Component {
                         <label htmlFor="inputName3" className="col-sm-2 control-label">Full Name:</label>
                         <div className="col-sm-10">
                             <input type="text"
-                                className={validation.name.classText}
-                                id="inputName3"
-                                placeholder="Full Name"
-                                name="name"
-                                onChange={this.handleChange}
+                                   className={validation.name.classText}
+                                   id="inputName3"
+                                   placeholder="Full Name"
+                                   name="name"
+                                   onChange={this.handleChange}
                             />
                             <small id="" className="form-text text-danger pl-1">
                                 {validation.name.message}
@@ -174,11 +174,11 @@ class Register extends Component {
                         <label htmlFor="inputId3" className="col-sm-2 control-label">Student ID:</label>
                         <div className="col-sm-10">
                             <input type="number"
-                                className={validation.studentId.classText}
-                                id="inputId3"
-                                placeholder="Student ID"
-                                name="studentId"
-                                onChange={this.handleChange}
+                                   className={validation.studentId.classText}
+                                   id="inputId3"
+                                   placeholder="Student ID"
+                                   name="studentId"
+                                   onChange={this.handleChange}
                             />
                             <small id="" className="form-text text-muted pl-1">
                                 E.g. 1234567
@@ -193,11 +193,11 @@ class Register extends Component {
                         <label htmlFor="inputUsername3" className="col-sm-2 control-label">Evision Username:</label>
                         <div className="col-sm-10">
                             <input type="text"
-                                className={validation.username.classText}
-                                id="inputUsername3"
-                                placeholder="Username"
-                                name="username"
-                                onChange={this.handleChange}
+                                   className={validation.username.classText}
+                                   id="inputUsername3"
+                                   placeholder="Username"
+                                   name="username"
+                                   onChange={this.handleChange}
                             />
                             <small id="" className="form-text text-danger pl-1">
                                 {validation.username.message}
@@ -209,11 +209,11 @@ class Register extends Component {
                         <label htmlFor="inputEmail3" className="col-sm-2 control-label">Email:</label>
                         <div className="col-sm-10 input-group">
                             <input type="text"
-                                className={validation.email.classText}
-                                id="inputEmail3"
-                                placeholder="user123"
-                                name="email"
-                                onChange={this.handleChange}
+                                   className={validation.email.classText}
+                                   id="inputEmail3"
+                                   placeholder="user123"
+                                   name="email"
+                                   onChange={this.handleChange}
                             />
                             <div className="input-group-append">
                                 <span className="input-group-text" id="basic-addon2">@student.otago.ac.nz</span>
@@ -232,11 +232,11 @@ class Register extends Component {
                         <label htmlFor="inputPassword3" className="col-sm-2 control-label">Password:</label>
                         <div className="col-sm-10">
                             <input type="password"
-                                className={validation.password.classText}
-                                id="inputPassword3"
-                                placeholder="Password"
-                                name="password"
-                                onChange={this.handleChange}
+                                   className={validation.password.classText}
+                                   id="inputPassword3"
+                                   placeholder="Password"
+                                   name="password"
+                                   onChange={this.handleChange}
                             />
                             <small id="passwordHelpBlock" className="form-text text-muted pl-1">
                                 Your password must be 8-25 characters long and contain letters and numbers.

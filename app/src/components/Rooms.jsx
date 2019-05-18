@@ -1,28 +1,45 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 
-import Room from './Room';
+
+//import Room from '/Room';
+import moment from 'moment';
+import {Redirect} from "react-router-dom";
 
 class Rooms extends Component {
-    constructor(props){
+
+    constructor(props) {
         super(props);
 
-        //Have just hardcoded data to test
         this.state = {
-            rooms: []
+            rooms: [],
+            redirect: false,
+            bookingID: ""
+        };
+
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.handleBook = this.handleBook.bind(this);
+    }
+
+
+    //decorate the function with async as we are using the await method
+
+    componentDidMount = async () => {
+        setAuthorizationToken(localStorage.jwtToken);
+        const {data: rooms} = await axios.get('/room/all');
+        //pending > resolved (success) or rejected(failure)
+        this.setState({rooms});
+        this.setState({redirect: false});
     };
 
-    this.componentDidMount = this.componentDidMount.bind(this);
-    
-}
-
-
-//decorate the function with async as we are using the await method
-async componentDidMount() {
-    const {data: rooms} = await axios.get('/room/all');
-    //pending > resolved (success) or rejected(failure)
-    this.setState({ rooms });  
-}
+    trueFalsetoYesNo(bool) {
+        if (bool) {
+            return "Yes"
+        } else {
+            return "No"
+        }
+    }
 
 //Handle booking - recieves the room id of the room to be booked. Passes this through. 
 handleBook = (roomId) => {
@@ -39,48 +56,94 @@ handleBook = (roomId) => {
 };
 
     //Function to loop through the array of rooms and display them as individual rooms
-    getRoomCards(){
-        
+    getRoomCards() {
+
         if (this.state.rooms.length === 0) return <p>There are no rooms available for this date.</p>;
 
 
-        //This is if we want to keep it all within the same class. 
-        return this.state.rooms.map((room, key) => 
+        return (
+            <div className="container pt-4 p-2">
+                <h2 className="pl-3 pb-3 pt-2"><b>Availabilities:</b></h2>
+                {this.state.rooms.map((room) =>
 
-            <div className="card m-2" key={room._id}>
-                <div className="card-body">
-                    <h5 className="card-title">Room: {room.name}</h5>
-                    <p className="card-text"><b>Room Capacity:</b> {room.capacity}</p>          
-                    <p className="card-text"><b>Room Facilities</b> {room.facilities.tv}</p>
-                    <p className="card-text"><b>Available</b> {room.available}</p>
-                    <button onClick={ () => this.handleBook(room._id)} className="btn btn-primary mt-2">Book</button>
-                </div>
-                
+                    <div className="card m-2" key={room.name}>
+                        <div className="card-body">
+                            <h5 className="card-title font-weight-bold">Room: {room.name}</h5>
+                            <ul className="card-text list-unstyled">
+                                <li>
+                                    <b>Capacity:</b> {room.capacity}
+                                </li>
+                                <li>
+                                    <b>Room TV:</b> {this.trueFalsetoYesNo(room.facilities.tv)}
+                                </li>
+                                <li>
+                                    <b>Room Projector:</b> {this.trueFalsetoYesNo(room.facilities.projector)}
+                                </li>
+                                <li>
+                                    <b>Room Whiteboard:</b> {this.trueFalsetoYesNo(room.facilities.whiteboard)}
+                                </li>
+                            </ul>
+                            <button onClick={() => {
+                                // noinspection JSIgnoredPromiseFromCall
+                                this.handleBook(room.name, room._id)
+                            }} className="btn btn-success mt-2">Book
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
-
-            /*
-              {this.state.rooms.map(room => (
-                    <Room 
-                    key={Room.id} 
-                    onBook={this.handleBook} 
-                    name={Room.name} 
-                    capacity={Room.capacity}  
-                    />
-                ))};*/
         )
+
+    };
+
+    handleBook = async (roomName, roomID) => {
+        const bookingData = this.props.location.data;
+        let proposedDate = bookingData.date + "T00:00:00.000Z";
+
+        const timeNumList = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
+
+        let momentDateStart = moment(proposedDate).add(timeNumList[bookingData.timePos], 'hour');
+        let momentDateEnd = moment(proposedDate).add(timeNumList[parseInt(bookingData.timePos) + parseInt(bookingData.duration)], 'hour');
+
+        let formatDateStart = moment.utc(momentDateStart).format();
+        let formatDateEnd = moment.utc(momentDateEnd).format();
+
+        const bookingName = bookingData.name;
+        const user = "5cb55db0df1cb758b50bf2a4";
+
+        await axios.put('/booking/newBooking/' + roomID, {
+            startTime: formatDateStart, endTime: formatDateEnd, roomId: roomID, bookingName, user
+        })
+            .then(res => {
+                let booking = res.data.bookings[res.data.bookings.length - 1];
+                this.setState({bookingID: booking._id});
+            });
+
+        let newBooking = {
+            time: moment.utc(formatDateStart).format('hh:mm a') + " - " + moment.utc(formatDateEnd).format('hh:mm a'),
+            roomId: roomID,
+            bookingName: bookingName,
+            bookingId: this.state.bookingID,
+            bookingDate: moment(proposedDate).format('dddd MMMM Do'),
+            bookingRoomName: roomName,
         };
 
-    render() {
-    
-        return(
-            <div>
-                <h3>All rooms available on this date to book:</h3>
-                {this.getRoomCards()}
+        this.props.appendBookingFunc(newBooking);
+        this.setState({redirect: true});
+    };
 
-                </div>
-            
+
+    render() {
+        if (this.state.redirect) {
+            return <Redirect to={"/"}/>;
+        }
+
+        return (
+            <div>
+                {this.getRoomCards()}
+            </div>
         )
-        
+
     }
 }
 
