@@ -2,17 +2,37 @@
 @import '~bootstrap/scss/_navbar.scss';
 @import '~bootstrap/scss/_buttons.scss';
 @import '~bootstrap/scss/mixins/_border-radius.scss';
+@import '~bootstrap/scss/_forms.scss';
 
 
 .form-control{
   @include border-radius($input-border-radius, 0);
 }
-@import '~bootstrap/scss/_forms.scss';
 
 
-$font-size-base:20px;
 
-// navbar-dark
+/* -------begin customization-------- */
+/* change the primary theme color to red */
+$theme-colors: (
+  primary: #6C889E
+);
+
+/* Enable variable updates */
+$enable-gradients: false;
+$enable-rounded:   false;
+$enable-shadows:  true;
+$font-family-base: $font-family-sans-serif !default;
+$font-family-sans-serif: helvetica; // snip
+$body-color: #6C889E;
+$box-shadow-lg: 0 3rem 8rem rgba($black, .200);
+$input-btn-focus-box-shadow: 2rem 3rem 4rem $input-btn-focus-width $input-btn-focus-color;
+$input-btn-focus-width: .7rem !default;
+$input-box-shadow: inset 0 20px 5px rgba($black, .075) !default;
+$btn-box-shadow: inset 0 7px 3 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
+
+
+/* NavBar */
+
 .navbar-dark {
     .navbar-brand {
       color: $navbar-dark-active-color;
@@ -21,16 +41,11 @@ $font-size-base:20px;
         color: $navbar-dark-active-color;
       }
     }
-    // more Sass here
+  
   }
 
 $navbar-dark-color:         $white;
 $navbar-dark-hover-color:   $white;
-$body-bg: #1A1B1D;
-
-$font-family: helvetica;
-
-$link-color: #1A1B !default;
 
 .navbar-text {
     color: #B1F2ED;
@@ -45,15 +60,16 @@ $link-color: #1A1B !default;
 
 
 
-  $mynewcolor:rgb(150, 223, 223);
+  $mynewcolor:#6C889E;
   $gradientcolor: linear-gradient(#e66465, #9198e5);
   $headingcolor: #6C889E;
 
   
-
+/* Button Styling */
 
 
 .btn-primary {
+    @include gradient-bg($gradientcolor);
     @include button-variant($mynewcolor, darken($mynewcolor, 7.5%), darken($mynewcolor, 10%), lighten($mynewcolor,5%), lighten($mynewcolor, 10%), darken($mynewcolor,30%));
 }
 
@@ -61,9 +77,8 @@ $link-color: #1A1B !default;
     @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
 }
 
-#create-account {
-  color: $mynewcolor;
-}
+//To ovveride all of the styles. 
+@import "node_modules/bootstrap/scss/bootstrap";
 
 
 
