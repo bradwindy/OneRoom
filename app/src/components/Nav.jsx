@@ -20,6 +20,7 @@ class Nav extends Component {
               <header>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                   <a className="navbar-brand" href="/">
+                  
                     RoomEase
                   </a>
                   <button
