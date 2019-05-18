@@ -15,68 +15,47 @@ module.exports = {
      * 4. Send the array of available rooms back to the frontend.
      */
     available: async (req, res) => {
-      Room.find({}).then(function(rooms){
-        rooms.map(room => {
-          res.send(room.name);
-        })
-        res.send(rooms);
-    });
-    //   Room.find({}, (err, rooms) => {
-    //     if(err) //do something
+      // Room.find({}).then(function (rooms) {
+      //   res.send(rooms);
 
-    //     rooms.map(room => {
-    //       res.send('Success');
-    //     })
-    //   })
-    //   ).then(function (rooms) {
-    //   res.send(rooms);
+        //To check if room is available
+        bookingSchema.path('startTime').validate(function (value) {
+            let roomId = this.roomId;
 
-    //   // Get most important booking details from body
-    // const {
-    //   roomId,
-    //   startTime,
-    //   endTime
-    // } = req.body;
+          //Get new booking start and end times based on users parameters and convert into number value
+            let newBookingStart = value.getTime();
+            let newBookingEnd = value.getTime();
 
-    //     //To check if room is available
-    //     bookingSchema.path('startTime').validate(function (value) {
-    //       let roomId = this.roomId
+          //Function to check booking clashes
+          let bookingClash = (existingBookingStart, existingBookingEnd, newBookingStart, newBookingEnd) => {
+            if (newBookingStart >= existingBookingStart && newBookingStart < existingBookingEnd ||
+              existingBookingStart >= newBookingStart && existingBookingStart < newBookingEnd) {
 
-    //       //Get new booking start and end times based on users parameters and convert into number value
-    //       let newBookingStart = value.getTime()
-    //       let newBookingEnd = value.getTime()
+              throw new Error(
+                'Booking could not be saved, There is a clash with existing booking'
+              )
+            }
+            return false
+          };
+          //Locate the room document containing bookings
+          return Room.findById(roomId).then(room => {
 
-    //       //Function to check booking clashes
-    //       let bookingClash = (existingBookingStart, existingBookingEnd, newBookingStart, newBookingEnd) => {
-    //         if (newBookingStart >= existingBookingStart && newBookingStart < existingBookingEnd ||
-    //           existingBookingStart >= newBookingStart && existingBookingStart < newBookingEnd) {
+            //Loop through each existing booking and return false if there is a clash
+            return room.bookings.every(booking => {
+              //Convert existing booking Date objects into number values
+              let existingBookingStart = new Date(booking.startTime).getTime();
+              let existingBookingEnd = new Date(booking.endTime).getTime();
 
-    //           throw new Error(
-    //             'Booking could not be saved, There is a clash with existing booking'
-    //           )
-    //         }
-    //         return false
-    //       }
-
-    //       //Locate the room document containing bookings
-    //       Room.findById(roomId).then(room => {
-
-    //         //Loop through each existing booking and return false if there is a clash
-    //         return room.bookings.every(booking => {
-    //           //Convert existing booking Date objects into number values
-    //           let existingBookingStart = new Date(booking.startTime).getTime()
-    //           let existingBookingEnd = new Date(booking.endTime).getTime()
-
-    //           //Check clash between new and existing booking
-    //           return !bookingClash(
-    //             existingBookingStart,
-    //             existingBookingEnd,
-    //             newBookingStart,
-    //             newBookingEnd
-    //           )
-    //         })
-    //       })
-    //     });
+              //Check clash between new and existing booking
+              return !bookingClash(
+                existingBookingStart,
+                existingBookingEnd,
+                newBookingStart,
+                newBookingEnd
+              )
+            })
+          })
+        });
     },
 
   // PUT - Make a new booking and store it in database
@@ -84,18 +63,18 @@ module.exports = {
     // Function to convert UTC JS Date object to a Moment.js object in AEST
     const dateAEST = date => {
       return momentTimezone(date).tz('Pacific/Auckland')
-    }
+    };
 
     // Function to calculate the duration of the hours between the start and end of the booking
     const durationHours = (startTime, endTime) => {
       // convert the UTC Date objects to Moment.js objects
-      let startDateLocal = dateAEST(startTime)
-      let endDateLocal = dateAEST(endTime)
+      let startDateLocal = dateAEST(startTime);
+      let endDateLocal = dateAEST(endTime);
       // calculate the duration of the difference between the two times
-      let difference = moment.duration(endDateLocal.diff(startDateLocal))
+      let difference = moment.duration(endDateLocal.diff(startDateLocal));
       // return the difference in decimal format
       return difference.hours() + difference.minutes() / 60
-    }
+    };
 
     // Get most important booking details from body
     const {
