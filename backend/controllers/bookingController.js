@@ -16,10 +16,12 @@ module.exports = {
      */
     available: async (req, res) => {
       Room.find({}).then(function(rooms){
-        rooms.map(room => {
-          res.send(room.name);
-        })
-        res.send(rooms);
+        var bookings = rooms.map(room => {
+          return room.bookings
+        });
+
+        res.send(bookings);
+        //res.send(rooms);
     });
     //   Room.find({}, (err, rooms) => {
     //     if(err) //do something
@@ -105,7 +107,7 @@ module.exports = {
     } = req.body;
 
     // Find the room in MongoDB. Then access the bookings and add this new booking.
-    await Room.findOneAndUpdate(
+    await Room.findByIdAndUpdate(
       roomId,
       {
         $addToSet: {
