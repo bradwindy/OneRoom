@@ -144,7 +144,10 @@ class Login extends Component {
                     <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
                         <div className="form-group row">
                             <div className="col-sm-10">
-                                <h1 className="pt-4"><b>Log In</b></h1>
+                                <h1 className="pt-4"><b>Lets get together.</b></h1>
+                                <p>RoomEase lets you book a meeting room to suit you and your 
+                                    groups needs exactly.
+                                </p>
                             </div>
                         </div>
                         <div className="form-group row">
