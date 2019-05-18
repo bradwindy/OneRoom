@@ -1,1 +1,35 @@
 @import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap/scss/_navbar.scss';
+
+$font-size-base:20px;
+
+// navbar-dark
+.navbar-dark {
+    .navbar-brand {
+      color: $navbar-dark-active-color;
+  
+      @include hover-focus {
+        color: $navbar-dark-active-color;
+      }
+    }
+    // more Sass here
+  }
+
+$navbar-dark-color:         $white;
+$navbar-dark-hover-color:   $white;
+$body-bg: #1A1B1D;
+
+$link-color: #1A1B !default;
+
+.navbar-text {
+    color: #B1F2ED;
+    a {
+      color:  #B1F2ED;
+
+      @include hover-focus {
+        color: $navbar-dark-active-color;
+      }
+    }
+  }
+
+

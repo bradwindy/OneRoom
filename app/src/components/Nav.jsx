@@ -17,14 +17,52 @@ class Nav extends Component {
         let url = this.props.location.pathname.toString();
         if (url.match(regexBook) || url.match(regexRooms)) {
             return (
-                <header
-                    className="navbar fixed-bottom navbar-expand navbar-light bg-light flex-column flex-md-row bd-navbar">
-                    <div className="navbar-nav-scroll">
-                        <ul className="navbar-nav bd-navbar-nav">
+              <header>
+                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                  <a className="navbar-brand" href="/">
+                    RoomEase
+                  </a>
+                  <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                  >
+                    <span class="navbar-toggler-icon" />
+                  </button>
+                  <div
+                    class="collapse navbar-collapse"
+                    id="navbarNavAltMarkup"
+                  >
+                    <div class="navbar-nav">
+                      <a class="nav-item nav-link active" href="/login">
+                        Login <span class="sr-only">(current)</span>
+                      </a>
+                      <a class="nav-item nav-link" href="/">
+                        Features
+                      </a>
+                      <a class="nav-item nav-link" href="/">
+                        Pricing
+                      </a>
+                      <a
+                        class="nav-item nav-link disabled"
+                        href="/"
+                      >
+                        Disabled
+                      </a>
+                    </div>
+                  </div>
+                </nav>
+              </header>
+
+              /*<ul className="navbar-nav bd-navbar-nav">
                             <li className="nav-item">
-                                <a className="navbar-brand" href="/"><b>RoomEase</b></a>
+                                
                             </li>
-                            <li className="nav-item">
+                            <li className="nav-item nav-link active">
                                 <a className="btn btn-outline-secondary mr-2" href="/login" role="button">Log In</a>
                             </li>
                             <li className="nav-item">
@@ -35,7 +73,8 @@ class Nav extends Component {
                             </li>
                         </ul>
                     </div>
-                </header>
+                    </nav>
+                </header>*/
             );
         } else {
             // noinspection HtmlUnknownTarget
@@ -43,13 +82,13 @@ class Nav extends Component {
                 // nav bar component, will update later on to dynamically render its elements depending on if the user is
                 // logged in or not.
                 <header
-                    className="navbar fixed-bottom navbar-expand navbar-light bg-light flex-column flex-md-row bd-navbar">
+                    className="navbar navbar-expand navbar-light bg-light ">
                     <div className="navbar-nav-scroll">
                         <ul className="navbar-nav bd-navbar-nav">
                             <li className="nav-item">
-                                <a className="navbar-brand" href="/"><b>RoomEase</b></a>
+                                <a className="navbar-brand" href="/"><b>RoomEaseImg</b></a>
                             </li>
-                            <li className="nav-item">
+                            <li className="nav-item nav-link active">
                                 <a className="btn btn-outline-secondary mr-2" href="/login" role="button">Log In</a>
                             </li>
                             <li className="nav-item">
