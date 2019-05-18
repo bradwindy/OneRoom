@@ -151,7 +151,7 @@ class Login extends Component {
                             </div>
                         </div>
                         <div className="form-group row">
-                            <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email:</label>
+                            <label htmlFor="inputEmail3" className="col-sm-2 col-form-label"></label>
                             <div className="col-sm-10 input-group">
                                 <input type="text"
                                        className={validation.email.classText}
@@ -176,7 +176,7 @@ class Login extends Component {
                         </div>
 
                         <div className="form-group row">
-                            <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password:</label>
+                            <label htmlFor="inputPassword3" className="col-sm-2 col-form-label"></label>
                             <div className="col-sm-10">
                                 <input type="password"
                                        className={validation.password.classText}
@@ -213,7 +213,7 @@ class Login extends Component {
                             </div>
                             <div className="col-sm-10">
                                 <button type="submit" className="btn btn-primary" onClick={this.handleSubmit} >Log in</button>
-                                <a className="btn btn-outline-secondary ml-2" href="/register" role="button">Register</a>
+                                <a className="btn btn-primary m-2" href="/register" role="button">Create account</a>
                             </div>
                         </div>
                     </form>
