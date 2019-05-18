@@ -31,7 +31,14 @@ class Login extends Component {
                 method: 'isEmpty',
                 validWhen: false,
                 message: 'Password is required.'
-            }
+            },
+            {
+                field: 'email',
+                method: 'matches',
+                args: [new RegExp("([A-z]{5}[0-9]{3})")],
+                validWhen: true,
+                message: 'Must be a valid student email username.'
+            },
         ]);
 
         // if form has been submitted before
@@ -108,11 +115,17 @@ class Login extends Component {
                 .then(res => {
                     // take json web token (JWT) that was returned from server
                     // we'll save it in local storage
+
                     const token = res.data.token; //capture jwt
                     localStorage.setItem('jwtToken', token);// set jwt in localStorage
                     setAuthorizationToken(token);
 
                     this.setState({ redirect: true });
+                }).catch(error => {
+
+                    if (error.response.status === 401) {
+                        alert("Username and/or password are incorrect.")
+                    }
                 });
         }
         

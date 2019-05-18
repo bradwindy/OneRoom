@@ -9,14 +9,6 @@ import axios from 'axios';
 import FormValidator from "./FormValidator";
 
 class Register extends Component {
-    state = {
-        name: '',
-        studentId: '',
-        username: '',
-        email: '',
-        password: '',
-    };
-
     /**  Takes the value of anything that is typed by the user for the form fields
      *   and sets the state for the form field above.
      *   Source - https://reactjs.org/docs/forms.html
@@ -55,10 +47,13 @@ class Register extends Component {
             //axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
             axios.post('/auth/register', user)
                 .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                    window.location.href = "/login";
-                });
+                    window.location.href = "/thanks";
+                }).catch(error => {
+
+                if (error.response.status === 403) {
+                    alert("User already exists!")
+                }
+            });
         }
     };
 
