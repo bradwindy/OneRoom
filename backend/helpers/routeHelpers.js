@@ -45,4 +45,4 @@ module.exports = {
             bookingName: Joi.string().max(25).required()
         })
     }
-}
+};

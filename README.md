@@ -126,6 +126,8 @@ You should be able to see the folders `app` and `backend`. Ignore the `README.md
 This directory refers to the front end of the system. This is where Elora and Bradley will work on the UI/UX things. 
 **_Refer to app folder README for more details._**
 
+[App README](https://isgb.otago.ac.nz/info310/cowen/Room_Booking_System/tree/master/app)
+
 ### The backend directory
 This directory refers to the back end of the system. This is where Alice, Vivek and Akash will work on 
 setting up the middleware, server and database.
