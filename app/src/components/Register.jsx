@@ -7,6 +7,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import FormValidator from "./FormValidator";
+import Background from "../images/background_profile.png";
 
 class Register extends Component {
     /**  Takes the value of anything that is typed by the user for the form fields
