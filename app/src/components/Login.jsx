@@ -32,6 +32,13 @@ class Login extends Component {
         method: "isEmpty",
         validWhen: false,
         message: "Password is required."
+      },
+      {
+        field: "email",
+        method: "matches",
+        args: [new RegExp("([A-z]{5}[0-9]{3})")],
+        validWhen: true,
+        message: "Must be a valid student email username."
       }
     ]);
 
@@ -49,6 +56,8 @@ class Login extends Component {
 
     setAuthorizationToken(localStorage.jwtToken);
   }
+
+  //setAuthorizationToken(localStorage.jwtToken);
 
   /** Takes the value of anything that is typed by the user for the form fields
    * and sets the state for the form field above.
@@ -110,17 +119,73 @@ class Login extends Component {
         this.setState({ redirect: true });
       });
     }
+  };
+
+  // handleClearForm(event) {
+  //     event.preventDefault();
+  //     this.setState({
+  //         email:'',
+  //         password:'',
+
+  //     });
+  //   };
+
+  /** HandleSubmit is triggered when the sign up form is submitted */
+  handleSubmit = async event => {
+    // Stopping the browser from reloading the page
+    event.preventDefault();
+
+    // Making a new object called userLogin which takes all the inputted form details
+    const userLogin = {
+      email: this.state.email + "@student.otago.ac.nz",
+      password: this.state.password
+    };
+
+    const { email, password, checkbox } = this.state;
+
+    localStorage.setItem("email", checkbox ? email : "");
+    localStorage.setItem("password", checkbox ? password : "");
+    localStorage.setItem("checkbox", checkbox);
+
+    // Calling a validator to validate state on submit
+    const validation = this.validator.validate(this.state);
+    // setting validation within state
+    this.setState({ validation });
+    // Letting the validator know in the future if we have submitted this form before
+    this.submitted = true;
+
+    // Only POST using axios if the form is all valid
+    if (validation.isValid) {
+      /** Using Axios to POST this to our /API/Login and passing the userLogin object as a payload */
+      await axios
+        .post("/auth/signin", userLogin)
+        .then(res => {
+          // take json web token (JWT) that was returned from server
+          // we'll save it in local storage
+
+          const token = res.data.token; //capture jwt
+          localStorage.setItem("jwtToken", token); // set jwt in localStorage
+          setAuthorizationToken(token);
+
+          this.setState({ redirect: true });
+        })
+        .catch(error => {
+          if (error.response.status === 401) {
+            alert("Username and/or password are incorrect.");
+          }
+        });
+    }
 
     //this.handleClearForm(event);
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     const checkbox = localStorage.getItem("checkbox") === "true";
     const email = checkbox ? localStorage.getItem("email") : "";
     const password = checkbox ? localStorage.getItem("password") : "";
     this.setState({ email, password, checkbox });
     this.setState({ redirect: false });
-  }
+  };
 
   render() {
     // Setting validation conditionally
@@ -243,6 +308,6 @@ class Login extends Component {
       );
     }
   }
-}
+};
 
 export default Login;

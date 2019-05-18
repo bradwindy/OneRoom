@@ -4,6 +4,7 @@ const express = require("express");
 const server = express();
 const moment = require('moment');
 const momentTimezone = require('moment-timezone');
+const { authJWT } = require('../passport');
 
 module.exports = {
     // GET - Get rooms that are available from database
@@ -164,11 +165,20 @@ module.exports = {
       // return res.status(404).send("The booking with the given ID was not found");
 
       delete: async (req, res) => {
-        const name = req.params.name;
-        Room.findOne({
-          name
-        }).then(function (room) {
-          res.send(room);
-        });
+        console.log("works")
+        const bookingId = req.params.bookingId;
+        const roomId = req.params.roomId;
+        console.log(bookingId);
+        console.log(roomId);
+        await Room.findByIdAndUpdate(
+          roomId,
+          { $pull: { bookings: { _id: bookingId } } },
+          { new: true }
+        ).then(function (room) {
+          res.status(201).json(room);
+        })
+        .catch(error => {
+          res.status(400).json({ error })
+        })
       }
 };
