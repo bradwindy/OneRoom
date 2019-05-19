@@ -15,6 +15,7 @@ class Nav extends Component {
     render() {
         let regexBook = /\/book.+/g;
         let regexRooms = /\/rooms/g;
+        
         let url = this.props.location.pathname.toString();
 
         let logButton = (
@@ -39,6 +40,54 @@ class Nav extends Component {
 
         if (url.match(regexBook) || url.match(regexRooms)) {
             return (
+              /******* This here is the  fixed naviagtion bar at the top of the page that hides. If the user is logged in too.
+               */
+
+              <header>
+                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                  <a className="navbar-brand" href="/">
+                    RoomEase
+                  </a>
+                  <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                  >
+                    <span class="navbar-toggler-icon" />
+                  </button>
+                  <div
+                    class="collapse navbar-collapse"
+                    id="navbarNavAltMarkup"
+                  >
+                    <div class="navbar-nav">
+                      <a class="nav-item nav-link" href="/">
+                        My Bookings
+                      </a>
+                      <a
+                        class="nav-item nav-link"
+                        href="/book/date"
+                      >
+                        Book a room{" "}
+                        <span className="sr-only">(current)</span>
+                      </a>
+                      <a
+                        class="nav-item nav-link"
+                        href="/login"
+                        onClick={Nav.logout}
+                      >
+                        Logout{" "}
+                        <span className="sr-only">(current)</span>
+                      </a>
+                    </div>
+                  </div>
+                </nav>
+              </header>
+
+              /*     
                 <header
                     className="navbar fixed-bottom navbar-expand navbar-light bg-light flex-column flex-md-row bd-navbar">
                     <div className="navbar-nav-scroll">
@@ -55,13 +104,22 @@ class Nav extends Component {
                             </li>
                         </ul>
                     </div>
-                </header>
+                </header>*/
             );
         } else {
             // noinspection HtmlUnknownTarget
             return (
+
+
+                <header>
+                <nav class="navbar navbar-light bg-light">
+  <span class="navbar-brand mb-0 h1">RoomEase</span>
+</nav>
+</header>
                 // nav bar component, will update later on to dynamically render its elements depending on if the user is
                 // logged in or not.
+                
+                /*
                 <header
                     className="navbar fixed-bottom navbar-expand navbar-light bg-light flex-column flex-md-row bd-navbar">
                     <div className="navbar-nav-scroll">
@@ -77,7 +135,7 @@ class Nav extends Component {
                             </li>
                         </ul>
                     </div>
-                </header>
+                </header>*/
             );
         }
     }

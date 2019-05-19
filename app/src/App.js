@@ -13,6 +13,9 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import ThankYou from "./components/ThankYou";
 
 import {library} from '@fortawesome/fontawesome-svg-core';
+
+
+
 import {
     faChevronLeft,
     faChevronRight,

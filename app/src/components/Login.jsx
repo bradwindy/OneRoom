@@ -162,6 +162,7 @@ class Login extends Component {
           }}
         >
           <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
+            
             <div className="form-group row">
               <div className="col-sm-10">
                 <h1 className="pt-4">
@@ -247,13 +248,12 @@ class Login extends Component {
                   <a
                     className="btn btn-primary m-2"
                     href="/register"
-                    role="button"
-                  >
-                    Create account
-                  </a>
-                </div>
+                    role="button">Create Account</a>
+       
               </div>
-            </div>
+              </div>
+              </div>
+            
           </form>
         </div>
       );
