@@ -109,54 +109,6 @@ class Login extends Component {
     // Only POST using axios if the form is all valid
     if (validation.isValid) {
       /** Using Axios to POST this to our /API/Login and passing the userLogin object as a payload */
-      await axios.post("/auth/signin", userLogin).then(res => {
-        // take json web token (JWT) that was returned from server
-        // we'll save it in local storage
-        const token = res.data.token; //capture jwt
-        localStorage.setItem("jwtToken", token); // set jwt in localStorage
-        setAuthorizationToken(token);
-
-        this.setState({ redirect: true });
-      });
-    }
-  };
-
-  // handleClearForm(event) {
-  //     event.preventDefault();
-  //     this.setState({
-  //         email:'',
-  //         password:'',
-
-  //     });
-  //   };
-
-  /** HandleSubmit is triggered when the sign up form is submitted */
-  handleSubmit = async event => {
-    // Stopping the browser from reloading the page
-    event.preventDefault();
-
-    // Making a new object called userLogin which takes all the inputted form details
-    const userLogin = {
-      email: this.state.email + "@student.otago.ac.nz",
-      password: this.state.password
-    };
-
-    const { email, password, checkbox } = this.state;
-
-    localStorage.setItem("email", checkbox ? email : "");
-    localStorage.setItem("password", checkbox ? password : "");
-    localStorage.setItem("checkbox", checkbox);
-
-    // Calling a validator to validate state on submit
-    const validation = this.validator.validate(this.state);
-    // setting validation within state
-    this.setState({ validation });
-    // Letting the validator know in the future if we have submitted this form before
-    this.submitted = true;
-
-    // Only POST using axios if the form is all valid
-    if (validation.isValid) {
-      /** Using Axios to POST this to our /API/Login and passing the userLogin object as a payload */
       await axios
         .post("/auth/signin", userLogin)
         .then(res => {
@@ -251,12 +203,7 @@ class Login extends Component {
             </div>
 
             <div className="form-group row">
-              <label
-                htmlFor="inputPassword3"
-                className="col-sm-2 col-form-label"
-              />
               <div className="col-sm-10 shadow-lg p-3 mb-2 rounded">
-                <div className="col-sm-10">
                   <input
                     type="password"
                     className={validation.password.classText}
@@ -269,12 +216,11 @@ class Login extends Component {
                   <small id="" className="form-text text-danger pl-1">
                     {validation.password.message}
                   </small>
-                </div>
               </div>
 
-              <div className="form-group row">
+              <div className="form-group row m-0">
                 <div className="col-sm-2" />
-                <div className="col-sm-10 pl-3 mb-0">
+                <div className="col-sm-10 pl-3 mb-2 mt-1">
                   <div className="checkbox">
                     <label className="mb-0">
                       <input
@@ -290,7 +236,7 @@ class Login extends Component {
               </div>
               <div className="form-group row">
                 <div className="col-sm-2" />
-                <div className="col-sm-10">
+                <div className="col-sm-10 ml-3">
                   <button
                     type="submit"
                     className="btn btn-primary"
