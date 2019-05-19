@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+import Background from "../images/background_two.png";
+import BackgroundTwo from "../images/background_three.png";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
 
 class Home extends Component {
     constructor(props) {
@@ -42,7 +46,13 @@ class Home extends Component {
     render() {
         if (this.state.bookings === undefined || this.state.bookings.length === 0) {
             return (
-                <div className="container pt-4 p-2">
+                <div className="container pt-4 p-2" style={{
+                    backgroundImage: "url(" + Background + ")",
+                    backgroundPosition: "bottom center",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "60%",
+                    height: "700px"
+                  }}>
                     <h2 className="pl-3 pb-1 pt-2 font-weight-bold">My Bookings:</h2>
                     <h4 className="pl-3 pb-3 pt-2">You currently have no bookings.</h4>
                 </div>
@@ -51,7 +61,13 @@ class Home extends Component {
         } else {
             return (
                 // "Home" component, a scrollable list of cards with booking info and buttons. Just example info for now
-                <div className="container pt-4 p-2">
+                <div className="container pt-4 p-2" style={{
+                    backgroundImage: "url(" + BackgroundTwo + ")",
+                    backgroundPosition: "bottom center",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "90%",
+                    height: "700px"
+                  }}>
                     <h2 className="pl-3 pb-3 pt-2 font-weight-bold">My Bookings:</h2>
 
                     {this.state.bookings.map(booking =>
@@ -72,10 +88,10 @@ class Home extends Component {
                                 </ul>
 
                                 <div className="row m-0">
-                                    <button className="btn btn-danger float-right" onClick={() => {
+                                    <button className="btn btn-sm btn-outline-danger float-right" onClick={() => {
                                         // noinspection JSIgnoredPromiseFromCall
                                         this.cancelBooking(booking.bookingId)
-                                    }}>Cancel
+                                    }}><FontAwesomeIcon icon="times"/> Cancel
                                     </button>
                                 </div>
                             </div>

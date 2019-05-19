@@ -1,8 +1,10 @@
+const mongoose = require("mongoose");
 const Room = require("../models/roomModel");
 const express = require("express");
 const server = express();
 const moment = require('moment');
 const momentTimezone = require('moment-timezone');
+const { authJWT } = require('../passport');
 
 module.exports = {
     // GET - Get rooms that are available from database
@@ -15,47 +17,60 @@ module.exports = {
      * 4. Send the array of available rooms back to the frontend.
      */
     available: async (req, res) => {
-      // Room.find({}).then(function (rooms) {
-      //   res.send(rooms);
-
-        //To check if room is available
-        bookingSchema.path('startTime').validate(function (value) {
-            let roomId = this.roomId;
-
-          //Get new booking start and end times based on users parameters and convert into number value
-            let newBookingStart = value.getTime();
-            let newBookingEnd = value.getTime();
-
-          //Function to check booking clashes
-          let bookingClash = (existingBookingStart, existingBookingEnd, newBookingStart, newBookingEnd) => {
-            if (newBookingStart >= existingBookingStart && newBookingStart < existingBookingEnd ||
-              existingBookingStart >= newBookingStart && existingBookingStart < newBookingEnd) {
-
-              throw new Error(
-                'Booking could not be saved, There is a clash with existing booking'
-              )
-            }
-            return false
-          };
-          //Locate the room document containing bookings
-          return Room.findById(roomId).then(room => {
-
-            //Loop through each existing booking and return false if there is a clash
-            return room.bookings.every(booking => {
-              //Convert existing booking Date objects into number values
-              let existingBookingStart = new Date(booking.startTime).getTime();
-              let existingBookingEnd = new Date(booking.endTime).getTime();
-
-              //Check clash between new and existing booking
-              return !bookingClash(
-                existingBookingStart,
-                existingBookingEnd,
-                newBookingStart,
-                newBookingEnd
-              )
-            })
-          })
+      Room.find({}).then(function(rooms){
+        var bookings = rooms.map(room => {
+          return JSON.stringify(room.bookings)
         });
+        console.log(bookings);
+        const {
+          userStartTime,
+          userEndTime
+        } = req.body;
+
+        // //Get users booking start and end times based on users parameters and convert into number value
+        // let userStartTime = new DateuserStartTime.getTime();
+        // let newBookingEnd = userEndTime.getTime();
+
+        var available = bookings.map(booking => {
+          console.log(booking[0].roomId)
+        // Convert existing booking Date objects into number values
+        let existingBookingStart = new Date(booking.startTime).getTime();
+        let existingBookingEnd = new Date(booking.endTime).getTime();
+        // Keep track of the room
+        let roomId = bookings.booking.roomId;
+        //console.log(roomId);
+          if (userStartTime >= existingBookingStart && userStartTime < existingBookingEnd ||
+            existingBookingStart >= userStartTime && existingBookingStart < userEndTime) {
+            // throw new Error(
+            //   'Booking could not be saved, There is a clash with existing booking'
+            // )
+            return true
+          }
+          return roomId
+        });
+        res.send(available);
+      });
+        //res.send(rooms);
+
+        //   //Locate the room document containing bookings
+        //   Room.findById(roomId).then(room => {
+
+        //     //Loop through each existing booking and return false if there is a clash
+        //     return room.bookings.every(booking => {
+        //       //Convert existing booking Date objects into number values
+        //       let existingBookingStart = new Date(booking.startTime).getTime()
+        //       let existingBookingEnd = new Date(booking.endTime).getTime()
+
+        //       //Check clash between new and existing booking
+        //       return !bookingClash(
+        //         existingBookingStart,
+        //         existingBookingEnd,
+        //         newBookingStart,
+        //         newBookingEnd
+        //       )
+        //     })
+        //   })
+        // });
     },
 
   // PUT - Make a new booking and store it in database
@@ -84,7 +99,7 @@ module.exports = {
     } = req.body;
 
     // Find the room in MongoDB. Then access the bookings and add this new booking.
-    await Room.findOneAndUpdate(
+    await Room.findByIdAndUpdate(
       roomId,
       {
         $addToSet: {
@@ -150,11 +165,20 @@ module.exports = {
       // return res.status(404).send("The booking with the given ID was not found");
 
       delete: async (req, res) => {
-        const name = req.params.name;
-        Room.findOne({
-          name
-        }).then(function (room) {
-          res.send(room);
-        });
+        console.log("works")
+        const bookingId = req.params.bookingId;
+        const roomId = req.params.roomId;
+        console.log(bookingId);
+        console.log(roomId);
+        await Room.findByIdAndUpdate(
+          roomId,
+          { $pull: { bookings: { _id: bookingId } } },
+          { new: true }
+        ).then(function (room) {
+          res.status(201).json(room);
+        })
+        .catch(error => {
+          res.status(400).json({ error })
+        })
       }
 };

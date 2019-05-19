@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 
 //import Room from '/Room';
@@ -26,6 +27,7 @@ class Rooms extends Component {
     //decorate the function with async as we are using the await method
 
     componentDidMount = async () => {
+        //const bookingData = this.props.location.data;
         setAuthorizationToken(localStorage.jwtToken);
         const {data: rooms} = await axios.get('/room/all');
         //pending > resolved (success) or rejected(failure)
@@ -33,27 +35,27 @@ class Rooms extends Component {
         this.setState({redirect: false});
     };
 
-    trueFalsetoYesNo(bool) {
+    trueFalseToYesNo = bool => {
         if (bool) {
             return "Yes"
         } else {
             return "No"
         }
-    }
+    };
 
-//Handle booking - recieves the room id of the room to be booked. Passes this through. 
-handleBook = (roomId) => {
-    console.log(roomId);
-    //Need to check if this is working. 
-    axios.patch('/newBooking/' + roomId);
-    console.log("Room Id: ", roomId);
+    /*//Handle booking - recieves the room id of the room to be booked. Passes this through.
+    handleBook = (roomId) => {
+        console.log(roomId);
+        //Need to check if this is working.
+        axios.patch('/newBooking/' + roomId);
+        console.log("Room Id: ", roomId);
 
-    //Update the rooms list to not show the room that has been booked. 
-    //This could be a backend thing. 
-    const rooms = this.state.rooms.filter(r => r._id !== roomId);
-    this.setState({rooms});
-    
-};
+        //Update the rooms list to not show the room that has been booked.
+        //This could be a backend thing.
+        const rooms = this.state.rooms.filter(r => r._id !== roomId);
+        this.setState({rooms});
+
+    };*/
 
     //Function to loop through the array of rooms and display them as individual rooms
     getRoomCards() {
@@ -63,13 +65,13 @@ handleBook = (roomId) => {
             <div className="card mt-3 w-75 mx-auto mt-5">
               <div className="card-body m-1 mt-3 text-center">
                 <p>There are no rooms available for this date.</p>
-                <a href="/book/date" class="card-link text-center">
+                  <a href="/book/date" className="card-link text-center">
                   Go back
                 </a>
               </div>
             </div>
           );
-        
+
 
 
         return (
@@ -79,25 +81,25 @@ handleBook = (roomId) => {
 
                     <div className="card m-2" key={room.name}>
                         <div className="card-body">
-                            <h5 className="card-title font-weight-bold">Room: {room.name}</h5>
+                            <h4 className="card-title font-weight-bold mb-2">{room.name}</h4>
                             <ul className="card-text list-unstyled">
                                 <li>
-                                    <b>Capacity:</b> {room.capacity}
-                                </li>
-                                <li>
-                                    <b>Room TV:</b> {this.trueFalsetoYesNo(room.facilities.tv)}
-                                </li>
-                                <li>
-                                    <b>Room Projector:</b> {this.trueFalsetoYesNo(room.facilities.projector)}
-                                </li>
-                                <li>
-                                    <b>Room Whiteboard:</b> {this.trueFalsetoYesNo(room.facilities.whiteboard)}
+                                    <h5>
+                                        <span className="badge badge-primary mr-2"><FontAwesomeIcon
+                                            icon="users"/> {room.capacity}</span>
+                                        <span className="badge badge-primary mr-2"><FontAwesomeIcon
+                                            icon="tv"/> {this.trueFalseToYesNo(room.facilities.tv)}</span>
+                                        <span className="badge badge-primary mr-2"><FontAwesomeIcon
+                                            icon="video"/> {this.trueFalseToYesNo(room.facilities.projector)}</span>
+                                        <span className="badge badge-primary mr-2"><FontAwesomeIcon
+                                            icon="chalkboard"/> {this.trueFalseToYesNo(room.facilities.whiteboard)}</span>
+                                    </h5>
                                 </li>
                             </ul>
                             <button onClick={() => {
                                 // noinspection JSIgnoredPromiseFromCall
                                 this.handleBook(room.name, room._id)
-                            }} className="btn btn-success mt-2">Book
+                            }} className="btn btn-success"><FontAwesomeIcon icon="plus"/> Book
                             </button>
                         </div>
                     </div>
@@ -116,10 +118,15 @@ handleBook = (roomId) => {
         let momentDateStart = moment(proposedDate).add(timeNumList[bookingData.timePos], 'hour');
         let momentDateEnd = moment(proposedDate).add(timeNumList[parseInt(bookingData.timePos) + parseInt(bookingData.duration)], 'hour');
 
-        let formatDateStart = moment.utc(momentDateStart).format();
-        let formatDateEnd = moment.utc(momentDateEnd).format();
+        let formatDateStart = moment(momentDateStart).format();
+        let formatDateEnd = moment(momentDateEnd).format();
 
-        const bookingName = bookingData.name;
+        let bookingName = "Booking";
+
+        if (bookingData.name !== "" && bookingData.name !== null) {
+            bookingName = bookingData.name;
+        }
+
         const user = "5cb55db0df1cb758b50bf2a4";
 
         await axios.put('/booking/newBooking/' + roomID, {
