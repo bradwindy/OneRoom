@@ -213,15 +213,20 @@ class Login extends Component {
             <div className="form-group row">
               <div className="col-sm-10">
                 <h1 className="pt-4">
-                  <b>Log In</b>
+                  <b>Lets get together.</b>
                 </h1>
+                <p>
+                  RoomEase lets you book a meeting room to suit you and your
+                  groups needs exactly.
+                </p>
               </div>
             </div>
             <div className="form-group row">
-              <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                Email:
-              </label>
-              <div className="col-sm-10 input-group">
+              <label
+                htmlFor="inputEmail3"
+                className="col-sm-2 col-form-label"
+              />
+              <div className="col-sm-10 input-group shadow-lg p-3 mb-1 rounded ">
                 <input
                   type="text"
                   className={validation.email.classText}
@@ -249,58 +254,58 @@ class Login extends Component {
               <label
                 htmlFor="inputPassword3"
                 className="col-sm-2 col-form-label"
-              >
-                Password:
-              </label>
-              <div className="col-sm-10">
-                <input
-                  type="password"
-                  className={validation.password.classText}
-                  id="inputPassword3"
-                  placeholder="Password"
-                  name="password"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                />
-                <small id="" className="form-text text-danger pl-1">
-                  {validation.password.message}
-                </small>
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <div className="col-sm-2" />
-              <div className="col-sm-10 pl-3 mb-0">
-                <div className="checkbox">
-                  <label className="mb-0">
-                    <input
-                      type="checkbox"
-                      name="checkbox"
-                      value={this.state.checkbox}
-                      onChange={this.handleChange}
-                    />{" "}
-                    Remember me
-                  </label>
+              />
+              <div className="col-sm-10 shadow-lg p-3 mb-2 rounded">
+                <div className="col-sm-10">
+                  <input
+                    type="password"
+                    className={validation.password.classText}
+                    id="inputPassword3"
+                    placeholder="Password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                  />
+                  <small id="" className="form-text text-danger pl-1">
+                    {validation.password.message}
+                  </small>
                 </div>
               </div>
-            </div>
-            <div className="form-group row">
-              <div className="col-sm-2" />
-              <div className="col-sm-10">
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={this.handleSubmit}
-                >
-                  Log in
-                </button>
-                <a
-                  className="btn btn-outline-secondary ml-2"
-                  href="/register"
-                  role="button"
-                >
-                  Register
-                </a>
+
+              <div className="form-group row">
+                <div className="col-sm-2" />
+                <div className="col-sm-10 pl-3 mb-0">
+                  <div className="checkbox">
+                    <label className="mb-0">
+                      <input
+                        type="checkbox"
+                        name="checkbox"
+                        value={this.state.checkbox}
+                        onChange={this.handleChange}
+                      />{" "}
+                      Remember me
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div className="form-group row">
+                <div className="col-sm-2" />
+                <div className="col-sm-10">
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    onClick={this.handleSubmit}
+                  >
+                    Log in
+                  </button>
+                  <a
+                    className="btn btn-primary m-2"
+                    href="/register"
+                    role="button"
+                  >
+                    Create account
+                  </a>
+                </div>
               </div>
             </div>
           </form>
@@ -308,6 +313,6 @@ class Login extends Component {
       );
     }
   }
-};
+}
 
 export default Login;

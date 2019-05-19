@@ -15,6 +15,7 @@
     "jquery": "^3.4.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
+    "node-sass": "^4.12.0",
     "moment-timezone": "^0.5.25",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
@@ -34,7 +35,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "scss": "node-sass --watch scss -o css"
   },
   "eslintConfig": {
     "extends": "react-app"
