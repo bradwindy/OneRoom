@@ -59,7 +59,18 @@ handleBook = (roomId) => {
     //Function to loop through the array of rooms and display them as individual rooms
     getRoomCards() {
 
-        if (this.state.rooms.length === 0) return <p>There are no rooms available for this date.</p>;
+        if (this.state.rooms.length === 0)
+          return (
+            <div className="card mt-3 w-75 mx-auto mt-5">
+              <div className="card-body m-1 mt-3 text-center">
+                <p>There are no rooms available for this date.</p>
+                <a href="/book/date" class="card-link text-center">
+                  Go back
+                </a>
+              </div>
+            </div>
+          );
+        
 
 
         return (
