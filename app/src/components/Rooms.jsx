@@ -26,6 +26,7 @@ class Rooms extends Component {
     //decorate the function with async as we are using the await method
 
     componentDidMount = async () => {
+        //const bookingData = this.props.location.data;
         setAuthorizationToken(localStorage.jwtToken);
         const {data: rooms} = await axios.get('/room/all');
         //pending > resolved (success) or rejected(failure)
@@ -33,13 +34,13 @@ class Rooms extends Component {
         this.setState({redirect: false});
     };
 
-    trueFalsetoYesNo(bool) {
+    trueFalseToYesNo = bool => {
         if (bool) {
             return "Yes"
         } else {
             return "No"
         }
-    }
+    };
 
 //Handle booking - recieves the room id of the room to be booked. Passes this through. 
 handleBook = (roomId) => {
@@ -74,13 +75,13 @@ handleBook = (roomId) => {
                                     <b>Capacity:</b> {room.capacity}
                                 </li>
                                 <li>
-                                    <b>Room TV:</b> {this.trueFalsetoYesNo(room.facilities.tv)}
+                                    <b>Room TV:</b> {this.trueFalseToYesNo(room.facilities.tv)}
                                 </li>
                                 <li>
-                                    <b>Room Projector:</b> {this.trueFalsetoYesNo(room.facilities.projector)}
+                                    <b>Room Projector:</b> {this.trueFalseToYesNo(room.facilities.projector)}
                                 </li>
                                 <li>
-                                    <b>Room Whiteboard:</b> {this.trueFalsetoYesNo(room.facilities.whiteboard)}
+                                    <b>Room Whiteboard:</b> {this.trueFalseToYesNo(room.facilities.whiteboard)}
                                 </li>
                             </ul>
                             <button onClick={() => {
@@ -105,10 +106,15 @@ handleBook = (roomId) => {
         let momentDateStart = moment(proposedDate).add(timeNumList[bookingData.timePos], 'hour');
         let momentDateEnd = moment(proposedDate).add(timeNumList[parseInt(bookingData.timePos) + parseInt(bookingData.duration)], 'hour');
 
-        let formatDateStart = moment.utc(momentDateStart).format();
-        let formatDateEnd = moment.utc(momentDateEnd).format();
+        let formatDateStart = moment(momentDateStart).format();
+        let formatDateEnd = moment(momentDateEnd).format();
 
-        const bookingName = bookingData.name;
+        let bookingName = "Booking";
+
+        if (bookingData.name !== "" && bookingData.name !== null) {
+            bookingName = bookingData.name;
+        }
+
         const user = "5cb55db0df1cb758b50bf2a4";
 
         await axios.put('/booking/newBooking/' + roomID, {

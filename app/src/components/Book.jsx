@@ -165,7 +165,7 @@ class BookPage extends Component {
                                        className="form-control"
                                        id="name"
                                        placeholder="Booking Name"
-                                       name="email"
+                                       name="bookingName"
                                        value={this.props.parentState.name}
                                        onChange={(event) => this.props.callbackFromParent(event.target.value, 0, page)}
 
@@ -184,21 +184,22 @@ class BookNav extends Component {
     render() {
         const pageURL = this.props.location.pathname;
         let nextPath = "";
+        let pageNum = "of 3";
 
         // Here is conditional rendering of the navigation buttons depending on the URL
         if (pageURL === "/book/date") {
             nextPath = this.props.match.url + "/time";
-            return this.navButtons(nextPath);
+            return this.navButtons(nextPath, "Page 1 " + pageNum);
         } else if (pageURL === "/book/time") {
             nextPath = this.props.match.url + "/name";
-            return this.navButtons(nextPath);
+            return this.navButtons(nextPath, "Page 2 " + pageNum);
         } else if (pageURL === "/book/name") {
-            return this.searchNavButtons();
+            return this.searchNavButtons("Page 3 " + pageNum);
         }
     }
 
     // This is the function that returns the navigation buttons for the date page.
-    navButtons(nextPath) {
+    navButtons(nextPath, pageNumber) {
         return (
             <div className="container align-middle">
                 <div
@@ -207,7 +208,7 @@ class BookNav extends Component {
                     <button onClick={this.props.history.goBack}
                             className="btn btn-outline-primary font-weight-bold mr-3">Back
                     </button>
-                    <h4 className="mr-2">----</h4>
+                    <p className="mr-2 mb-0">{pageNumber}</p>
                     {/*Same with this button, next page rather than specific page, have a variable generated
                     depending this.props.match.params.bookPage in render(), which contains next page and then added to
                     this url instead of /time }*/}
@@ -218,7 +219,7 @@ class BookNav extends Component {
     };
 
     // This is the function that returns the navigation buttons for the time page with a search button instead of a next button.
-    searchNavButtons() {
+    searchNavButtons(pageNumber) {
         return (
             <div className="container align-middle">
                 <div
@@ -227,7 +228,7 @@ class BookNav extends Component {
                     <button onClick={this.props.history.goBack}
                             className="btn btn-outline-primary font-weight-bold mr-3">Back
                     </button>
-                    <h4 className="mr-2">----</h4>
+                    <p className="mr-2 mb-0">{pageNumber}</p>
                     {/*Same with this button, next page rather than specific page, have a variable generated
                     depending this.props.match.params.bookPage in render(), which contains next page and then added to
                     this url instead of /time }*/}

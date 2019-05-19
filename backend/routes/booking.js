@@ -10,7 +10,7 @@ router.route('/available')
     .get(BookingController.available);
 
 // PUT a booking - Make a booking
-router.route('/newBooking')
+router.route('/newBooking/:id')
     .put(BookingController.new);
 
 // GET details about a booking
@@ -32,7 +32,7 @@ router.route('/editBooking')
     .put(BookingController.edit);
 
 // DELETE a booking
-server.route("/deleteBooking")
+router.route('/deleteBooking/:roomId/:bookingId')
     .delete(BookingController.delete);
     /** Delete Logic Flow
      *  1. Look for the item, if not existing, return 404 and exit route.

@@ -10,6 +10,7 @@ import NoMatch from "./components/NoMatch"
 import Register from "./components/Register"
 
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import ThankYou from "./components/ThankYou";
 
 class App extends Component {
     constructor(props) {
@@ -76,6 +77,7 @@ class App extends Component {
                                    />
                                }
                         />
+                        <Route path={"/thanks/"} component={ThankYou}/>
                         <Route component={NoMatch}/>
                     </Switch>
                 </Root>
