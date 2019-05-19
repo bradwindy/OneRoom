@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Background from "../images/background_two.png";
 import BackgroundTwo from "../images/background_three.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
 
 class Home extends Component {
   constructor(props) {
@@ -49,25 +50,21 @@ class Home extends Component {
             backgroundImage: "url(" + Background + ")",
             backgroundPosition: "bottom center",
             backgroundRepeat: "no-repeat",
-            backgroundSize: "60%",
+            backgroundSize: "40%",
             height: "700px"
           }}
         >
-        
-
-          <div class="card text-center">
-           
-            <div class="card-body">
-              <h5 class="card-title">You currently have no bookings.</h5>
-              <p class="card-text">
-                Don't miss out! Book your room now. 
-              </p>
-              <a href="/book/date" class="btn btn-primary">
-                Book Room
-              </a>
-            </div>
-            
-          </div>
+          <MDBCol style={{ maxWidth: "22rem" }}>
+            <MDBCard>
+              <MDBCardBody>
+                <MDBCardTitle>
+                  You currently have no bookings.
+                </MDBCardTitle>
+                <MDBCardText>Why not book yourself a room?</MDBCardText>
+                <MDBBtn href="/book/date">Book Room</MDBBtn>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
         </div>
       );
     } else {

@@ -246,7 +246,7 @@ class Login extends Component {
                     Log in
                   </button>
                   <a
-                    className="btn btn-primary m-2"
+                    className="btn btn-primary"
                     href="/register"
                     role="button">Create Account</a>
        
