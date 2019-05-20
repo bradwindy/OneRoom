@@ -32,7 +32,7 @@ module.exports = {
         // let newBookingEnd = userEndTime.getTime();
 
         var available = bookings.map(booking => {
-          console.log(booking[0].roomId)
+          console.log(booking[0].roomId);
         // Convert existing booking Date objects into number values
         let existingBookingStart = new Date(booking.startTime).getTime();
         let existingBookingEnd = new Date(booking.endTime).getTime();
@@ -165,7 +165,7 @@ module.exports = {
       // return res.status(404).send("The booking with the given ID was not found");
 
       delete: async (req, res) => {
-        console.log("works")
+        console.log("works");
         const bookingId = req.params.bookingId;
         const roomId = req.params.roomId;
         console.log(bookingId);

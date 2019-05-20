@@ -42,6 +42,10 @@ class Book extends Component {
     // There is one route for the /book path. This renders the nav buttons that are on each page.
     // The other route renders the date and time pickers above nav.
     render() {
+        if (localStorage.getItem('jwtToken') === null) {
+            window.location.href = "/login";
+        }
+
         return (
             <div className="p-4">
                 <Route
