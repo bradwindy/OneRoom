@@ -165,7 +165,7 @@ class BookPage extends Component {
                         </div>
                         <div className="form-group row">
                             <label htmlFor="time-select"
-                                   className="col-sm-2 col-form-label font-weight-bold">Time:</label>
+                                   className="col-sm-2 col-form-label font-weight-bold">Name:</label>
                             <div className="col-sm-10">
                                 <input type="text"
                                        className="form-control"
@@ -211,20 +211,20 @@ class BookNav extends Component {
                 <div className="container align-middle">
                     <div
                         className="row col-sm-2 fixed-bottom p-3 pb-5 mb-5 justify-content-center align-items-center no-gutters">
-                        <p className="mr-2 mb-0">{pageNumber}</p>
+                        <p className="mr-2 mb-0 font-weight-bold">{pageNumber}</p>
                     </div>
 
                     <div
                         className="row col-sm-2 fixed-bottom p-3 pb-4 justify-content-center align-items-center no-gutters">
                         {/*Will need to make the link below go back to the previous page and always be consistent*/}
                         <button onClick={this.props.history.goBack}
-                                className="btn btn-outline-primary font-weight-bold mr-2">
+                                className="btn btn-primary font-weight-bold mr-2">
                             <FontAwesomeIcon icon="chevron-left"/> Back
                         </button>
                         {/*Same with this button, next page rather than specific page, have a variable generated
                     depending this.props.match.params.bookPage in render(), which contains next page and then added to
                     this url instead of /time }*/}
-                        <Link to={`${nextPath}`} className="btn btn-outline-primary font-weight-bold">
+                        <Link to={`${nextPath}`} className="btn btn-primary font-weight-bold">
                             Next <FontAwesomeIcon icon="chevron-right"/>
                         </Link>
                     </div>
@@ -239,14 +239,14 @@ class BookNav extends Component {
             <div className="container align-middle">
                 <div
                     className="row col-sm-2 fixed-bottom p-3 pb-5 mb-5 justify-content-center align-items-center no-gutters">
-                    <p className="mr-2 mb-0">{pageNumber}</p>
+                    <p className="mr-2 mb-0 font-weight-bold">{pageNumber}</p>
                 </div>
 
                 <div
                     className="row col-sm-2 fixed-bottom p-3 pb-4 justify-content-center align-items-center no-gutters">
                     {/*Will need to make the link below go back to the previous page and always be consistent*/}
                     <button onClick={this.props.history.goBack}
-                            className="btn btn-outline-primary font-weight-bold mr-2">
+                            className="btn btn-primary font-weight-bold mr-2">
                         <FontAwesomeIcon icon="chevron-left"/> Back
                     </button>
                     {/*Same with this button, next page rather than specific page, have a variable generated

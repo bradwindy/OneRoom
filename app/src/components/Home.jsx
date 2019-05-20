@@ -50,7 +50,7 @@ class Home extends Component {
         if (this.state.bookings === undefined || this.state.bookings.length === 0) {
             return (
                 <div
-                    className="container pt-4 p-2"
+                    className="container pt-3 p-2"
                     style={{
                         backgroundImage: "url(" + Background + ")",
                         backgroundPosition: "bottom center",
@@ -61,14 +61,13 @@ class Home extends Component {
                 >
 
 
-                    <div className="card text-center">
-
+                    <div className="card text-center m-2">
                         <div className="card-body">
-                            <h5 className="card-title">You currently have no bookings.</h5>
+                            <h5 className="card-title pt-2">You currently have no bookings.</h5>
                             <p className="card-text">
                                 Don't miss out! Book your room now.
                             </p>
-                            <a href="/book/date" className="btn btn-primary font-weight-bold">
+                            <a href="/book/date" className="btn btn-success font-weight-bold">
                                 <FontAwesomeIcon icon="plus"/> Book Room
                             </a>
                         </div>
@@ -80,7 +79,7 @@ class Home extends Component {
             return (
                 // "Home" component, a scrollable list of cards with booking info and buttons. Just example info for now
                 <div
-                    className="container pt-4 p-2"
+                    className="container pt-3 p-2"
                     style={{
                         backgroundImage: "url(" + BackgroundTwo + ")",
                         backgroundPosition: "bottom center",
@@ -94,8 +93,8 @@ class Home extends Component {
                     {this.state.bookings.map(booking => (
                         <div className="card m-2" key={booking.bookingId}>
                             <div className="card-block m-4">
-                                <h4 className="card-title">
-                                    <b>{booking.bookingName}</b>
+                                <h4 className="card-title font-weight-bold">
+                                    {booking.bookingName}
                                 </h4>
                                 <ul className="card-text list-unstyled">
                                     <li>
@@ -114,7 +113,7 @@ class Home extends Component {
 
                                 <div className="row m-0">
                                     <button
-                                        className="btn btn-sm btn-outline-danger float-right"
+                                        className="btn btn-sm btn-danger float-right m-0"
                                         onClick={() => {
                                             // noinspection JSIgnoredPromiseFromCall
                                             this.cancelBooking(booking.bookingId, booking.roomId);
@@ -126,6 +125,11 @@ class Home extends Component {
                             </div>
                         </div>
                     ))}
+                    <div className="text-center pt-3">
+                        <a href="/book/date" className="btn btn-success font-weight-bold">
+                            <FontAwesomeIcon icon="plus"/> Book Another Room
+                        </a>
+                    </div>
                 </div>
             );
         }

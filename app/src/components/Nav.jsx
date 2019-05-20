@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+//import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 
 class Nav extends Component {
@@ -44,9 +44,6 @@ class Nav extends Component {
                             id="navbarNavAltMarkup"
                         >
                             <div className="navbar-nav">
-                                <a className="nav-item nav-link" href="/book/date">
-                                    <b><b>Book a Room</b></b>
-                                </a>
                                 <a className="nav-item nav-link" href="/">
                                     My Bookings
                                 </a>
