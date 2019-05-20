@@ -1,13 +1,16 @@
-# Otago Business School Rooms Booking System
-A meeting-room booking system built with ReactJS, Express.js, Node.js and Cloud SQL.
+# Otago Business School - Room Booking System
+A meeting-room booking system built with ReactJS, Express.js, Node.js and MongoDB.
+We have chosen to follow a MVC pattern of development.
 
 ## Table of Contents
 
 * [Setup](#setup)
     * [Installing Git](#installing-git)
     * [Installing Node and npm](#installing-node-and-npm)
-    * [Project Setup](#Project Setup)
-    * [Database Setup](#Database Setup)
+    * [Project Setup](#Project-Setup)
+    * [Database Setup](#Database-Setup)
+    * [Launching the Development Environment](#Launching-the-Development-Environment)
+    * [Closing the Development Environment](#Closing-the-Development-Environment)
 * [Understanding our Files](#understanding-the-files)
     * [The app directory](#the-app-directory)
     * [The backend directory](#the-backend-directory)
@@ -29,6 +32,47 @@ To install Node and npm for Mac or Windows:
 [Install for Windows](https://nodejs.org/dist/v10.15.3/node-v10.15.3-x86.msi)
 
 ### Project Setup
+
+STEPS FOR WINDOWS USERS:
+Once you have Git setup, open Command Prompt and navigate to
+```
+cd /Users/YOURNAME
+```
+
+Now, clone the repo
+```
+git clone https://isgb.otago.ac.nz/info310/git/cowen/Room_Booking_System.git
+```
+
+Change to the `app` folder and install development and production dependencies.
+
+```
+cd app
+npm install
+```
+
+Check that you now have the `node_modules` folder within your `app` folder.
+This would've setup React.js for you.
+
+```
+dir
+```
+
+Return back to the `Room_Booking_System` folder and install development and production dependencies for the backend/server side.
+
+```
+cd ../
+npm install
+```
+
+Check that you now have the `node_modules` folder within your `Room_Booking_System` folder.
+This would have set up Express.js and a way to connect to the database for you.
+
+```
+dir
+```
+
+
 
 STEPS FOR MAC OSX USERS:
 
@@ -53,63 +97,54 @@ Check that you now have the `node_modules` folder within your `app` folder.
 This would've setup React.js for you.
 
 ```
-ls app
+ls
 ```
 
-Return back to the `roomease` folder.
+Return back to the `Room_Booking_System` folder and install development and production dependencies for the backend/server side.
 
 ```
 cd ../
-```
-Change to the `backend` folder and install development and production dependencies.
-
-```
-cd backend
 npm install
 ```
 
-Check that you now have the `node_modules` folder within your `backend` folder.
+Check that you now have the `node_modules` folder within your `Room_Booking_System` folder.
 This would have set up Express.js and a way to connect to the database for you.
 
 ```
-ls backend
+ls
 ```
 
 ### Database Setup
 
-STEPS FOR MAC OSX USERS:
+STEPS FOR WINDOWS/MAC USERS:
 
-To keep the database connection secure, it is generlly not advised to share the
-connection information online, but this will be the only way we can get Sherlock to
-connect to our CloudSQL Database.
+Download MongoDB (ZIP/TGZ) for your OS by following the instructions in this link: [Download MongoDB](https://www.mongodb.com/download-center/community)
 
-While you are still in the `backend` folder, type into the terminal
+1. Once MongoDB has been downloaded locate the downloaded ZIP or TGZ file, usually found within your computer's `Downloads` folder.
+2. Open the ZIP or TGZ file and navigate to the `bin` directory and double click the `mongod.pdb` or `mongod` file. This should open a Command Prompt or Terminal window and setup a MongoDB instance locally on your machine. Do not close this window! This window must be left open for development purposes. 
+
+If you would like to exit/stop running the MongoDB instance just press CTRL + C on Windows, or COMMAND + C on Mac.
+
+### Launching the Development Environment
+
+STEPS FOR WINDOWS/MAC USERS:
+With Node and npm installed and a MongoDB instance running we can now launch our frontend and backend.
+
+1. Open a new Command Prompt or Terminal window.
+2. Navigate to the `Room_Booking_System` directory which is most likely located in your `User` directory if you have followed these steps.
 
 ```
-touch .env
+cd /Users/YOURNAME/Room_Booking_System
 ```
-Copy paste this into `.env`
+3. Once within the directory, type `npm run dev`. This command will start the server/backend on PORT 5000 and will then start the app/frontend on PORT 3000.
 
-```
-DB_HOST=35.201.14.21
-DB_DATABASE=roomease_schema
-DB_USER=admin
-DB_PASS=admin
-```
-.env helps establish a connection to the CloudSQL Database, when you run the Node server.
+4. The app/frontend should automatically open in a web browser. You can also manually access the app/frontend by pasting `http://localhost:3000/login` in the URL section of your preffered web browser.
 
--- ALL STEPS AFTER THIS POINT IS SOLELY FOR THE DEVELOPMENT TEAM, NOT FOR SHERLOCK --
+### Closing the Development Environment
 
-Now you need to choose a database managing tool like DBeaver or MySQL Workbench. This will
-help you add/delete/view and manage the database.
+1. Press CTRL + C on Windows(Command Prompt) or COMMAND + C on Mac(Terminal) to shut down Node. This is done within the window where you earlier typed `npm run dev`
 
-[Download DBeaver](https://dbeaver.io/download/)
-
-[Download MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
-
-For setup instructions let's just talk about it.
-
-Note: The tables should be setup (except for foreign keys)
+2. Once Node is stopped, exit/stop running the MongoDB instance by pressing CTRL + C on Windows(Command Prompt), or COMMAND + C on Mac(Terminal).
 
 ## Understanding our Files
 
