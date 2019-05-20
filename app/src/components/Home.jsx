@@ -31,7 +31,7 @@ class Home extends Component {
     cancelBooking = async (bookingId, roomId) => {
         this.props.removeBookingFunc(bookingId);
 
-        await axios.delete(`/deleteBooking/` + roomId + '/' + bookingId)
+        await axios.delete(`/booking/deleteBooking/` + roomId + '/' + bookingId)
             .then(res => {
                 console.log(res);
             });
