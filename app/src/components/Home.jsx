@@ -68,8 +68,8 @@ class Home extends Component {
                             <p className="card-text">
                                 Don't miss out! Book your room now.
                             </p>
-                            <a href="/book/date" className="btn btn-primary">
-                                Book Room
+                            <a href="/book/date" className="btn btn-primary font-weight-bold">
+                                <FontAwesomeIcon icon="plus"/> Book Room
                             </a>
                         </div>
 

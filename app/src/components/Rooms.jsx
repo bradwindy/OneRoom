@@ -3,8 +3,10 @@ import axios from 'axios';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
+
 //import Room from '/Room';
 import moment from 'moment';
+import {Redirect} from "react-router-dom";
 
 class Rooms extends Component {
 
@@ -150,8 +152,8 @@ class Rooms extends Component {
 
 
     render() {
-        if (localStorage.getItem('jwtToken') === null) {
-            window.location.href = "/login";
+        if (this.state.redirect) {
+            return <Redirect to={"/"}/>;
         }
 
         return (
