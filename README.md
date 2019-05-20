@@ -2,8 +2,14 @@
 A meeting-room booking system built with ReactJS, Express.js, Node.js and MongoDB.
 We have chosen to follow a MVC pattern of development.
 
-## Table of Contents
+## Authors
+- Bradley Windybank
+- Vivek George
+- Alice Averill
+- Elora Chang
+- Akash Mokashi
 
+## Table of Contents
 * [Setup](#setup)
     * [Installing Git](#installing-git)
     * [Installing Node and npm](#installing-node-and-npm)
@@ -11,13 +17,14 @@ We have chosen to follow a MVC pattern of development.
     * [Database Setup](#Database-Setup)
     * [Launching the Development Environment](#Launching-the-Development-Environment)
     * [Closing the Development Environment](#Closing-the-Development-Environment)
-* [Understanding our Files](#understanding-the-files)
+* [Directory and File Breakdown](#Directory-and-File-Breakdown)
     * [The app directory](#the-app-directory)
     * [The backend directory](#the-backend-directory)
     * [Common files in Directories](Common-files-in-Directories)
 
 ## Setup
 These instructions will get you a copy of the project up and running on your local machine for development purposes.
+
 ### Installing Git
 You can install Git for Mac, Windows and Linux by following the instructions here for your operating system.
 [Install Git](https://www.atlassian.com/git/tutorials/install-git)
@@ -146,30 +153,17 @@ cd /Users/YOURNAME/Room_Booking_System
 
 2. Once Node is stopped, exit/stop running the MongoDB instance by pressing CTRL + C on Windows(Command Prompt), or COMMAND + C on Mac(Terminal).
 
-## Understanding our Files
+## Directory and File Breakdown
 
-FOR MAC USERS ONLY:
-
-1. Open Finder
-2. On the top bar of the Screen (File, Edit, View, Go, Window, Help) - click on 'Go'
-3. Then, select 'Home' from the dropdown.
-4. Locate and open 'roomease'
-
-You should be able to see the folders `app` and `backend`. Ignore the `README.md'
-
-### The app directory
-This directory refers to the front end of the system. This is where Elora and Bradley will work on the UI/UX things. 
+### The app directory - Client
+This directory refers to the front end of the system.
 **_Refer to app folder README for more details._**
 
 [App README](https://isgb.otago.ac.nz/info310/cowen/Room_Booking_System/tree/master/app)
 
-### The backend directory
-This directory refers to the back end of the system. This is where Alice, Vivek and Akash will work on 
-setting up the middleware, server and database.
+### Backend - API's, Server and Database
 
-It consists of three main directories `controllers`, `helpers` and `routes`
-
-`server.js` is our main backend/server file. This file will provide access to all the routes in the `routes` directory and can be considered as the brain of the backend. It will also list all the middleware such as bodyParser (which will convert the incoming data into JSON)
+The root of this project consists of five main directories `controllers`, `helpers`, `models`, `routes` and `tests`. It also consists of two main files `server.js` and `passport.js`.
 
 `routes` - this directory solely consists of our Express.js routes. This is the entry point of any data from the frontend. The routes usually include several functions taken from the `helpers` and `controllers` directories.
 
@@ -177,7 +171,9 @@ It consists of three main directories `controllers`, `helpers` and `routes`
 
 `controllers` - this directory focuses on defining the logic of the routes stored in `routes`. For example, we have a route /register, the AuthController will store all the user details which is passed via the /register route, into the database, only after the data has been validated by a `helper` . So a controller can be thought of as an interface between the database and our routes.
 
-Also, open the `database.js` file. This file simply checks whether we have succesfully conected to the database everytime we launch a local server using Node. It takes values for host, user, database and password from the `.env' file, which we set up earlier.
+`server.js` is our main backend/server file. This file will provide access to all the routes in the `routes` directory and can be considered as the brain of the backend. It will also list all the middleware such as bodyParser (which will convert the incoming data into JSON). It also helps establish a connection to our MongoDB database.
+
+
 
 ### Common files in Directories
 
@@ -187,6 +183,3 @@ This is why we have two seperate "package.json" files for `app` and `backend`. I
 `node_modules` - this directory consists of several different Javascript packages/libraries that
 help us develop things faster. Things like Express, React, MySQL when developing come from here.
 
-`.gitignore` - this file basically tells Git what not to put onto GitBucket. For example, things like
-'node_modules' should not and do not need to be put onto GitBucket as they are large. Basically, things
-which are very large and are more locally oriented files should be added to the `.gitignore` document.
