@@ -2,31 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7fb6073-e54f-4d92-80fc-2f254903165c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/configuration/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/configuration/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controllers/authController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/authController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controllers/bookingController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/bookingController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controllers/roomController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/roomController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controllers/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/userController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/helpers/routeHelpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/routeHelpers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/roomModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/roomModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/userModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/userModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/passport.js" beforeDir="false" afterPath="$PROJECT_DIR$/passport.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/rooms.json" beforeDir="false" afterPath="$PROJECT_DIR$/rooms.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/booking.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/booking.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/room.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/room.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/test/booking_test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/booking_test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/test/createRoom_test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/createRoom_test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/test/demo_test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/demo_test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/test/readRoom_test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/readRoom_test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/test/testHelper_test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/testHelper_test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/app/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -68,8 +44,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+            <state relative-caret-position="112">
+              <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -367,7 +343,7 @@
       <workItem from="1558305141626" duration="35000" />
       <workItem from="1558305313877" duration="632000" />
       <workItem from="1558308724276" duration="5042000" />
-      <workItem from="1558328636606" duration="2416000" />
+      <workItem from="1558328636606" duration="2743000" />
     </task>
     <task id="LOCAL-00001" summary="Added Dependencies.">
       <created>1554785866838</created>
@@ -639,7 +615,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="218764000" />
+    <option name="totallyTimeSpent" value="219091000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1049,8 +1025,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+        <state relative-caret-position="112">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
         </state>
       </provider>
     </entry>
