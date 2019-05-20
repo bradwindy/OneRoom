@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Room = require("../models/roomModel");
 const express = require("express");
 const server = express();
-const moment = require('moment');
+const moment = require('moment/moment');
 const momentTimezone = require('moment-timezone');
 const { authJWT } = require('../passport');
 

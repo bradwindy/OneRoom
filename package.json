@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nodemon --exec 'mocha */**_test.js'",
     "start": "nodemon server.js",
-    "app": "cd ../app/ && npm start",
+    "app": "cd app && npm start",
     "dev": "concurrently --kill-others-on-fail \"npm run start\" \"npm run app\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
