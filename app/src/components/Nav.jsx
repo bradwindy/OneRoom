@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
+//import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 
 class Nav extends Component {
