@@ -9,6 +9,7 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const Room = require("./models/roomModel");
 const auth = require("./passport");
+const path = require('path');
 /** Connecting to local instance of MongoDB
  *  If connection is successful, check if the old room collection is present and delete it.
  *  Then insert, Mock room data is automatically created in database.
@@ -76,6 +77,14 @@ server.use("/room", require("./routes/room"));
 server.use("/user", require("./routes/user"));
 server.use("/booking", require("./routes/booking"));
 
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static
+    server.use(express.static('app/build'));
+    server.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 /** Server Information
 *   PORT is an environment (env) variable. Environment variables refers

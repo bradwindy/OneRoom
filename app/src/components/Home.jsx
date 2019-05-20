@@ -53,16 +53,16 @@ class Home extends Component {
             height: "700px"
           }}
         >
-        
 
-          <div class="card text-center">
-           
-            <div class="card-body">
-              <h5 class="card-title">You currently have no bookings.</h5>
-              <p class="card-text">
+
+            <div className="card text-center">
+
+                <div className="card-body">
+                    <h5 className="card-title">You currently have no bookings.</h5>
+                    <p className="card-text">
                 Don't miss out! Book your room now. 
               </p>
-              <a href="/book/date" class="btn btn-primary">
+                    <a href="/book/date" className="btn btn-primary">
                 Book Room
               </a>
             </div>
