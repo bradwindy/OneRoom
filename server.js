@@ -19,7 +19,7 @@ const path = require('path');
  */
 mongoose
   .connect(
-    "mongodb://localhost/Roomease",
+      "mongodb://heroku_tr09kvn5:roomease1@ds151076.mlab.com:51076/heroku_tr09kvn5",
     { useCreateIndex: true, useNewUrlParser: true },
     function() {
       /* dummy function */
