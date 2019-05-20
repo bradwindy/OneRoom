@@ -17,12 +17,12 @@ const path = require('path');
  *  https://github.com/Automattic/mongoose/issues/4135
  *  https://stackoverflow.com/questions/54587040/import-external-json-file-to-mongodb-using-nodejs-and-mongoose
  */
-mongoose
+/*mongoose
   .connect(
       "mongodb://heroku_tr09kvn5:roomease1@ds151076.mlab.com:51076/heroku_tr09kvn5",
     { useCreateIndex: true, useNewUrlParser: true },
     function() {
-      /* dummy function */
+      /!* dummy function *!/
     }
   )
   .then(() => {
@@ -44,7 +44,7 @@ mongoose
     // mongoose connection error will be handled here
     console.error("Error starting database", err.stack);
     process.exit(1);
-  });
+  });*/
 
 /** Middlewares */
 server.use(morgan("dev"));
