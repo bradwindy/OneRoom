@@ -1,7 +1,0 @@
-.env
-
-# Dependency directories
-node_modules/
-
-# misc
-.DS_Store
