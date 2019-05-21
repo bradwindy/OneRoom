@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import Background from "../images/background_two.png";
 import BackgroundTwo from "../images/background_three.png";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {confirmAlert} from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import axios from 'axios';
 
 class Home extends Component {
@@ -14,7 +16,7 @@ class Home extends Component {
 
         // This binding is necessary to make `this` work in the callback
         this.cancelBooking = this.cancelBooking.bind(this);
-        this.cancelConfirm = this.cancelConfirm.bind(this);
+        this.submitDelete = this.submitDelete.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
     }
 
@@ -39,7 +41,30 @@ class Home extends Component {
         window.location.reload();
     };
 
-    cancelConfirm = () => {
+    submitDelete = (bookingId, roomId) => {
+        confirmAlert({
+            customUI: ({onClose}) => {
+                return (
+                    <div className="card text-center m-2">
+                        <div className="card-body">
+                            <h5 className="card-title pt-2 font-weight-bold">Confirm Delete</h5>
+                            <p className="card-text">
+                                Are you sure you want to delete this booking?
+                            </p>
+                            <button className="btn btn-primary" onClick={onClose}>No</button>
+                            <button className="btn btn-danger font-weight-bold" onClick={() => {
+                                this.cancelBooking(bookingId, roomId);
+                                onClose();
+                            }}
+                            >
+                                Yes, Delete Booking
+                            </button>
+                        </div>
+
+                    </div>
+                );
+            }
+        });
     };
 
     render() {
@@ -116,7 +141,7 @@ class Home extends Component {
                                         className="btn btn-sm btn-danger float-right m-0"
                                         onClick={() => {
                                             // noinspection JSIgnoredPromiseFromCall
-                                            this.cancelBooking(booking.bookingId, booking.roomId);
+                                            this.submitDelete(booking.bookingId, booking.roomId);
                                         }}
                                     >
                                         <FontAwesomeIcon icon="times"/> Cancel
