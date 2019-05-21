@@ -43,10 +43,35 @@ class Rooms extends Component {
         }
     };
 
+    /*//Handle booking - recieves the room id of the room to be booked. Passes this through.
+    handleBook = (roomId) => {
+        console.log(roomId);
+        //Need to check if this is working.
+        axios.patch('/newBooking/' + roomId);
+        console.log("Room Id: ", roomId);
+
+        //Update the rooms list to not show the room that has been booked.
+        //This could be a backend thing.
+        const rooms = this.state.rooms.filter(r => r._id !== roomId);
+        this.setState({rooms});
+
+    };*/
+
     //Function to loop through the array of rooms and display them as individual rooms
     getRoomCards() {
 
-        if (this.state.rooms.length === 0) return <p>There are no rooms available for this date.</p>;
+        if (this.state.rooms.length === 0)
+          return (
+            <div className="card mt-3 w-75 mx-auto mt-5">
+              <div className="card-body m-1 mt-3 text-center">
+                <p>There are no rooms available for this date.</p>
+                  <a href="/book/date" className="card-link text-center">
+                  Go back
+                </a>
+              </div>
+            </div>
+          );
+
 
 
         return (
@@ -60,13 +85,13 @@ class Rooms extends Component {
                             <ul className="card-text list-unstyled">
                                 <li>
                                     <h5>
-                                        <span className="badge badge-info mr-2"><FontAwesomeIcon
+                                        <span className="badge badge-primary mr-2"><FontAwesomeIcon
                                             icon="users"/> {room.capacity}</span>
-                                        <span className="badge badge-info mr-2"><FontAwesomeIcon
+                                        <span className="badge badge-primary mr-2"><FontAwesomeIcon
                                             icon="tv"/> {this.trueFalseToYesNo(room.facilities.tv)}</span>
-                                        <span className="badge badge-info mr-2"><FontAwesomeIcon
+                                        <span className="badge badge-primary mr-2"><FontAwesomeIcon
                                             icon="video"/> {this.trueFalseToYesNo(room.facilities.projector)}</span>
-                                        <span className="badge badge-info mr-2"><FontAwesomeIcon
+                                        <span className="badge badge-primary mr-2"><FontAwesomeIcon
                                             icon="chalkboard"/> {this.trueFalseToYesNo(room.facilities.whiteboard)}</span>
                                     </h5>
                                 </li>
@@ -102,7 +127,13 @@ class Rooms extends Component {
             bookingName = bookingData.name;
         }
 
-        const user = "5cb55db0df1cb758b50bf2a4";
+        const uName = localStorage.getItem("email");
+
+        const userInfo = await axios.get('/user/' + uName);
+
+        const user = userInfo.data._id;
+
+        console.log(user);
 
         await axios.put('/booking/newBooking/' + roomID, {
             startTime: formatDateStart, endTime: formatDateEnd, roomId: roomID, bookingName, user

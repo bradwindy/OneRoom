@@ -9,6 +9,7 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const Room = require("./models/roomModel");
 const auth = require("./passport");
+const path = require('path');
 /** Connecting to local instance of MongoDB
  *  If connection is successful, check if the old room collection is present and delete it.
  *  Then insert, Mock room data is automatically created in database.
@@ -18,10 +19,13 @@ const auth = require("./passport");
  */
 mongoose
   .connect(
-    "mongodb://localhost/Roomease",
+      // Use this for hosting MongoDB locally
+      "mongodb://localhost/Roomease",
+      //Uncomment this at the end for Heroku Deployment
+      //"mongodb://heroku_tr09kvn5:nen20kn4oc4q5ihl7p1dq4b5nm@ds151076.mlab.com:51076/heroku_tr09kvn5",
     { useCreateIndex: true, useNewUrlParser: true },
     function() {
-      /* dummy function */
+        /* dummy function */
     }
   )
   .then(() => {
@@ -76,6 +80,14 @@ server.use("/room", require("./routes/room"));
 server.use("/user", require("./routes/user"));
 server.use("/booking", require("./routes/booking"));
 
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static
+    server.use(express.static('app/build'));
+    server.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'app', 'build', 'index.html'));
+    });
+}
 
 /** Server Information
 *   PORT is an environment (env) variable. Environment variables refers

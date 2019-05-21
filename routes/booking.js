@@ -5,6 +5,10 @@ const { authJWT } = require('../passport');
 const { validateBody, schemas } = require('../helpers/routeHelpers'); // calling both things present in the helper file
 const BookingController = require('../controllers/bookingController.js');
 
+// GET all available rooms for user
+router.route('/available')
+    .get(BookingController.available);
+
 // PUT a booking - Make a booking
 router.route('/newBooking/:id')
     .put(BookingController.new);
@@ -23,9 +27,12 @@ router.route('/editBooking')
      *  4. If validation passes, update the instance of the booking in database
      *  5. Return the updated booking confirmation back to user
      */
+// PUT - Update a booking
+router.route('/editBooking')
+    .put(BookingController.edit);
 
 // DELETE a booking
-server.route("/deleteBooking")
+router.route('/deleteBooking/:roomId/:bookingId')
     .delete(BookingController.delete);
     /** Delete Logic Flow
      *  1. Look for the item, if not existing, return 404 and exit route.

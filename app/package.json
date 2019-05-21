@@ -14,18 +14,24 @@
     "bootstrap": "^4.3.1",
     "braces": "^3.0.1",
     "dompurify": "^1.0.10",
+    "eslint": "^5.16.0",
+    "eslint-config-react-app": "^4.0.1",
     "express-session": "^1.16.1",
     "i": "^0.3.6",
     "jquery": "^3.4.0",
     "jsonwebtoken": "^8.5.1",
+    "mdbreact": "^4.14.0",
+    "mdreact": "^0.1.5",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.25",
+    "node-sass": "^4.12.0",
     "npm": "^6.9.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "popper.js": "^1.15.0",
     "rc-time-picker": "^3.6.4",
     "react": "^16.8.6",
+    "react-confirm-alert": "^2.4.1",
     "react-datepicker": "^2.4.0",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
@@ -39,7 +45,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "scss": "node-sass --watch scss -o css"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,9 +56,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "concurrently": "^4.1.0",
-    "react-testing-library": "^7.0.0"
-  }
+  ]
 }
