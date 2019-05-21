@@ -79,6 +79,7 @@ class Book extends Component {
 class BookPage extends Component {
     render() {
         const page = this.props.match.params.bookPage;
+        const startDate = moment().format('YYYY-MM-DD');
 
         // conditional rendering of the content of the page depending on the URL
         if (page === 'date') {
@@ -88,6 +89,7 @@ class BookPage extends Component {
                         <h2 className="pl-3 pb-3 pt-4 mt-2 font-weight-bold">Select Date:</h2>
                         <DatePicker className="pb-4"
                                     date={this.props.parentState.date}
+                                    minDate={startDate}
                                     onSelect={date => {
                                         // On a change of date, run callback method to update state
                                         this.props.callbackFromParent(date, 0, page);
