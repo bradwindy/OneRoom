@@ -132,7 +132,6 @@ class BookPage extends Component {
                                     <option value="11">7:00pm</option>
                                     <option value="12">8:00pm</option>
                                     <option value="13">9:00pm</option>
-                                    <option value="14">10:00pm</option>
                                 </select>
                             </div>
                         </div>
