@@ -95,7 +95,7 @@ class Login extends Component {
 
         const {email, password, checkbox} = this.state;
 
-        localStorage.setItem("email", checkbox ? email : "");
+        localStorage.setItem("email", email);
         localStorage.setItem("password", checkbox ? password : "");
         localStorage.setItem("checkbox", checkbox);
 
