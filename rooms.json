@@ -1,0 +1,181 @@
+[{
+        "name": "G01",
+        "capacity": "4",
+        "facilities": {
+            "projector": "false",
+            "tv": "false",
+            "whiteboard": "false"
+        }
+    },
+    {
+        "name": "G02",
+        "capacity": "6",
+        "facilities": {
+            "projector": "true",
+            "tv": "true",
+            "whiteboard": "true"
+        }
+    },
+    {
+        "name": "G03",
+        "capacity": "4",
+        "facilities": {
+            "projector": "false",
+            "tv": "true",
+            "whiteboard": "false"
+        }
+    },
+    {
+        "name": "G04",
+        "capacity": "4",
+        "facilities": {
+            "projector": "false",
+            "tv": "true",
+            "whiteboard": "false"
+        }
+    },
+    {
+        "name": "G05",
+        "capacity": "10",
+        "facilities": {
+            "projector": "true",
+            "tv": "true",
+            "whiteboard": "false"
+        }
+    },
+    {
+        "name": "G06",
+        "capacity": "8",
+        "facilities": {
+            "projector": "true",
+            "tv": "true",
+            "whiteboard": "true"
+        }
+    },
+    {
+        "name": "G07",
+        "capacity": "4",
+        "facilities": {
+            "projector": "false",
+            "tv": "true",
+            "whiteboard": "true"
+        }
+    },
+    {
+        "name": "G08",
+        "capacity": "4",
+        "facilities": {
+            "projector": "false",
+            "tv": "false",
+            "whiteboard": "false"
+        }
+    },
+    {
+        "name": "G09",
+        "capacity": "4",
+        "facilities": {
+            "projector": "true",
+            "tv": "true",
+            "whiteboard": "true"
+        }
+    },
+    {
+        "name": "G10",
+        "capacity": "10",
+        "facilities": {
+            "projector": "false",
+            "tv": "true",
+            "whiteboard": "false"
+        }
+    },
+    {
+        "name": "G11",
+        "capacity": "10",
+        "facilities": {
+            "projector": "false",
+            "tv": "true",
+            "whiteboard": "true"
+        }
+    },
+    {
+        "name": "G12",
+        "capacity": "10",
+        "facilities": {
+            "projector": "true",
+            "tv": "true",
+            "whiteboard": "false"
+        }
+    },
+    {
+        "name": "G13",
+        "capacity": "6",
+        "facilities": {
+            "projector": "true",
+            "tv": "true",
+            "whiteboard": "true"
+        }
+    },
+    {
+        "name": "G14",
+        "capacity": "6",
+        "facilities": {
+            "projector": "true",
+            "tv": "true",
+            "whiteboard": "true"
+        }
+    },
+    {
+        "name": "G15",
+        "capacity": "10",
+        "facilities": {
+            "projector": "false",
+            "tv": "false",
+            "whiteboard": "false"
+        }
+    },
+    {
+        "name": "G16",
+        "capacity": "10",
+        "facilities": {
+            "projector": "false",
+            "tv": "false",
+            "whiteboard": "false"
+        }
+    },
+    {
+        "name": "G17",
+        "capacity": "6",
+        "facilities": {
+            "projector": "false",
+            "tv": "false",
+            "whiteboard": "false"
+        }
+    },
+    {
+        "name": "G18",
+        "capacity": "4",
+        "facilities": {
+            "projector": "false",
+            "tv": "false",
+            "whiteboard": "true"
+        }
+    },
+    {
+        "name": "G19",
+        "capacity": "8",
+        "facilities": {
+            "projector": "true",
+            "tv": "true",
+            "whiteboard": "true"
+        }
+    },
+    {
+        "name": "G20",
+        "capacity": "8",
+        "facilities": {
+            "projector": "true",
+            "tv": "true",
+            "whiteboard": "true"
+        }
+    }
+]
