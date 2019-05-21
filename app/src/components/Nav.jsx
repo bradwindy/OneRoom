@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
+import Logo from "../images/logodesign.svg";
 
 //import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
@@ -25,8 +26,8 @@ class Nav extends Component {
 
                 <header>
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                        <a className="navbar-brand" href="/">
-                            RoomEase
+                    <a className="navbar-brand" href="/">
+                        <img src={Logo} width="80" height="50" alt=""/>
                         </a>
                         <button
                             className="navbar-toggler"
@@ -61,7 +62,9 @@ class Nav extends Component {
             return (
                 <header>
                     <nav className="navbar navbar-light bg-light">
-                        <span className="navbar-brand mb-0 ">RoomEase</span>
+                    <a className="navbar-brand" href="/">
+                        <img src={Logo} width="80" height="50" alt=""/>
+                        </a>
                     </nav>
                 </header>
             );
