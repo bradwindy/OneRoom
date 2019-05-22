@@ -19,7 +19,8 @@ const path = require('path');
  */
 mongoose
   .connect(
-      "mongodb://heroku_tr09kvn5:nen20kn4oc4q5ihl7p1dq4b5nm@ds151076.mlab.com:51076/heroku_tr09kvn5",
+      //"mongodb://heroku_tr09kvn5:nen20kn4oc4q5ihl7p1dq4b5nm@ds151076.mlab.com:51076/heroku_tr09kvn5",
+      "mongodb://localhost/Roomease",
     { useCreateIndex: true, useNewUrlParser: true },
     function() {
         /* dummy function */
