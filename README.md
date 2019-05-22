@@ -155,6 +155,7 @@ cd /Users/YOURNAME/Room_Booking_System
 
 ## Directory and File Breakdown
 
+| 
 ### The app directory - Client
 This directory refers to the front end of the system.
 **_Refer to app folder README for more details._**
@@ -163,7 +164,7 @@ This directory refers to the front end of the system.
 
 ### Backend - API's, Server and Database
 
-The root of this project consists of five main directories `controllers`, `helpers`, `models`, `routes` and `tests`. It also consists of two main files `server.js` and `passport.js`.
+The root of this project consists of five main directories `routes`, `helpers`, `controllers`, `models` and `tests`. It also consists of two main files `server.js` and `passport.js`.
 
 `routes` - this directory solely consists of our Express.js routes. This is the entry point of any data from the frontend. The routes usually include several functions taken from the `helpers` and `controllers` directories.
 
@@ -171,9 +172,13 @@ The root of this project consists of five main directories `controllers`, `helpe
 
 `controllers` - this directory focuses on defining the logic of the routes stored in `routes`. For example, we have a route /register, the AuthController will store all the user details which is passed via the /register route, into the database, only after the data has been validated by a `helper` . So a controller can be thought of as an interface between the database and our routes.
 
+`models` - this directory focuses on defining the MongoDB schemas for a User, Room and Booking. The model is usually the last step in the API request, which involves either storing/accessing/updating data and returning a success or failure status. 
+
+`tests` - this directory focuses on defining unit and integration tests for the backend. This involves test to check if a database connection is succesful, storing, reading and modifying data in the database is working individually through their respective funtions or together as a controller and API.
+
 `server.js` is our main backend/server file. This file will provide access to all the routes in the `routes` directory and can be considered as the brain of the backend. It will also list all the middleware such as bodyParser (which will convert the incoming data into JSON). It also helps establish a connection to our MongoDB database.
 
-
+`passport.js` is the main file which handles authentication and security. It provides functions which allow the backend to authorise a user by generating a JWT token when the user logs in. This token is then validated each time the user tries to access any restricted functionality through the mechanism of 'protected routes' which involves sending the earlier generated JWT token which each request.
 
 ### Common files in Directories
 
