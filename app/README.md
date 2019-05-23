@@ -13,8 +13,8 @@ A room booking system for the University of Otago's Business School.
 
 ## Development
 
-The front-end of this project was developed using React.js, Bootstrap css,
-React Router, and Sweet Alert 2. 
+The front-end of this project was developed using React, Bootstrap,
+React Router, Font Awesome, Material Design Bootstrap and Confirm Alert. 
 
 ## Structure
 
