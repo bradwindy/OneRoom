@@ -32,5 +32,9 @@ The React application is structured as follows:
     - **No Match Page:** The page displayed when a route that does not exist is accessed.
     - **Room:** The component that deals with displaying the details of a room.
     - **Rooms:** The component that displays a list of rooms available and allows the user to book one.
+    
+## Licenses
+
+Licenses are included within their own packages or within LICENCES file. A list is available in licenses.csv
 
 
