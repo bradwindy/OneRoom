@@ -1,6 +1,5 @@
 const User = require("../models/userModel");
 const express = require('express');
-const server = express();
 
 module.exports = {
   register: async (req, res, next) => {
@@ -25,6 +24,7 @@ module.exports = {
     //next();
   },
 
+  // Template route to check if our JWT Token auth is working. Testing purposes only.
   secret: async (req, res, next) => {
     console.log('Access to secret resource!');
     res.json({ secret: "resource" });
