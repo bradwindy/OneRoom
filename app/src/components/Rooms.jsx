@@ -128,12 +128,8 @@ class Rooms extends Component {
         }
 
         const uName = localStorage.getItem("email");
-
         const userInfo = await axios.get('/user/' + uName);
-
         const user = userInfo.data._id;
-
-        console.log(user);
 
         await axios.put('/booking/newBooking/' + roomID, {
             startTime: formatDateStart, endTime: formatDateEnd, roomId: roomID, bookingName, user

@@ -47,7 +47,7 @@ mongoose
     process.exit(1);
   });
 
-/** Middlewares */
+/** Middleware */
 server.use(morgan("dev"));
 
 // Allows our Express app/server to use JSON data

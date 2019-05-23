@@ -11,11 +11,11 @@ class ThankYou extends Component {
                         </h2>
                     </div>
                     <div className="pl-4 pr-4 row justify-content-center align-items-center pt-2">
-                        <h4 className="font-weight-bold text-center pl-4 pr-4 text-secondary">
+                        <h4 className="font-weight-bold text-center pl-4 pr-4 text-success">
                             Thank you for registering with Roomease
                         </h4>
                     </div>
-                    <div className="pl-4 pr-4 row justify-content-center align-items-center pt-4">
+                    <div className="pl-4 pr-4 row justify-content-center align-items-center pt-3">
                         <a className="btn btn-primary" href="/login" role="button">Proceed to Log In</a>
                     </div>
                 </div>

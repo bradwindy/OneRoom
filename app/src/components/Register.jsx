@@ -7,59 +7,13 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import FormValidator from "./FormValidator";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
 
 //import Background from "../images/background_profile.png";
 
 class Register extends Component {
-    /**  Takes the value of anything that is typed by the user for the form fields
-     *   and sets the state for the form field above.
-     *   Source - https://reactjs.org/docs/forms.html
-     */
-
-    handleChange = event => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    };
-
-    /** HandleSubmit is triggered when the sign up form is submitted */
-    handleSubmit = event => {
-        // Stopping the browser from reloading the page
-        event.preventDefault();
-
-        // Making a new object called user which takes all the inputted form details
-        const user = {
-            name: this.state.name,
-            studentId: this.state.studentId,
-            username: this.state.username,
-            email: this.state.email + "@student.otago.ac.nz",
-            password: this.state.password,
-        };
-
-        // Calling a validator to validate state on submit
-        const validation = this.validator.validate(this.state);
-        // setting validation within state
-        this.setState({validation});
-        // Letting the validator know in the future if we have submitted this form before
-        this.submitted = true;
-
-        // Only POST using axios if the form is all valid
-        if (validation.isValid) {
-            /** Using Axios to POST this to our /register API and passing the user object as a payload */
-            //axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
-            axios.post('/auth/register', user)
-                .then(res => {
-                    window.location.href = "/thanks";
-                }).catch(error => {
-
-                if (error.response.status === 403) {
-                    alert("User already exists!")
-                }
-            });
-        }
-    };
-
-    // Constructor for login object
+    // Constructor for register object
     constructor(props) {
         super(props);
 
@@ -72,12 +26,6 @@ class Register extends Component {
              * ValidWhen: What the result of the method above needs to be for the rule to be valid\
              * Message: Message to be displayed to the user upon invalid field
              */
-            {
-                field: 'username',
-                method: 'isEmpty',
-                validWhen: false,
-                message: 'Username is required.'
-            },
             {
                 field: 'studentId',
                 method: 'isEmpty',
@@ -115,7 +63,14 @@ class Register extends Component {
                 method: 'matches',
                 args: [new RegExp("([A-z]{5}[0-9]{3})")],
                 validWhen: true,
-                message: 'Must be a valid student email username.'
+                message: 'Must be a valid student username.'
+            },
+            {
+                field: 'email',
+                method: 'isLength',
+                args: [{min: 8, max: 8}],
+                validWhen: true,
+                message: 'Email name must be 8 characters in length'
             },
             {
                 field: 'password',
@@ -137,6 +92,53 @@ class Register extends Component {
             password: '',
             validation: this.validator.valid(),
         };
+    };
+
+    /**  Takes the value of anything that is typed by the user for the form fields
+     *   and sets the state for the form field above.
+     *   Source - https://reactjs.org/docs/forms.html
+     */
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    };
+
+    /** HandleSubmit is triggered when the sign up form is submitted */
+    handleSubmit = async event => {
+        // Stopping the browser from reloading the page
+        event.preventDefault();
+
+        // Making a new object called user which takes all the inputted form details
+        const user = {
+            name: this.state.name,
+            studentId: this.state.studentId,
+            username: this.state.email,
+            email: this.state.email + "@student.otago.ac.nz",
+            password: this.state.password,
+        };
+
+        // Calling a validator to validate state on submit
+        const validation = this.validator.validate(this.state);
+        // setting validation within state
+        this.setState({validation});
+        // Letting the validator know in the future if we have submitted this form before
+        this.submitted = true;
+
+        // Only POST using axios if the form is all valid
+        if (validation.isValid) {
+            /** Using Axios to POST this to our /register API and passing the user object as a payload */
+            //axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
+            await axios.post('/auth/register', user)
+                .then(res => {
+                    window.location.href = "/thanks";
+                }).catch(error => {
+
+                    if (error.response.status === 403) {
+                        alert("User already exists!")
+                    }
+                });
+        }
     };
 
     /** Sign Up Form using HTML and Bootstrap */
@@ -187,22 +189,6 @@ class Register extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="inputUsername3" className="col-sm-2 control-label">Evision Username:</label>
-                        <div className="col-sm-10">
-                            <input type="text"
-                                   className={validation.username.classText}
-                                   id="inputUsername3"
-                                   placeholder="Username"
-                                   name="username"
-                                   onChange={this.handleChange}
-                            />
-                            <small id="" className="form-text text-danger pl-1">
-                                {validation.username.message}
-                            </small>
-                        </div>
-                    </div>
-
-                    <div className="form-group row">
                         <label htmlFor="inputEmail3" className="col-sm-2 control-label">Email:</label>
                         <div className="col-sm-10 input-group">
                             <input type="text"
@@ -248,6 +234,7 @@ class Register extends Component {
                         <div className="col-sm-2">
                         </div>
                         <div className="col-sm-offset-2 col-sm-10">
+                            <a className="btn btn-light mt-2" href="/login"><FontAwesomeIcon icon="chevron-left"/> Back</a>
                             <button type="submit" className="btn btn-primary mt-2">Register</button>
                         </div>
                     </div>

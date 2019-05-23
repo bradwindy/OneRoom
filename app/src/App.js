@@ -75,7 +75,6 @@ class App extends Component {
 
         for (let index = 0; index < bookingArr.length; ++index) {
             if (bookingArr[index].bookingId === bookingIDRemove) {
-                console.log(bookingArr[index]);
                 bookingArr.splice(index, 1);
             }
         }
