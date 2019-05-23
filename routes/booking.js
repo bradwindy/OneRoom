@@ -1,8 +1,5 @@
-const express = require('express');
-const server = express();
 const router = require('express-promise-router')();
 const { authJWT } = require('../passport');
-const { validateBody, schemas } = require('../helpers/routeHelpers'); // calling both things present in the helper file
 const BookingController = require('../controllers/bookingController.js');
 
 // GET all available rooms for user
