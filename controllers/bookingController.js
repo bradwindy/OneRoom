@@ -1,13 +1,10 @@
-const mongoose = require("mongoose");
 const Room = require("../models/roomModel");
 const express = require("express");
-const server = express();
 const moment = require('moment/moment');
 const momentTimezone = require('moment-timezone');
-const { authJWT } = require('../passport');
 
 module.exports = {
-    // GET - Get rooms that are available from database
+    // GET - Get rooms that are available from database - This route has not been completed
     /**
      * 1. GET all room documents and get their bookings
      * 2. Using the date and time passed from the user, loop through each booking for
@@ -128,6 +125,7 @@ module.exports = {
 
 
   // GET - Show deatils about a certain booking by accesing the database and retriving the details in JSON
+  // This route has not been completed
   details: async (req, res) => {
       const name = req.params.name;
       Room.findOne({
@@ -137,7 +135,7 @@ module.exports = {
       });
     },
 
-    /** PUT - Update Logic Flow
+    /** PUT - Update Logic Flow - This route has not been completed.
      *  1. Look for the item, if not existing, return 404 and exit route.
      *  2. If exisiting, validate the update using Joi and check that there are no time clashes.
      *  3. If validation fails, return 400 - bad request
@@ -165,11 +163,8 @@ module.exports = {
       // return res.status(404).send("The booking with the given ID was not found");
 
       delete: async (req, res) => {
-        console.log("works");
         const bookingId = req.params.bookingId;
         const roomId = req.params.roomId;
-        console.log(bookingId);
-        console.log(roomId);
         await Room.findByIdAndUpdate(
           roomId,
           { $pull: { bookings: { _id: bookingId } } },
