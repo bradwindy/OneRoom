@@ -39,7 +39,14 @@ class Login extends Component {
                 args: [new RegExp("([A-z]{5}[0-9]{3})")],
                 validWhen: true,
                 message: "Must be a valid student email username."
-            }
+            },
+            {
+                field: 'email',
+                method: 'isLength',
+                args: [{min: 8, max: 8}],
+                validWhen: true,
+                message: 'Email name must be 8 characters in length'
+            },
         ]);
 
         // if form has been submitted before
@@ -141,9 +148,7 @@ class Login extends Component {
 
     render() {
         // Setting validation conditionally
-        let validation = this.submitted
-            ? this.validator.validate(this.state)
-            : this.state.validation;
+        let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation;
         // noinspection HtmlUnknownTarget
 
         if (this.state.redirect) {
@@ -236,7 +241,7 @@ class Login extends Component {
                             <div className="col-sm-10 pl-2 mt-1">
                                 <button
                                     type="submit"
-                                    className="btn btn-primary"
+                                    className="btn btn-success"
                                     onClick={this.handleSubmit}
                                 >
                                     Log in

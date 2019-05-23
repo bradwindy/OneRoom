@@ -47,30 +47,32 @@ class Book extends Component {
         }
 
         return (
-            <div className="p-4">
-                <Route
-                    path={`${this.props.match.path}`}
-                    render={(props) =>
-                        <BookNav
-                            {...props}
-                            // This is where we can pass values or functions to a rendered component
-                            parentState={this.state}
-                            callbackFromParent={this.callback}
-                            searchFunc={this.roomRequest}
-                        />
-                    }
-                />
-                <Route
-                    path={`${this.props.match.path}:bookPage`}
-                    render={(props) =>
-                        <BookPage
-                            {...props}
-                            // This is where we can pass values or functions to a rendered component
-                            parentState={this.state}
-                            callbackFromParent={this.callback}
-                        />
-                    }
-                />
+            <div className="row justify-content-center no-gutters">
+                <div className="col-sm-5 p-0 no-gutters">
+                    <Route
+                        path={`${this.props.match.path}`}
+                        render={(props) =>
+                            <BookNav
+                                {...props}
+                                // This is where we can pass values or functions to a rendered component
+                                parentState={this.state}
+                                callbackFromParent={this.callback}
+                                searchFunc={this.roomRequest}
+                            />
+                        }
+                    />
+                    <Route
+                        path={`${this.props.match.path}:bookPage`}
+                        render={(props) =>
+                            <BookPage
+                                {...props}
+                                // This is where we can pass values or functions to a rendered component
+                                parentState={this.state}
+                                callbackFromParent={this.callback}
+                            />
+                        }
+                    />
+                </div>
             </div>
         );
     }
@@ -84,7 +86,7 @@ class BookPage extends Component {
         // conditional rendering of the content of the page depending on the URL
         if (page === 'date') {
             return (
-                <div className="container">
+                <div className="container pt-2">
                     <div className="row justify-content-center align-items-center no-gutters">
                         <h2 className="pl-3 pb-3 pt-4 mt-2 font-weight-bold">Select Date:</h2>
                         <DatePicker className="pb-4"
@@ -132,7 +134,6 @@ class BookPage extends Component {
                                     <option value="11">7:00pm</option>
                                     <option value="12">8:00pm</option>
                                     <option value="13">9:00pm</option>
-                                    <option value="14">10:00pm</option>
                                 </select>
                             </div>
                         </div>
@@ -209,28 +210,26 @@ class BookNav extends Component {
     // This is the function that returns the navigation buttons for the date page.
     navButtons(nextPath, pageNumber) {
         return (
-            <div className="container align-middle">
-                <div className="container align-middle">
-                    <div
-                        className="row col-sm-2 fixed-bottom p-3 pb-5 mb-5 justify-content-center align-items-center no-gutters">
+            <div className="container">
+                <div className="col">
+                    <div className="row fixed-bottom p-3 pb-5 mb-5 justify-content-center ">
                         <p className="mr-2 mb-0 font-weight-bold">{pageNumber}</p>
                     </div>
 
-                    <div
-                        className="row col-sm-2 fixed-bottom p-3 pb-4 justify-content-center align-items-center no-gutters">
+                    <div className="row fixed-bottom p-3 pb-4 justify-content-center ">
                         {/*Will need to make the link below go back to the previous page and always be consistent*/}
                         <button onClick={this.props.history.goBack}
                                 className="btn btn-primary font-weight-bold mr-2">
                             <FontAwesomeIcon icon="chevron-left"/> Back
                         </button>
                         {/*Same with this button, next page rather than specific page, have a variable generated
-                    depending this.props.match.params.bookPage in render(), which contains next page and then added to
-                    this url instead of /time }*/}
+                        depending this.props.match.params.bookPage in render(), which contains next page and then added to
+                        this url instead of /time }*/}
                         <Link to={`${nextPath}`} className="btn btn-primary font-weight-bold">
                             Next <FontAwesomeIcon icon="chevron-right"/>
                         </Link>
                     </div>
-                </div>
+                    </div>
             </div>
         );
     };

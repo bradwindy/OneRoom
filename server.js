@@ -19,10 +19,8 @@ const path = require('path');
  */
 mongoose
   .connect(
-      // Use this for hosting MongoDB locally
-      "mongodb://localhost/Roomease",
-      //Uncomment this at the end for Heroku Deployment
       //"mongodb://heroku_tr09kvn5:nen20kn4oc4q5ihl7p1dq4b5nm@ds151076.mlab.com:51076/heroku_tr09kvn5",
+      "mongodb://localhost/Roomease",
     { useCreateIndex: true, useNewUrlParser: true },
     function() {
         /* dummy function */
@@ -49,7 +47,7 @@ mongoose
     process.exit(1);
   });
 
-/** Middlewares */
+/** Middleware */
 server.use(morgan("dev"));
 
 // Allows our Express app/server to use JSON data
