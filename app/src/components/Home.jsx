@@ -20,28 +20,39 @@ class Home extends Component {
         this.componentDidMount = this.componentDidMount.bind(this);
     }
 
+    // Runs when page is mounted/run/rendered
     componentDidMount = () => {
+        // Get the booking array from local storage.
         let bookingArr = JSON.parse(localStorage.getItem("bookingArray"));
 
+        // If it is null, as in not current array, replace with an empty array
         if (bookingArr == null) {
             bookingArr = [];
         }
 
+        // set the list of booking in state to that of the array
         this.setState({bookings: bookingArr});
     };
 
+    // Function that cancels booking
     cancelBooking = async (bookingId, roomId) => {
+        // execute remove booking function, this is passed to here from App.js using react router.
         this.props.removeBookingFunc(bookingId);
 
+        // Delete booking using axios
         await axios.delete(`/booking/deleteBooking/` + roomId + '/' + bookingId)
             .then(res => {
-                console.log(res);
+                //console.log(res);
             });
 
+        // Reload the page to update list of cards
         window.location.reload();
     };
 
+    // Function run on the press of the cancel button. Combines popup confirmation with cancel function
     submitDelete = (bookingId, roomId) => {
+
+        // Custom alert popup
         confirmAlert({
             customUI: ({onClose}) => {
                 return (
@@ -68,10 +79,12 @@ class Home extends Component {
     };
 
     render() {
+        // If there is no JWT token in local storage, the user must not be logged in and so redirect to login page
         if (localStorage.getItem('jwtToken') === null) {
             window.location.href = "/login";
         }
 
+        // If there are no bookings, display a card to inform user, with a button to create a new booking
         if (this.state.bookings === undefined || this.state.bookings.length === 0) {
             return (
                 <div
@@ -100,7 +113,9 @@ class Home extends Component {
                     </div>
                 </div>
             );
+
         } else {
+            // If there are bookings, maps bookings to a list of cards.
             return (
                 // "Home" component, a scrollable list of cards with booking info and buttons. Just example info for now
                 <div

@@ -6,3 +6,6 @@ node_modules/
 # misc
 .DS_Store
 /.idea/
+/.DS_Store/
+gource.mp4
+gource2.mp4

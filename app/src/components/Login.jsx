@@ -129,6 +129,8 @@ class Login extends Component {
                     this.setState({redirect: true});
                 })
                 .catch(error => {
+                    // If there is a 401 error back from the server,
+                    // inform the user that the username and or password are incorrect
                     if (error.response.status === 401) {
                         alert("Username and/or password are incorrect.");
                     }
@@ -138,6 +140,7 @@ class Login extends Component {
         //this.handleClearForm(event);
     };
 
+    // Runs when page is mounted/run/rendered, get info from local storage and set respective values in state
     componentDidMount = () => {
         const checkbox = localStorage.getItem("checkbox") === "true";
         const email = checkbox ? localStorage.getItem("email") : "";
@@ -149,9 +152,10 @@ class Login extends Component {
     render() {
         // Setting validation conditionally
         let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation;
-        // noinspection HtmlUnknownTarget
 
+        // noinspection HtmlUnknownTarget
         if (this.state.redirect) {
+            // Redirect on correct login
             return <Redirect to={"/"}/>;
         } else {
             return (
