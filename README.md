@@ -155,7 +155,17 @@ cd /Users/YOURNAME/Room_Booking_System
 
 ## Directory and File Breakdown
 
-| 
+### API Routes
+POST: /register - creates new user
+POST: /auth/signin - logs in user based on input
+PUT: /booking/newBooking/:id - updates a particular booking (by replacing)
+GET: /booking/showBooking - displays bookings
+DELETE: /booking/deletebooking/:roomId/:bookingId - deletes particular booking
+GET: /rooms/all - displays all rooms
+GET: /rooms/:name - gets a particular room given its name
+GET: /user/:username - gets a particular user given their username
+
+
 ### The app directory - Client
 This directory refers to the front end of the system.
 **_Refer to app folder README for more details._**
