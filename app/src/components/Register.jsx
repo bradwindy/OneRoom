@@ -9,9 +9,6 @@ import axios from 'axios';
 import FormValidator from "./FormValidator";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-
-//import Background from "../images/background_profile.png";
-
 class Register extends Component {
     // Constructor for register object
     constructor(props) {
@@ -133,7 +130,7 @@ class Register extends Component {
                 .then(res => {
                     window.location.href = "/thanks";
                 }).catch(error => {
-
+                    // If there is a 403 error returned, a user must already exist and so inform user
                     if (error.response.status === 403) {
                         alert("User already exists!")
                     }

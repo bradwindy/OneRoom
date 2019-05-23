@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+// Thank you page displayed after user has registered
 class ThankYou extends Component {
     render() {
         return (

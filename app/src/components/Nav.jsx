@@ -14,6 +14,7 @@ class Nav extends Component {
     };
 
     render() {
+        // Regex's to render a blank nav bar on pages where the menu is not needed
         let regexLogin = /\/login/g;
         let regexThanks = /\/thanks/g;
         let regexReg = /\/register/g;
