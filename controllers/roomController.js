@@ -1,6 +1,4 @@
 const Room = require('../models/roomModel');
-const express = require('express');
-const server = express();
 
 
 module.exports = {
