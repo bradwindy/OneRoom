@@ -7,19 +7,19 @@ const BookingController = require('../controllers/bookingController.js');
 
 // GET all available rooms for user
 router.route('/available')
-    .get(BookingController.available);
+    .get(authJWT,BookingController.available);
 
 // PUT a booking - Make a booking
 router.route('/newBooking/:id')
-    .put(BookingController.new);
+    .put(authJWT,BookingController.new);
 
 // GET details about a booking
 router.route('/showBooking')
-    .get(BookingController.details);
+    .get(authJWT,BookingController.details);
 
 // PUT - Update a booking
 router.route('/editBooking')
-    .put(BookingController.edit);
+    .put(authJWT,BookingController.edit);
     /** Update Logic Flows
      *  1. Look for the item, if not existing, return 404 and exit route.
      *  2. If exisiting, validate the update using Joi and check that there are no time clashes.
