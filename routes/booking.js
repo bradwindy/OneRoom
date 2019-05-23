@@ -33,7 +33,7 @@ router.route('/editBooking')
 
 // DELETE a booking
 router.route('/deleteBooking/:roomId/:bookingId')
-    .delete(authJWT, BookingController.delete);
+    .delete(BookingController.delete);
     /** Delete Logic Flow
      *  1. Look for the item, if not existing, return 404 and exit route.
      *  2. If existing, delete the item
