@@ -13,7 +13,7 @@ class ThankYou extends Component {
                     </div>
                     <div className="pl-4 pr-4 row justify-content-center align-items-center pt-2">
                         <h4 className="font-weight-bold text-center pl-4 pr-4 text-success">
-                            Thank you for registering with Roomease
+                            Thank you for registering with OneRoom
                         </h4>
                     </div>
                     <div className="pl-4 pr-4 row justify-content-center align-items-center pt-3">

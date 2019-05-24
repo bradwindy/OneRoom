@@ -212,20 +212,19 @@ class BookNav extends Component {
         return (
             <div className="container">
                 <div className="col">
-                    <div className="row fixed-bottom p-3 pb-5 mb-5 justify-content-center ">
+                    {/*<div className="row fixed-bottom p-3 pb-5 mb-5 justify-content-center ">
                         <p className="mr-2 mb-0 font-weight-bold">{pageNumber}</p>
-                    </div>
-
-                    <div className="row fixed-bottom p-3 pb-4 justify-content-center ">
+                    </div>*/}
+                    <div className="row fixed-bottom p-3 mb-4 pb-5 justify-content-center ">
                         {/*Will need to make the link below go back to the previous page and always be consistent*/}
                         <button onClick={this.props.history.goBack}
-                                className="btn btn-primary font-weight-bold mr-2">
+                                className="btn btn-blue-grey font-weight-bold mr-2">
                             <FontAwesomeIcon icon="chevron-left"/> Back
                         </button>
                         {/*Same with this button, next page rather than specific page, have a variable generated
                         depending this.props.match.params.bookPage in render(), which contains next page and then added to
                         this url instead of /time }*/}
-                        <Link to={`${nextPath}`} className="btn btn-primary font-weight-bold">
+                        <Link to={`${nextPath}`} className="btn btn-blue-grey font-weight-bold">
                             Next <FontAwesomeIcon icon="chevron-right"/>
                         </Link>
                     </div>
@@ -240,20 +239,20 @@ class BookNav extends Component {
 
             <div className="container">
                 <div className="col">
-                    <div className="row fixed-bottom p-3 pb-5 mb-5 justify-content-center ">
+                    {/*<div className="row fixed-bottom p-3 pb-5 mb-5 justify-content-center ">
                         <p className="mr-2 mb-0 font-weight-bold">{pageNumber}</p>
-                    </div>
+                    </div>*/}
 
-                    <div className="row fixed-bottom p-3 pb-4 justify-content-center ">
+                    <div className="row fixed-bottom p-3 mb-4 pb-5 justify-content-center ">
                         {/*Will need to make the link below go back to the previous page and always be consistent*/}
                         <button onClick={this.props.history.goBack}
-                                className="btn btn-primary font-weight-bold mr-2">
+                                className="btn btn-blue-grey font-weight-bold mr-2">
                             <FontAwesomeIcon icon="chevron-left"/> Back
                         </button>
                         {/*Same with this button, next page rather than specific page, have a variable generated
                         depending this.props.match.params.bookPage in render(), which contains next page and then added to
                         this url instead of /time }*/}
-                        <Link className="btn btn-primary font-weight-bold" to={{
+                        <Link className="btn btn-info font-weight-bold" to={{
                             pathname: '/rooms',
                             data: this.props.parentState,
                         }}><FontAwesomeIcon icon="search"/> Search</Link>

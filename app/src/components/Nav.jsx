@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import Logo from "../images/LogoDesign-01-01.png";
-
 
 //import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
@@ -29,9 +27,9 @@ class Nav extends Component {
                  */
 
                 <header>
-                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <a className="navbar-brand" href="/">
-                        <img src={Logo} width="140" height="35" alt=""/>
+                    <nav className="navbar navbar-expand-lg navbar-dark fixed-bottom peach-gradient">
+                        <a className="navbar-brand font-weight-bold text-white" href="/">
+                            OneRoom
                         </a>
                         <button
                             className="navbar-toggler"
@@ -65,9 +63,9 @@ class Nav extends Component {
             // noinspection HtmlUnknownTarget
             return (
                 <header>
-                    <nav className="navbar navbar-light bg-light">
-                    <a className="navbar-brand" href="/">
-                        <img src={Logo} width="140" height="35" alt=""/>
+                    <nav className="navbar navbar-light navbar-dark fixed-bottom peach-gradient">
+                        <a className="navbar-brand font-weight-bold text-white" href="/">
+                            OneRoom
                         </a>
                     </nav>
                 </header>

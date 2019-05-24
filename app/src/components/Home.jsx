@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import Background from "../images/background_two.png";
-import BackgroundTwo from "../images/background_three.png";
+import Background from "../images/fogg-no-comments.png";
+import BackgroundTwo from "../images/workflow.png";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -88,13 +88,13 @@ class Home extends Component {
         if (this.state.bookings === undefined || this.state.bookings.length === 0) {
             return (
                 <div
-                    className="container pt-3 p-2"
+                    className="container mt-2 p-3"
                     style={{
                         backgroundImage: "url(" + Background + ")",
                         backgroundPosition: "bottom center",
                         backgroundRepeat: "no-repeat",
-                        backgroundSize: "60%",
-                        height: "700px"
+                        backgroundSize: "100%",
+                        height: "92vh"
                     }}
                 >
 
@@ -105,7 +105,7 @@ class Home extends Component {
                             <p className="card-text">
                                 Don't miss out! Book your room now.
                             </p>
-                            <a href="/book/date" className="btn btn-success font-weight-bold">
+                            <a href="/book/date" className="btn peach-gradient font-weight-bold text-white">
                                 <FontAwesomeIcon icon="plus"/> Book Room
                             </a>
                         </div>
@@ -125,13 +125,13 @@ class Home extends Component {
                         backgroundPosition: "bottom center",
                         backgroundRepeat: "no-repeat",
                         backgroundSize: "90%",
-                        height: "700px"
+                        height: "92vh"
                     }}
                 >
-                    <h2 className="pl-3 pb-3 pt-2 font-weight-bold">My Bookings:</h2>
+                    <h2 className="pl-3 pb-3 pt-3 font-weight-bold">My Bookings:</h2>
 
                     {this.state.bookings.map(booking => (
-                        <div className="card m-2" key={booking.bookingId}>
+                        <div className="card ml-3 mr-3 mb-2 mt-2" key={booking.bookingId}>
                             <div className="card-block m-4">
                                 <h4 className="card-title font-weight-bold">
                                     {booking.bookingName}
@@ -166,7 +166,7 @@ class Home extends Component {
                         </div>
                     ))}
                     <div className="text-center pt-3">
-                        <a href="/book/date" className="btn btn-success font-weight-bold">
+                        <a href="/book/date" className="btn peach-gradient text-white font-weight-bold">
                             <FontAwesomeIcon icon="plus"/> Book Another Room
                         </a>
                     </div>

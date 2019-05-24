@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import './App.scss';
-
 import Root from "./components/Root"
 import Home from "./components/Home"
 import Login from "./components/Login"

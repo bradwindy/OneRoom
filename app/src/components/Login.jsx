@@ -178,7 +178,7 @@ class Login extends Component {
                                     <b>Lets get together.</b>
                                 </h1>
                                 <p>
-                                    RoomEase lets you book a meeting room to suit you and your
+                                    OneRoom lets you book a meeting room to suit you and your
                                     groups needs exactly.
                                 </p>
                             </div>

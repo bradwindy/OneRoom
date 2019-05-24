@@ -55,7 +55,7 @@ class Rooms extends Component {
         // Map list of rooms to cards with room information badges
         return (
             <div className="container pt-4 p-2">
-                <h2 className="pl-3 pb-3 pt-2"><b>Availabilities:</b></h2>
+                <h2 className="pl-3 pb-3 pt-2 font-weight-bold">Availabilities:</h2>
                 {this.state.rooms.map((room) =>
 
                     <div className="card m-2" key={room.name}>
