@@ -237,26 +237,27 @@ class BookNav extends Component {
     // This is the function that returns the navigation buttons for the time page with a search button instead of a next button.
     searchNavButtons(pageNumber) {
         return (
-            <div className="container align-middle">
-                <div
-                    className="row col-sm-2 fixed-bottom p-3 pb-5 mb-5 justify-content-center align-items-center no-gutters">
-                    <p className="mr-2 mb-0 font-weight-bold">{pageNumber}</p>
-                </div>
 
-                <div
-                    className="row col-sm-2 fixed-bottom p-3 pb-4 justify-content-center align-items-center no-gutters">
-                    {/*Will need to make the link below go back to the previous page and always be consistent*/}
-                    <button onClick={this.props.history.goBack}
-                            className="btn btn-primary font-weight-bold mr-2">
-                        <FontAwesomeIcon icon="chevron-left"/> Back
-                    </button>
-                    {/*Same with this button, next page rather than specific page, have a variable generated
-                    depending this.props.match.params.bookPage in render(), which contains next page and then added to
-                    this url instead of /time }*/}
-                    <Link className="btn btn-primary font-weight-bold" to={{
-                        pathname: '/rooms',
-                        data: this.props.parentState,
-                    }}><FontAwesomeIcon icon="search"/> Search</Link>
+            <div className="container">
+                <div className="col">
+                    <div className="row fixed-bottom p-3 pb-5 mb-5 justify-content-center ">
+                        <p className="mr-2 mb-0 font-weight-bold">{pageNumber}</p>
+                    </div>
+
+                    <div className="row fixed-bottom p-3 pb-4 justify-content-center ">
+                        {/*Will need to make the link below go back to the previous page and always be consistent*/}
+                        <button onClick={this.props.history.goBack}
+                                className="btn btn-primary font-weight-bold mr-2">
+                            <FontAwesomeIcon icon="chevron-left"/> Back
+                        </button>
+                        {/*Same with this button, next page rather than specific page, have a variable generated
+                        depending this.props.match.params.bookPage in render(), which contains next page and then added to
+                        this url instead of /time }*/}
+                        <Link className="btn btn-primary font-weight-bold" to={{
+                            pathname: '/rooms',
+                            data: this.props.parentState,
+                        }}><FontAwesomeIcon icon="search"/> Search</Link>
+                    </div>
                 </div>
             </div>
         );
