@@ -51,6 +51,13 @@ Now, clone the repo
 git clone https://isgb.otago.ac.nz/info310/git/cowen/Room_Booking_System.git
 ```
 
+Check that the Room_Booking_System directory is cloned and installed into your computer. Then open the directory.
+
+```
+dir
+cd Room_Booking_System
+```
+
 Change to the `app` folder and install development and production dependencies.
 
 ```
@@ -93,6 +100,13 @@ Now, clone the repo
 git clone https://isgb.otago.ac.nz/info310/git/cowen/Room_Booking_System.git
 ```
 
+Check that the Room_Booking_System directory is cloned and installed into your computer. Then open the directory.
+
+```
+ls
+cd Room_Booking_System
+```
+
 Change to the `app` folder and install development and production dependencies.
 
 ```
@@ -123,11 +137,24 @@ ls
 
 ### Database Setup
 
-STEPS FOR WINDOWS/MAC USERS:
+STEPS FOR WINDOWS USERS:
+
+Download MongoDB (MSI) for your OS by following the instructions in this link: [Download MongoDB](https://www.mongodb.com/download-center/community)
+
+1. Once MongoDB has been downloaded locate the downloaded MSI file, usually found within your computer's `Downloads` folder.
+
+2. Open the MSI file and install MongoDB by following the installation wizard. Choose the 'Complete' installation option. Also choose the "Install MongoDB Compass" option, usually located on the 5th screen. Click "Install". 
+This should open up MongoDB Compass Community on your computer.
+
+3. On the MongoDB Compass Community application click "Connect". This should setup a MongoDB instance locally on your machine. Do not close this window! This window must be left open for development purposes. 
+
+
+STEPS FOR MAC USERS:
 
 Download MongoDB (ZIP/TGZ) for your OS by following the instructions in this link: [Download MongoDB](https://www.mongodb.com/download-center/community)
 
 1. Once MongoDB has been downloaded locate the downloaded ZIP or TGZ file, usually found within your computer's `Downloads` folder.
+
 2. Open the ZIP or TGZ file and navigate to the `bin` directory and double click the `mongod.pdb` or `mongod` file. This should open a Command Prompt or Terminal window and setup a MongoDB instance locally on your machine. Do not close this window! This window must be left open for development purposes. 
 
 If you would like to exit/stop running the MongoDB instance just press CTRL + C on Windows, or COMMAND + C on Mac.
@@ -155,7 +182,25 @@ cd /Users/YOURNAME/Room_Booking_System
 
 ## Directory and File Breakdown
 
-| 
+### API Routes
+POST: /register - creates new user
+
+POST: /auth/signin - logs in user based on input
+
+PUT: /booking/newBooking/:id - updates a particular booking (by replacing)
+
+GET: /booking/showBooking - displays bookings
+
+DELETE: /booking/deletebooking/:roomId/:bookingId - deletes particular booking
+
+GET: /rooms/all - displays all rooms
+
+GET: /rooms/:name - gets a particular room given its name
+
+GET: /user/:username - gets a particular user given their username
+
+
+
 ### The app directory - Client
 This directory refers to the front end of the system.
 **_Refer to app folder README for more details._**

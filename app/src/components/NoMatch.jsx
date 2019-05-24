@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
 class NoMatch extends Component {
+
+    // Page that displays when user accesses invalid URL
     render() {
         return (
             <div className="container">

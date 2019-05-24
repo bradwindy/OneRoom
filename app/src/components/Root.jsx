@@ -15,7 +15,7 @@ class Root extends Component {
                 {/* this.props.children is the element that is rendered inside the root element in app.js
                 this element depends on the page route. So if you were visiting /login , the login element will be
                 passed here and then displayed*/}
-                <div className="row no-gutters">
+                <div className="row align-items-center no-gutters">
                     <div className="col no-gutters">
                         {this.props.children}
                     </div>

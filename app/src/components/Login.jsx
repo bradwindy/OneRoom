@@ -39,7 +39,14 @@ class Login extends Component {
                 args: [new RegExp("([A-z]{5}[0-9]{3})")],
                 validWhen: true,
                 message: "Must be a valid student email username."
-            }
+            },
+            {
+                field: 'email',
+                method: 'isLength',
+                args: [{min: 8, max: 8}],
+                validWhen: true,
+                message: 'Email name must be 8 characters in length'
+            },
         ]);
 
         // if form has been submitted before
@@ -122,6 +129,8 @@ class Login extends Component {
                     this.setState({redirect: true});
                 })
                 .catch(error => {
+                    // If there is a 401 error back from the server,
+                    // inform the user that the username and or password are incorrect
                     if (error.response.status === 401) {
                         alert("Username and/or password are incorrect.");
                     }
@@ -131,6 +140,7 @@ class Login extends Component {
         //this.handleClearForm(event);
     };
 
+    // Runs when page is mounted/run/rendered, get info from local storage and set respective values in state
     componentDidMount = () => {
         const checkbox = localStorage.getItem("checkbox") === "true";
         const email = checkbox ? localStorage.getItem("email") : "";
@@ -141,12 +151,11 @@ class Login extends Component {
 
     render() {
         // Setting validation conditionally
-        let validation = this.submitted
-            ? this.validator.validate(this.state)
-            : this.state.validation;
-        // noinspection HtmlUnknownTarget
+        let validation = this.submitted ? this.validator.validate(this.state) : this.state.validation;
 
+        // noinspection HtmlUnknownTarget
         if (this.state.redirect) {
+            // Redirect on correct login
             return <Redirect to={"/"}/>;
         } else {
             return (
@@ -236,7 +245,7 @@ class Login extends Component {
                             <div className="col-sm-10 pl-2 mt-1">
                                 <button
                                     type="submit"
-                                    className="btn btn-primary"
+                                    className="btn btn-success"
                                     onClick={this.handleSubmit}
                                 >
                                     Log in

@@ -16,13 +16,16 @@ class Nav extends Component {
     };
 
     render() {
+        // Regex's to render a blank nav bar on pages where the menu is not needed
         let regexLogin = /\/login/g;
+        let regexThanks = /\/thanks/g;
+        let regexReg = /\/register/g;
 
         let url = this.props.location.pathname.toString();
 
-        if (!url.match(regexLogin)) {
+        if (!url.match(regexLogin) && !url.match(regexThanks) && !url.match(regexReg)) {
             return (
-                /******* This here is the  fixed naviagtion bar at the top of the page that hides. If the user is logged in too.
+                /******* This here is the  fixed navigation bar at the top of the page that hides. If the user is logged in too.
                  */
 
                 <header>

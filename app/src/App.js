@@ -8,14 +8,9 @@ import Book from "./components/Book"
 import Rooms from "./components/Rooms"
 import NoMatch from "./components/NoMatch"
 import Register from "./components/Register"
-
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import ThankYou from "./components/ThankYou";
-
 import {library} from '@fortawesome/fontawesome-svg-core';
-
-
-
 import {
     faChevronLeft,
     faChevronRight,
@@ -59,27 +54,34 @@ class App extends Component {
         this.bookingArrayRem = this.bookingArrayRem.bind(this);
     };
 
+    // Function that adds booking to local storage
     bookingArrayAdd = (newBooking) => {
+        // Get booking array from local storage
         let bookingArr = JSON.parse(localStorage.getItem('bookingArray'));
 
+        // if null, make blank
         if (bookingArr === null) {
             bookingArr = [];
         }
 
+        // join in new booking to array
         let joined = bookingArr.concat([newBooking]);
+        // save array back to local storage
         localStorage.setItem('bookingArray', JSON.stringify(joined));
     };
 
+    // Function that removes booking from local storage
     bookingArrayRem = (bookingIDRemove) => {
+        // Get booking array from local storage
         let bookingArr = JSON.parse(localStorage.getItem('bookingArray'));
 
+        // Find booking that matches ID and remove
         for (let index = 0; index < bookingArr.length; ++index) {
             if (bookingArr[index].bookingId === bookingIDRemove) {
-                console.log(bookingArr[index]);
                 bookingArr.splice(index, 1);
             }
         }
-
+        // save array back to local storage
         localStorage.setItem('bookingArray', JSON.stringify(bookingArr));
     };
 

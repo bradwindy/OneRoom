@@ -2,14 +2,11 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-
-
-//import Room from '/Room';
 import moment from 'moment';
 import {Redirect} from "react-router-dom";
 
+// Component that renders a list of room cards
 class Rooms extends Component {
-
     constructor(props) {
         super(props);
 
@@ -23,18 +20,15 @@ class Rooms extends Component {
         this.handleBook = this.handleBook.bind(this);
     }
 
-
-    //decorate the function with async as we are using the await method
-
     componentDidMount = async () => {
-        //const bookingData = this.props.location.data;
         setAuthorizationToken(localStorage.jwtToken);
+        // Get list of rooms from database
         const {data: rooms} = await axios.get('/room/all');
-        //pending > resolved (success) or rejected(failure)
         this.setState({rooms});
         this.setState({redirect: false});
     };
 
+    // Turns boolean value to a yes or no
     trueFalseToYesNo = bool => {
         if (bool) {
             return "Yes"
@@ -43,23 +37,9 @@ class Rooms extends Component {
         }
     };
 
-    /*//Handle booking - recieves the room id of the room to be booked. Passes this through.
-    handleBook = (roomId) => {
-        console.log(roomId);
-        //Need to check if this is working.
-        axios.patch('/newBooking/' + roomId);
-        console.log("Room Id: ", roomId);
-
-        //Update the rooms list to not show the room that has been booked.
-        //This could be a backend thing.
-        const rooms = this.state.rooms.filter(r => r._id !== roomId);
-        this.setState({rooms});
-
-    };*/
-
     //Function to loop through the array of rooms and display them as individual rooms
     getRoomCards() {
-
+        // If there are no rooms returned from database, inform user.
         if (this.state.rooms.length === 0)
           return (
             <div className="card mt-3 w-75 mx-auto mt-5">
@@ -72,8 +52,7 @@ class Rooms extends Component {
             </div>
           );
 
-
-
+        // Map list of rooms to cards with room information badges
         return (
             <div className="container pt-4 p-2">
                 <h2 className="pl-3 pb-3 pt-2"><b>Availabilities:</b></h2>
@@ -109,40 +88,51 @@ class Rooms extends Component {
 
     };
 
+    // Function that handles the booking of the room based on information passed through to this page and room chosen
     handleBook = async (roomName, roomID) => {
+        // Get the data of booking, passed through using Link method of react router
         const bookingData = this.props.location.data;
+
+        // Turn date to moment compatible format
         let proposedDate = bookingData.date + "T00:00:00.000Z";
 
+        // Time list to chosen chosen position in list into integer
         const timeNumList = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
+        // Add time to date
         let momentDateStart = moment(proposedDate).add(timeNumList[bookingData.timePos], 'hour');
         let momentDateEnd = moment(proposedDate).add(timeNumList[parseInt(bookingData.timePos) + parseInt(bookingData.duration)], 'hour');
 
+        // Format datetime to correct value needed for database
         let formatDateStart = moment(momentDateStart).format();
         let formatDateEnd = moment(momentDateEnd).format();
 
+        // Default booking name if no name is provided
         let bookingName = "Booking";
 
+        // If name is provided, adjust booking name
         if (bookingData.name !== "" && bookingData.name !== null) {
             bookingName = bookingData.name;
         }
 
+        // get email value from localstorage
         const uName = localStorage.getItem("email");
-
+        // Get data related to username from database
         const userInfo = await axios.get('/user/' + uName);
-
+        // Get user id from info to save with booking
         const user = userInfo.data._id;
 
-        console.log(user);
-
+        // save booking to database
         await axios.put('/booking/newBooking/' + roomID, {
             startTime: formatDateStart, endTime: formatDateEnd, roomId: roomID, bookingName, user
         })
             .then(res => {
+                // Get resulting booking ID so it can be save locally
                 let booking = res.data.bookings[res.data.bookings.length - 1];
                 this.setState({bookingID: booking._id});
             });
 
+        // create booking object so it can be saved locally. This is so a refresh does not affect list of user bookings
         let newBooking = {
             time: moment.utc(formatDateStart).format('hh:mm a') + " - " + moment.utc(formatDateEnd).format('hh:mm a'),
             roomId: roomID,
@@ -152,7 +142,9 @@ class Rooms extends Component {
             bookingRoomName: roomName,
         };
 
+        // send booking to append function passed from app.js to save locally
         this.props.appendBookingFunc(newBooking);
+        // redirect
         this.setState({redirect: true});
     };
 
