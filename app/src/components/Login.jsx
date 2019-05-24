@@ -3,7 +3,7 @@ import axios from "axios";
 import FormValidator from "./FormValidator";
 import setAuthorizationToken from "../utils/setAuthorizationToken";
 import {Redirect} from "react-router-dom";
-import Background from "../images/background_one.png";
+import Background from "../images/fogg-payment-processed-1.png";
 
 // DOM purify to be used in this file
 class Login extends Component {
@@ -166,16 +166,16 @@ class Login extends Component {
                         backgroundImage: "url(" + Background + ")",
                         backgroundPosition: "bottom center",
                         backgroundRepeat: "no-repeat",
-                        backgroundSize: "400px",
-                        height: "700px"
+                        backgroundSize: "92vw",
+                        height: "92vh"
                     }}
                 >
                     <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
 
                         <div className="form-group row">
                             <div className="col-sm-10">
-                                <h1 className="pt-4">
-                                    <b>Lets get together.</b>
+                                <h1 className="pt-4 font-weight-bold">
+                                    Lets get together.
                                 </h1>
                                 <p>
                                     OneRoom lets you book a meeting room to suit you and your
@@ -245,13 +245,13 @@ class Login extends Component {
                             <div className="col-sm-10 pl-2 mt-1">
                                 <button
                                     type="submit"
-                                    className="btn btn-success"
+                                    className="btn btn-info"
                                     onClick={this.handleSubmit}
                                 >
                                     Log in
                                 </button>
                                 <a
-                                    className="btn btn-primary m-2"
+                                    className="btn peach-gradient text-white m-2"
                                     href="/register"
                                     role="button">Create Account</a>
 

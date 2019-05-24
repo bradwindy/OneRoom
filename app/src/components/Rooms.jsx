@@ -64,13 +64,13 @@ class Rooms extends Component {
                             <ul className="card-text list-unstyled">
                                 <li>
                                     <h5>
-                                        <span className="badge badge-primary mr-2"><FontAwesomeIcon
+                                        <span className="badge blue-grey mr-2"><FontAwesomeIcon
                                             icon="users"/> {room.capacity}</span>
-                                        <span className="badge badge-primary mr-2"><FontAwesomeIcon
+                                        <span className="badge blue-grey mr-2"><FontAwesomeIcon
                                             icon="tv"/> {this.trueFalseToYesNo(room.facilities.tv)}</span>
-                                        <span className="badge badge-primary mr-2"><FontAwesomeIcon
+                                        <span className="badge blue-grey mr-2"><FontAwesomeIcon
                                             icon="video"/> {this.trueFalseToYesNo(room.facilities.projector)}</span>
-                                        <span className="badge badge-primary mr-2"><FontAwesomeIcon
+                                        <span className="badge blue-grey mr-2"><FontAwesomeIcon
                                             icon="chalkboard"/> {this.trueFalseToYesNo(room.facilities.whiteboard)}</span>
                                     </h5>
                                 </li>
@@ -78,7 +78,7 @@ class Rooms extends Component {
                             <button onClick={() => {
                                 // noinspection JSIgnoredPromiseFromCall
                                 this.handleBook(room.name, room._id)
-                            }} className="btn btn-success"><FontAwesomeIcon icon="plus"/> Book
+                            }} className="btn btn-info m-0"><FontAwesomeIcon icon="plus"/> Book
                             </button>
                         </div>
                     </div>

@@ -62,7 +62,7 @@ class Home extends Component {
                             <p className="card-text">
                                 Are you sure you want to delete this booking?
                             </p>
-                            <button className="btn btn-primary" onClick={onClose}>No</button>
+                            <button className="btn btn-blue-grey" onClick={onClose}>No</button>
                             <button className="btn btn-danger font-weight-bold" onClick={() => {
                                 this.cancelBooking(bookingId, roomId);
                                 onClose();
@@ -93,7 +93,7 @@ class Home extends Component {
                         backgroundImage: "url(" + Background + ")",
                         backgroundPosition: "bottom center",
                         backgroundRepeat: "no-repeat",
-                        backgroundSize: "100%",
+                        backgroundSize: "92vw",
                         height: "92vh"
                     }}
                 >
@@ -101,7 +101,7 @@ class Home extends Component {
 
                     <div className="card text-center m-2">
                         <div className="card-body">
-                            <h5 className="card-title pt-2">You currently have no bookings.</h5>
+                            <h5 className="card-title pt-2 font-weight-bold">You currently have no bookings.</h5>
                             <p className="card-text">
                                 Don't miss out! Book your room now.
                             </p>
@@ -124,7 +124,7 @@ class Home extends Component {
                         backgroundImage: "url(" + BackgroundTwo + ")",
                         backgroundPosition: "bottom center",
                         backgroundRepeat: "no-repeat",
-                        backgroundSize: "90%",
+                        backgroundSize: "92vw",
                         height: "92vh"
                     }}
                 >

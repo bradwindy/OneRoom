@@ -146,7 +146,7 @@ class Register extends Component {
                 <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
                     <div className="form-group row">
                         <div className="col-sm-10">
-                            <h1 className="pt-2"><b>Sign Up</b></h1>
+                            <h1 className="pt-2 font-weight-bold">Sign Up</h1>
                         </div>
                     </div>
 
@@ -232,7 +232,9 @@ class Register extends Component {
                         </div>
                         <div className="col-sm-offset-2 col-sm-10">
                             <a className="btn btn-light mt-2" href="/login"><FontAwesomeIcon icon="chevron-left"/> Back</a>
-                            <button type="submit" className="btn btn-primary mt-2">Register</button>
+                            <button type="submit"
+                                    className="btn peach-gradient text-white font-weight-bold mt-2">Register
+                            </button>
                         </div>
                     </div>
                 </form>
