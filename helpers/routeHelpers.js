@@ -16,8 +16,7 @@ module.exports = {
                 return res.status(400).send(result.error.details[0].message);    
             }
 
-            if (!req.value) {
-                // Creating a  
+            if (!req.value) { 
                 req.value = {};
             }
             req.value['body'] = result.value;

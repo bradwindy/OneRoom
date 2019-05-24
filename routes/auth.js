@@ -13,11 +13,11 @@ const AuthController = require('../controllers/authController');
 router.route('/register')
     .post(validateBody(schemas.registerSchema), AuthController.register);
 
-// User Sign in
+// User Sign in - Validate user and generate a token and send it back to the user
 router.route('/signin')
     .post(validateBody(schemas.authSchema), signIn, signToken);
     
-//hold the token    
+// Test route to check if JWT Token is working 
 router.route('/secret')
     .get(authJWT, AuthController.secret);
 

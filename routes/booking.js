@@ -1,25 +1,22 @@
-const express = require('express');
-const server = express();
 const router = require('express-promise-router')();
 const { authJWT } = require('../passport');
-const { validateBody, schemas } = require('../helpers/routeHelpers'); // calling both things present in the helper file
 const BookingController = require('../controllers/bookingController.js');
 
 // GET all available rooms for user
 router.route('/available')
-    .get(authJWT,BookingController.available);
+    .get(authJWT, BookingController.available);
 
 // PUT a booking - Make a booking
 router.route('/newBooking/:id')
-    .put(authJWT,BookingController.new);
+    .put(authJWT, BookingController.new);
 
 // GET details about a booking
 router.route('/showBooking')
-    .get(authJWT,BookingController.details);
+    .get(authJWT, BookingController.details);
 
 // PUT - Update a booking
 router.route('/editBooking')
-    .put(authJWT,BookingController.edit);
+    .put(authJWT, BookingController.edit);
     /** Update Logic Flows
      *  1. Look for the item, if not existing, return 404 and exit route.
      *  2. If exisiting, validate the update using Joi and check that there are no time clashes.
@@ -29,7 +26,7 @@ router.route('/editBooking')
      */
 // PUT - Update a booking
 router.route('/editBooking')
-    .put(authJWT,BookingController.edit);
+    .put(authJWT, BookingController.edit);
 
 // DELETE a booking
 router.route('/deleteBooking/:roomId/:bookingId')
