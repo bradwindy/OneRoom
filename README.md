@@ -2,6 +2,8 @@
 A meeting-room booking system built with ReactJS, Express.js, Node.js and MongoDB.
 We have chosen to follow a MVC pattern of development.
 
+[View our app live](https://roomease-otago.herokuapp.com/login)
+
 ## Authors
 - Bradley Windybank
 - Vivek George
