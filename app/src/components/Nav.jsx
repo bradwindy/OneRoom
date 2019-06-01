@@ -28,11 +28,11 @@ class Nav extends Component {
 
                 <header>
                     <nav className="navbar navbar-expand-lg navbar-dark fixed-bottom peach-gradient">
-                        <a className="navbar-brand font-weight-bold text-white" href="/">
+                        <a className="navbar-brand font-weight-bold text-white ml-3" href="/">
                             OneRoom
                         </a>
                         <button
-                            className="navbar-toggler"
+                            className="navbar-toggler mr-2"
                             type="button"
                             data-toggle="collapse"
                             data-target="#navbarNavAltMarkup"
@@ -47,11 +47,11 @@ class Nav extends Component {
                             id="navbarNavAltMarkup"
                         >
                             <div className="navbar-nav">
-                                <a className="nav-item nav-link" href="/">
+                                <a className="nav-item pl-3 nav-link" href="/">
                                     My Bookings
                                 </a>
 
-                                <a className="nav-item nav-link" href="/login" onClick={Nav.logout}>
+                                <a className="nav-item pl-3 nav-link" href="/login" onClick={Nav.logout}>
                                     Log Out{" "}
                                 </a>
                             </div>
@@ -64,7 +64,7 @@ class Nav extends Component {
             return (
                 <header>
                     <nav className="navbar navbar-light navbar-dark fixed-bottom peach-gradient">
-                        <a className="navbar-brand font-weight-bold text-white" href="/">
+                        <a className="navbar-brand font-weight-bold text-white ml-3" href="/">
                             OneRoom
                         </a>
                     </nav>

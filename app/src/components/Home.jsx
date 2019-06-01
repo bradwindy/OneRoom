@@ -88,7 +88,7 @@ class Home extends Component {
         if (this.state.bookings === undefined || this.state.bookings.length === 0) {
             return (
                 <div
-                    className="container mt-2 p-3"
+                    className="container mt-2 p-4"
                     style={{
                         backgroundImage: "url(" + Background + ")",
                         backgroundPosition: "bottom center",
@@ -97,7 +97,7 @@ class Home extends Component {
                         height: "92vh"
                     }}
                 >
-
+                    <h2 className="pl-3 pb-3 pt-3 font-weight-bold">My Bookings:</h2>
 
                     <div className="card text-center m-2">
                         <div className="card-body">
@@ -119,7 +119,7 @@ class Home extends Component {
             return (
                 // "Home" component, a scrollable list of cards with booking info and buttons. Just example info for now
                 <div
-                    className="container pt-3 p-2"
+                    className="container pt-3 p-4"
                     style={{
                         backgroundImage: "url(" + BackgroundTwo + ")",
                         backgroundPosition: "bottom center",

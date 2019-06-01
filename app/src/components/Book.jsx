@@ -86,18 +86,27 @@ class BookPage extends Component {
         // conditional rendering of the content of the page depending on the URL
         if (page === 'date') {
             return (
-                <div className="container pt-2">
-                    <div className="row justify-content-center align-items-center no-gutters">
-                        <h2 className="pl-3 pb-3 pt-4 mt-2 font-weight-bold">Select Date:</h2>
-                        <DatePicker className="pb-4"
-                                    date={this.props.parentState.date}
-                                    minDate={startDate}
-                                    onSelect={date => {
-                                        // On a change of date, run callback method to update state
-                                        this.props.callbackFromParent(date, 0, page);
-                                    }}
-                        />
-                    </div>
+                <div className="container">
+                    <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
+                        <div className="form-group row">
+                            <div className="col-sm-10 p-0">
+                                <h2 className="pl-3 pt-4 font-weight-bold">Select Date:</h2>
+                            </div>
+                        </div>
+                        <div className="form-group row align-items-center justify-content-center">
+                            <div className="col align-items-center justify-content-center text-center pt-4">
+                                <DatePicker className="pb-4"
+                                            id="date-select"
+                                            date={this.props.parentState.date}
+                                            minDate={startDate}
+                                            onSelect={date => {
+                                                // On a change of date, run callback method to update state
+                                                this.props.callbackFromParent(date, 0, page);
+                                            }}
+                                />
+                            </div>
+                        </div>
+                    </form>
                 </div>
             );
         } else if (page === 'time') {
@@ -106,7 +115,7 @@ class BookPage extends Component {
                     <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
                         <div className="form-group row">
                             <div className="col-sm-10 p-0">
-                                <h2 className="pl-3 mt-2 font-weight-bold">Select Time:</h2>
+                                <h2 className="pl-3 pt-4 font-weight-bold">Select Time:</h2>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -163,7 +172,7 @@ class BookPage extends Component {
                     <form className="form-vertical m-4" onSubmit={this.handleSubmit}>
                         <div className="form-group row">
                             <div className="col-sm-10 p-0">
-                                <h2 className="pl-3 mt-2 font-weight-bold">Name Booking:</h2>
+                                <h2 className="pl-3 pt-4 font-weight-bold">Name Booking:</h2>
                             </div>
                         </div>
                         <div className="form-group row">
