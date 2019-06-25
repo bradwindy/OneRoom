@@ -1,8 +1,8 @@
-# Otago Business School - Room Booking System
+# OneRoom Booking System
 A meeting-room booking system built with ReactJS, Express.js, Node.js and MongoDB.
 We have chosen to follow a MVC pattern of development.
 
-[View our app live](https://roomease-otago.herokuapp.com/login)
+####[View the app live!](https://one-room-bookings.herokuapp.com/login)
 
 ## Authors
 - Bradley Windybank
@@ -20,9 +20,9 @@ We have chosen to follow a MVC pattern of development.
     * [Launching the Development Environment](#Launching-the-Development-Environment)
     * [Closing the Development Environment](#Closing-the-Development-Environment)
 * [Directory and File Breakdown](#Directory-and-File-Breakdown)
-    * [The app directory](#the-app-directory)
-    * [The backend directory](#the-backend-directory)
-    * [Common files in Directories](Common-files-in-Directories)
+    * [The app directory](#The-app-directory)
+    * [The backend directory](#Backend)
+    * [Common files in Directories](#Common-files-in-Directories)
 
 ## Setup
 These instructions will get you a copy of the project up and running on your local machine for development purposes.
@@ -203,13 +203,13 @@ GET: /user/:username - gets a particular user given their username
 
 
 
-### The app directory - Client
+### The app directory
 This directory refers to the front end of the system.
 **_Refer to app folder README for more details._**
 
 [App README](https://isgb.otago.ac.nz/info310/cowen/Room_Booking_System/tree/master/app)
 
-### Backend - API's, Server and Database
+### Backend
 
 The root of this project consists of five main directories `routes`, `helpers`, `controllers`, `models` and `tests`. It also consists of two main files `server.js` and `passport.js`.
 

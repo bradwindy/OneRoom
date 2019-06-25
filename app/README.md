@@ -1,8 +1,8 @@
-# RoomEase React Application
+# OneRoom React Application
 
 ## About
 
-A room booking system for the University of Otago's Business School.
+A room booking system originally created for the University of Otago's Business School.
 
 ## Authors
 - Akash Mokashi
@@ -35,6 +35,6 @@ The React application is structured as follows:
     
 ## Licenses
 
-Licenses are included within their own packages or within LICENCES file. A list is available in licenses.csv
+Licenses are included within their own packages or within LICENCE file. A list is available in licenses.csv
 
 
