@@ -28,15 +28,17 @@ module.exports = {
         registerSchema: Joi.object().keys({
             name: Joi.string().min(2).required(),
             studentId: Joi.number().integer().min(100000).max(99999999).required(),
-            username: Joi.string().alphanum().min(7).max(9).required(),
+            username: Joi.string().email({
+                minDomainAtoms: 2
+            }).required(),
             email: Joi.string().email({
-                minDomainAtoms: 4
+                minDomainAtoms: 2
             }).required(),
             password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required()
         }),
         authSchema : Joi.object().keys({
             email: Joi.string().email({
-                minDomainAtoms: 4
+                minDomainAtoms: 2
             }).required(),
             password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required()
         }),

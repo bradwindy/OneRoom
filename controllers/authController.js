@@ -1,8 +1,7 @@
 const User = require("../models/userModel");
-const express = require('express');
 
 module.exports = {
-  register: async (req, res, next) => {
+  register: async (req, res) => {
     // Need to get user details from front end
     const { name, studentId, username, email, password } = req.body;
     // Check if there is an existing user with the same email
@@ -10,12 +9,7 @@ module.exports = {
     if (foundUser) {
       return res.status(403).json({ error: "Email is already in use" });
     }
-    // Checking if our JSON data passed from Axios (frontend) is recieved by our api in the backend.
-    console.log(name);
-    console.log(studentId);
-    console.log(username);
-    console.log(email);
-    console.log(password);
+
     // Create the new user object using the userModel schema
     const newUser = new User({ name, studentId, username, email, password });
     // Store the user into the database and wiat for this to finish before moving on
@@ -25,7 +19,7 @@ module.exports = {
   },
 
   // Template route to check if our JWT Token auth is working. Testing purposes only.
-  secret: async (req, res, next) => {
+  secret: async (req, res) => {
     console.log('Access to secret resource!');
     res.json({ secret: "resource" });
   }

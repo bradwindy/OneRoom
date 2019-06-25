@@ -27,21 +27,21 @@ class Register extends Component {
                 field: 'studentId',
                 method: 'isEmpty',
                 validWhen: false,
-                message: 'Student ID is required.'
+                message: 'ID is required.'
             },
             {
                 field: 'studentId',
                 method: 'isInt',
                 args: [{allow_leading_zeroes: false}],
                 validWhen: true,
-                message: 'Student ID must contain no letters or leading zeros'
+                message: 'ID must contain no letters or leading zeros'
             },
             {
                 field: 'studentId',
                 method: 'isLength',
                 args: [{min: 7, max: 8}],
                 validWhen: true,
-                message: 'Student ID must be 7 or 8 numbers in length'
+                message: 'ID must be 7 or 8 numbers in length'
             },
             {
                 field: 'name',
@@ -57,17 +57,9 @@ class Register extends Component {
             },
             {
                 field: 'email',
-                method: 'matches',
-                args: [new RegExp("([A-z]{5}[0-9]{3})")],
+                method: 'isEmail',
                 validWhen: true,
-                message: 'Must be a valid student username.'
-            },
-            {
-                field: 'email',
-                method: 'isLength',
-                args: [{min: 8, max: 8}],
-                validWhen: true,
-                message: 'Email name must be 8 characters in length'
+                message: 'Not a valid email address'
             },
             {
                 field: 'password',
@@ -111,7 +103,7 @@ class Register extends Component {
             name: this.state.name,
             studentId: this.state.studentId,
             username: this.state.email,
-            email: this.state.email + "@student.otago.ac.nz",
+            email: this.state.email,
             password: this.state.password,
         };
 
@@ -151,7 +143,8 @@ class Register extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="inputName3" className="col-sm-2 control-label">Full Name:</label>
+                        <label htmlFor="inputName3" className="col-sm-2 control-label font-weight-bold">Full
+                            Name:</label>
                         <div className="col-sm-10">
                             <input type="text"
                                    className={validation.name.classText}
@@ -167,12 +160,12 @@ class Register extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="inputId3" className="col-sm-2 control-label">Student ID:</label>
+                        <label htmlFor="inputId3" className="col-sm-2 control-label font-weight-bold">ID:</label>
                         <div className="col-sm-10">
                             <input type="number"
                                    className={validation.studentId.classText}
                                    id="inputId3"
-                                   placeholder="Student ID"
+                                   placeholder="ID"
                                    name="studentId"
                                    onChange={this.handleChange}
                             />
@@ -186,18 +179,15 @@ class Register extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="inputEmail3" className="col-sm-2 control-label">Email:</label>
+                        <label htmlFor="inputEmail3" className="col-sm-2 control-label font-weight-bold">Email:</label>
                         <div className="col-sm-10 input-group">
                             <input type="text"
                                    className={validation.email.classText}
                                    id="inputEmail3"
-                                   placeholder="user123"
+                                   placeholder="example@email.com"
                                    name="email"
                                    onChange={this.handleChange}
                             />
-                            <div className="input-group-append">
-                                <span className="input-group-text" id="basic-addon2">@student.otago.ac.nz</span>
-                            </div>
                         </div>
                         <div className="col-sm-2">
                         </div>
@@ -209,12 +199,13 @@ class Register extends Component {
                     </div>
 
                     <div className="form-group row">
-                        <label htmlFor="inputPassword3" className="col-sm-2 control-label">Password:</label>
+                        <label htmlFor="inputPassword3"
+                               className="col-sm-2 control-label font-weight-bold">Password:</label>
                         <div className="col-sm-10">
                             <input type="password"
                                    className={validation.password.classText}
                                    id="inputPassword3"
-                                   placeholder="Password"
+                                   placeholder="************"
                                    name="password"
                                    onChange={this.handleChange}
                             />

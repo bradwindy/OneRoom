@@ -28,24 +28,16 @@ class Login extends Component {
                 message: "Email is required."
             },
             {
+                field: 'email',
+                method: 'isEmail',
+                validWhen: true,
+                message: 'Not a valid email address'
+            },
+            {
                 field: "password",
                 method: "isEmpty",
                 validWhen: false,
                 message: "Password is required."
-            },
-            {
-                field: "email",
-                method: "matches",
-                args: [new RegExp("([A-z]{5}[0-9]{3})")],
-                validWhen: true,
-                message: "Must be a valid student email username."
-            },
-            {
-                field: 'email',
-                method: 'isLength',
-                args: [{min: 8, max: 8}],
-                validWhen: true,
-                message: 'Email name must be 8 characters in length'
             },
         ]);
 
@@ -96,7 +88,7 @@ class Login extends Component {
 
         // Making a new object called userLogin which takes all the inputted form details
         const userLogin = {
-            email: this.state.email + "@student.otago.ac.nz",
+            email: this.state.email,
             password: this.state.password
         };
 
@@ -194,11 +186,6 @@ class Login extends Component {
                                     value={this.state.email}
                                     onChange={this.handleChange}
                                 />
-                                <div className="input-group-append">
-                                    <span className="input-group-text" id="basic-addon2">
-                                        @student.otago.ac.nz
-                                    </span>
-                                </div>
                             </div>
 
                             <div className="col-sm-10">
