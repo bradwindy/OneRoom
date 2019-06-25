@@ -50,7 +50,7 @@ cd /Users/YOURNAME
 
 Now, clone the repo
 ```
-git clone https://isgb.otago.ac.nz/info310/git/cowen/Room_Booking_System.git
+git clone https://github.com/bradwindy/OneRoom.git
 ```
 
 Check that the Room_Booking_System directory is cloned and installed into your computer. Then open the directory.
@@ -99,7 +99,7 @@ cd /Users/YOURNAME
 
 Now, clone the repo
 ```
-git clone https://isgb.otago.ac.nz/info310/git/cowen/Room_Booking_System.git
+git clone https://github.com/bradwindy/OneRoom.git
 ```
 
 Check that the Room_Booking_System directory is cloned and installed into your computer. Then open the directory.
@@ -207,7 +207,7 @@ GET: /user/:username - gets a particular user given their username
 This directory refers to the front end of the system.
 **_Refer to app folder README for more details._**
 
-[App README](https://isgb.otago.ac.nz/info310/cowen/Room_Booking_System/tree/master/app)
+[App README](https://github.com/bradwindy/OneRoom/tree/master/app)
 
 ### Backend
 
