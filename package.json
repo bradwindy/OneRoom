@@ -18,7 +18,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
-    "concurrently": "^4.1.0",
+    "concurrently": "^5.0.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
     "express-promise-router": "^3.0.3",
