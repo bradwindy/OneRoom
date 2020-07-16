@@ -2,7 +2,7 @@
 A meeting-room booking system built with ReactJS, Express.js, Node.js and MongoDB.
 We have chosen to follow a MVC pattern of development.
 
-[View the app live!](https://one-room-bookings.herokuapp.com/login)
+[View the app live!](https://one-room-bookings.herokuapp.com/login) (Give it 15 seconds, it's on a free heroku dyno)
 
 ## Authors
 - Bradley Windybank
