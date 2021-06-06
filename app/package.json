@@ -15,7 +15,7 @@
     "braces": "3.0.2",
     "dompurify": "2.0.1",
     "eslint-config-react-app": "5.0.2",
-    "express-session": "1.16.2",
+    "express-session": "1.17.2",
     "i": "0.3.6",
     "jquery": "3.4.1",
     "jsonwebtoken": "8.5.1",
