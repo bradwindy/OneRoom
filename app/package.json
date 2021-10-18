@@ -16,7 +16,7 @@
     "dompurify": "2.0.1",
     "eslint-config-react-app": "5.0.2",
     "express-session": "1.16.2",
-    "i": "0.3.6",
+    "i": "0.3.7",
     "jquery": "3.4.1",
     "jsonwebtoken": "8.5.1",
     "mdbreact": "4.20.0",
