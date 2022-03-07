@@ -22,7 +22,7 @@
     "mdbreact": "4.20.0",
     "mdreact": "0.1.5",
     "moment": "2.24.0",
-    "moment-timezone": "0.5.26",
+    "moment-timezone": "0.5.34",
     "node-sass": "4.12.0",
     "npm": "6.11.3",
     "passport": "0.4.0",
